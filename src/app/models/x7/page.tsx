@@ -7,7 +7,7 @@ import Footer from '../../../components/Footer';
 
 export default function X7Page() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isVideoVisible, setIsVideoVisible] = useState(false);
+
   const [selectedColor, setSelectedColor] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -138,7 +138,7 @@ export default function X7Page() {
       if (videoRef.current) {
         const rect = videoRef.current.getBoundingClientRect();
         const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        setIsVideoVisible(isVisible);
+
         
         if (isVisible) {
           videoRef.current.play().catch(() => {

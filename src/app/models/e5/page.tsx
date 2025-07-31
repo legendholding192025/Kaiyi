@@ -7,7 +7,7 @@ import Footer from '../../../components/Footer';
 
 export default function E5Page() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isVideoVisible, setIsVideoVisible] = useState(false);
+
   const [selectedColor, setSelectedColor] = useState(0);
 
   const carColors = [
@@ -119,7 +119,7 @@ export default function E5Page() {
       if (videoRef.current) {
         const rect = videoRef.current.getBoundingClientRect();
         const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        setIsVideoVisible(isVisible);
+
         
         if (isVisible) {
           videoRef.current.play().catch(() => {

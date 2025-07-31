@@ -114,9 +114,11 @@ export default function WeAreKaiyiPage() {
           
           {/* Legend Holding Image */}
           <div className="flex justify-center mb-[4vw] md:mb-[2vw]">
-            <img
+            <Image
               src="https://cdn.legendholding.com/images/cdn_688a15cd3575d9.32434529_20250730_125333.png"
               alt="Legend Holding"
+              width={800}
+              height={600}
               className="w-auto h-auto max-w-full"
             />
           </div>

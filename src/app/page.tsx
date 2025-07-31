@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 export default function Home() {
-  const [isVideoVisible, setIsVideoVisible] = useState(false);
+
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const heroSlides = [
@@ -38,7 +38,7 @@ export default function Home() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [heroSlides.length]);
 
   // Video visibility detection
   useEffect(() => {
@@ -46,7 +46,7 @@ export default function Home() {
       if (videoRef.current) {
         const rect = videoRef.current.getBoundingClientRect();
         const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        setIsVideoVisible(isVisible);
+
         
         if (isVisible) {
           videoRef.current.play().catch(() => {
@@ -269,10 +269,10 @@ export default function Home() {
             if (videoRef.current) {
               if (videoRef.current.requestFullscreen) {
                 videoRef.current.requestFullscreen();
-              } else if ((videoRef.current as any).webkitRequestFullscreen) {
-                (videoRef.current as any).webkitRequestFullscreen();
-              } else if ((videoRef.current as any).msRequestFullscreen) {
-                (videoRef.current as any).msRequestFullscreen();
+              } else if ((videoRef.current as HTMLVideoElement & { webkitRequestFullscreen?: () => void }).webkitRequestFullscreen) {
+                (videoRef.current as HTMLVideoElement & { webkitRequestFullscreen: () => void }).webkitRequestFullscreen();
+              } else if ((videoRef.current as HTMLVideoElement & { msRequestFullscreen?: () => void }).msRequestFullscreen) {
+                (videoRef.current as HTMLVideoElement & { msRequestFullscreen: () => void }).msRequestFullscreen();
               }
               videoRef.current.muted = false;
               videoRef.current.play();
