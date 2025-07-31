@@ -45,9 +45,9 @@ export default function Home() {
     const handleVideoVisibility = () => {
       if (videoRef.current) {
         const rect = videoRef.current.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
 
-        if (isVisible) {
+        if (isInViewport) {
           videoRef.current.play().catch(() => {
             // Autoplay was prevented
           });
@@ -269,10 +269,10 @@ export default function Home() {
               const video = videoRef.current;
               if (video.requestFullscreen) {
                 video.requestFullscreen();
-              } else if ((video as HTMLVideoElement & { webkitRequestFullscreen?: () => void }).webkitRequestFullscreen) {
-                (video as HTMLVideoElement & { webkitRequestFullscreen: () => void }).webkitRequestFullscreen();
-              } else if ((video as HTMLVideoElement & { msRequestFullscreen?: () => void }).msRequestFullscreen) {
-                (video as HTMLVideoElement & { msRequestFullscreen: () => void }).msRequestFullscreen();
+              } else if ((video as HTMLVideoElement & { webkitRequestFullscreen?: () => Promise<void> }).webkitRequestFullscreen) {
+                (video as HTMLVideoElement & { webkitRequestFullscreen: () => Promise<void> }).webkitRequestFullscreen();
+              } else if ((video as HTMLVideoElement & { msRequestFullscreen?: () => Promise<void> }).msRequestFullscreen) {
+                (video as HTMLVideoElement & { msRequestFullscreen: () => Promise<void> }).msRequestFullscreen();
               }
               video.muted = false;
               video.play();
