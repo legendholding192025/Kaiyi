@@ -69,7 +69,7 @@ export default function Navbar() {
 
   // Close dropdowns when clicking outside
   useEffect(() => {
-    const handleClickOutside = (_event: MouseEvent) => {
+    const handleClickOutside = () => {
       if (isLanguageDropdownOpen) {
         setIsLanguageDropdownOpen(false);
       }

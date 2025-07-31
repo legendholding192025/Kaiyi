@@ -139,7 +139,6 @@ export default function X3ProPage() {
         const rect = videoRef.current.getBoundingClientRect();
         const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
 
-        
         if (isVisible) {
           videoRef.current.play().catch(() => {
             // Autoplay was prevented

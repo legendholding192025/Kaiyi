@@ -47,7 +47,6 @@ export default function Home() {
         const rect = videoRef.current.getBoundingClientRect();
         const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
 
-        
         if (isVisible) {
           videoRef.current.play().catch(() => {
             // Autoplay was prevented
@@ -267,15 +266,16 @@ export default function Home() {
           className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-all duration-300 cursor-pointer"
           onClick={() => {
             if (videoRef.current) {
-              if (videoRef.current.requestFullscreen) {
-                videoRef.current.requestFullscreen();
-              } else if ((videoRef.current as HTMLVideoElement & { webkitRequestFullscreen?: () => void }).webkitRequestFullscreen) {
-                (videoRef.current as HTMLVideoElement & { webkitRequestFullscreen: () => void }).webkitRequestFullscreen();
-              } else if ((videoRef.current as HTMLVideoElement & { msRequestFullscreen?: () => void }).msRequestFullscreen) {
-                (videoRef.current as HTMLVideoElement & { msRequestFullscreen: () => void }).msRequestFullscreen();
+              const video = videoRef.current;
+              if (video.requestFullscreen) {
+                video.requestFullscreen();
+              } else if ((video as HTMLVideoElement & { webkitRequestFullscreen?: () => void }).webkitRequestFullscreen) {
+                (video as HTMLVideoElement & { webkitRequestFullscreen: () => void }).webkitRequestFullscreen();
+              } else if ((video as HTMLVideoElement & { msRequestFullscreen?: () => void }).msRequestFullscreen) {
+                (video as HTMLVideoElement & { msRequestFullscreen: () => void }).msRequestFullscreen();
               }
-              videoRef.current.muted = false;
-              videoRef.current.play();
+              video.muted = false;
+              video.play();
             }
           }}
         >
