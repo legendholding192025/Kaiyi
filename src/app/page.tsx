@@ -5,6 +5,12 @@ import { useEffect, useState, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
+// Type definitions for video fullscreen methods
+interface VideoWithFullscreen extends HTMLVideoElement {
+  webkitRequestFullscreen?: () => Promise<void>;
+  msRequestFullscreen?: () => Promise<void>;
+}
+
 export default function Home() {
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -266,13 +272,13 @@ export default function Home() {
           className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-all duration-300 cursor-pointer"
           onClick={() => {
             if (videoRef.current) {
-              const video = videoRef.current;
+              const video = videoRef.current as VideoWithFullscreen;
               if (video.requestFullscreen) {
                 video.requestFullscreen();
-              } else if ((video as HTMLVideoElement & { webkitRequestFullscreen?: () => Promise<void> }).webkitRequestFullscreen) {
-                (video as HTMLVideoElement & { webkitRequestFullscreen: () => Promise<void> }).webkitRequestFullscreen();
-              } else if ((video as HTMLVideoElement & { msRequestFullscreen?: () => Promise<void> }).msRequestFullscreen) {
-                (video as HTMLVideoElement & { msRequestFullscreen: () => Promise<void> }).msRequestFullscreen();
+              } else if (video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+              } else if (video.msRequestFullscreen) {
+                video.msRequestFullscreen();
               }
               video.muted = false;
               video.play();
