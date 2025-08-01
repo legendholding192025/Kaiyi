@@ -12,6 +12,7 @@ export default function Navbar() {
   const [isModelsDropdownOpen, setIsModelsDropdownOpen] = useState(false);
   const [isAfterSalesDropdownOpen, setIsAfterSalesDropdownOpen] = useState(false);
   const [isContactDropdownOpen, setIsContactDropdownOpen] = useState(false);
+  const [isMobileModelsDropdownOpen, setIsMobileModelsDropdownOpen] = useState(false);
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   
@@ -90,13 +91,16 @@ export default function Navbar() {
       if (isAfterSalesDropdownOpen) {
         setIsAfterSalesDropdownOpen(false);
       }
+      if (isMobileModelsDropdownOpen) {
+        setIsMobileModelsDropdownOpen(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isLanguageDropdownOpen, isContactDropdownOpen, isAfterSalesDropdownOpen]);
+  }, [isLanguageDropdownOpen, isContactDropdownOpen, isAfterSalesDropdownOpen, isMobileModelsDropdownOpen]);
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-gradient-to-b from-[#ebebeb] to-[#afb0b0] text-black">
@@ -326,11 +330,35 @@ export default function Navbar() {
         </div>
         
         {/* Mobile Menu */}
-        <div className={`lg:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+        <div className={`lg:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
           <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
-            <a href="#models" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-black hover:text-gray-700 transition-colors">
-              {t('nav.models')}
-            </a>
+            <div className="relative">
+              <button 
+                onClick={() => setIsMobileModelsDropdownOpen(!isMobileModelsDropdownOpen)}
+                className="flex items-center justify-between w-full px-3 py-2 text-base font-medium text-black hover:text-gray-700 transition-colors"
+              >
+                <span>{t('nav.models')}</span>
+                <svg className={`w-4 h-4 transition-transform ${isMobileModelsDropdownOpen ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M7 10l5 5 5-5z"/>
+                </svg>
+              </button>
+              
+              {/* Mobile Models Dropdown */}
+              {isMobileModelsDropdownOpen && (
+                <div className="transition-all duration-200 max-h-48 opacity-100">
+                  {tabsContent.map((model) => (
+                    <a 
+                      key={model.id}
+                      href={model.link} 
+                      onClick={() => setIsMobileMenuOpen(false)} 
+                      className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors"
+                    >
+                      {model.car}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
             <a href="/we-are-kaiyi" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-black hover:text-gray-700 transition-colors">
               {t('nav.weAreKaiyi')}
             </a>

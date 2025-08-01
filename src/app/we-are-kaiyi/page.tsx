@@ -23,23 +23,23 @@ export default function WeAreKaiyiPage() {
               priority
             />
           </div>
-          <div className="hero-title absolute left-[5vw] md:left-[10vw] top-[25vh] md:top-[30vh] text-white font-bruno-ace-sc text-[6vw] md:text-[4vw] z-10 drop-shadow-lg">
+          <div className="hero-title absolute left-[5vw] md:left-[10vw] top-[35vh] md:top-[30vh] text-white font-bruno-ace-sc text-[8vw] md:text-[4vw] z-10 drop-shadow-lg">
             We Are Kaiyi
           </div>
         </div>
 
         {/* Content Section */}
-        <div className="cooperation-section mx-auto mt-[10vw] md:mt-[5vw] max-w-[1100px] px-4">
-          <div className="section-title font-bruno-ace-sc text-[4vw] md:text-[2vw] text-[#222] text-center mb-[4vw] md:mb-[2vw]">
+        <div className="cooperation-section mx-auto mt-[12vw] md:mt-[5vw] max-w-[1100px] px-4">
+          <div className="section-title font-bruno-ace-sc text-[5vw] md:text-[2vw] text-[#222] text-center mb-[6vw] md:mb-[2vw]">
             We are Kaiyi
           </div>
           <div className="video-container flex justify-center">
           </div>
-          <div className="stats-content flex flex-col md:flex-row justify-between items-start mt-[4vw] md:mt-[2vw] space-y-[4vw] md:space-y-0">
-            <div className="stats-grid grid grid-cols-2 md:flex gap-[4vw] md:gap-[2vw] w-full md:w-auto">
+          <div className="stats-content flex flex-col md:flex-row justify-between items-start mt-[6vw] md:mt-[2vw] space-y-[6vw] md:space-y-0">
+            <div className="stats-grid flex justify-center md:justify-start gap-[6vw] md:gap-[2vw] w-full md:w-auto">
               <div className="stat-item text-center">
-                <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">2024</div>
-                <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Since</div>
+                <div className="stat-number text-[6vw] md:text-[2vw] text-[#dc0000] font-bold">2024</div>
+                <div className="stat-label text-[3.5vw] md:text-[1vw] text-[#222]">Since</div>
               </div>
               {/* <div className="stat-item text-center">
                 <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">4.727B</div>
@@ -54,18 +54,18 @@ export default function WeAreKaiyiPage() {
                 <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Annual Capacity</div>
               </div> */}
             </div>
-            <div className="story-text w-full md:flex-1 md:ml-[3vw] text-[3vw] md:text-[1vw] text-[#444] space-y-[2vw] md:space-y-[1vw]">
+            <div className="story-text w-full md:flex-1 md:ml-[3vw] text-[4vw] md:text-[1vw] text-[#444] space-y-[3vw] md:space-y-[1vw] leading-relaxed">
               <p>
               Kaiyi UAE, part of Legend Holding Group, serves as the exclusive dealership of Kaiyi vehicles in the United Arab Emirates. Committed to deliver maximum innovation and customer satisfaction, we offer a dynamic range of technologically advanced vehicles designed to elevate your driving experience, in line with Kaiyi Auto Manufacturer. 
-              Strategically located in the heart of Dubai, our Showroom facility delivers comprehensive sales and after-sales services, ensuring convenience, trust, and excellence at every step. At Kaiyi UAE, we don’t just sell cars. We drive the future together forward.
+              Strategically located in the heart of Dubai, our Showroom facility delivers comprehensive sales and after-sales services, ensuring convenience, trust, and excellence at every step. At Kaiyi UAE, we don't just sell cars. We drive the future together forward.
               </p>
             </div>
           </div>
         </div>
 
         {/* Cooperation Story Section */}
-        <div className="cooperation-section mx-auto mt-[10vw] md:mt-[5vw] max-w-[1100px] px-4">
-          <div className="section-title font-bruno-ace-sc text-[4vw] md:text-[2vw] text-[#222] text-center mb-[4vw] md:mb-[2vw]">
+        <div className="cooperation-section mx-auto mt-[12vw] md:mt-[5vw] max-w-[1100px] px-4">
+          <div className="section-title font-bruno-ace-sc text-[5vw] md:text-[2vw] text-[#222] text-center mb-[6vw] md:mb-[2vw]">
             KAIYI COOPERATION STORY
           </div>
           <div className="video-container flex justify-center">
@@ -79,11 +79,11 @@ export default function WeAreKaiyiPage() {
               />
             </div>
           </div>
-          <div className="stats-content flex flex-col md:flex-row justify-between items-start mt-[4vw] md:mt-[2vw] space-y-[4vw] md:space-y-0">
-            <div className="stats-grid grid grid-cols-2 md:flex gap-[4vw] md:gap-[2vw] w-full md:w-auto">
+          <div className="stats-content flex flex-col md:flex-row justify-between items-start mt-[6vw] md:mt-[2vw] space-y-[6vw] md:space-y-0">
+            <div className="stats-grid flex justify-center md:justify-start gap-[6vw] md:gap-[2vw] w-full md:w-auto">
               <div className="stat-item text-center">
-                <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">2014</div>
-                <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Since</div>
+                <div className="stat-number text-[6vw] md:text-[2vw] text-[#dc0000] font-bold">2014</div>
+                <div className="stat-label text-[3.5vw] md:text-[1vw] text-[#222]">Since</div>
               </div>
               {/* <div className="stat-item text-center">
                 <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">4.727B</div>
@@ -98,7 +98,7 @@ export default function WeAreKaiyiPage() {
                 <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Annual Capacity</div>
               </div> */}
             </div>
-            <div className="story-text w-full md:flex-1 md:ml-[3vw] text-[3vw] md:text-[1vw] text-[#444] space-y-[2vw] md:space-y-[1vw]">
+            <div className="story-text w-full md:flex-1 md:ml-[3vw] text-[4vw] md:text-[1vw] text-[#444] space-y-[3vw] md:space-y-[1vw] leading-relaxed">
               <p>
                 Kaiyi was established in January 2014, and it was originally a wholly-owned subsidiary of Chery Automobile Co.,Ltd. It is the only complete vehicle manufacturing enterprise in Sichuan Province with full qualifications of fuel and new energy for sedan, SUV and MPV.
               </p>
@@ -110,11 +110,11 @@ export default function WeAreKaiyiPage() {
         </div>
 
         {/* Smart Factory Section */}
-        <div className="factory-section mx-auto mt-[10vw] md:mt-[5vw] max-w-[900px] px-4">
-          <div className="section-title font-bruno-ace-sc text-[4vw] md:text-[2vw] text-[#222] text-center mb-[3vw] md:mb-[1vw]">
+        <div className="factory-section mx-auto mt-[12vw] md:mt-[5vw] max-w-[900px] px-4">
+          <div className="section-title font-bruno-ace-sc text-[5vw] md:text-[2vw] text-[#222] text-center mb-[6vw] md:mb-[1vw]">
             KAIYI SMART FACTORY
           </div>
-          <div className="section-content text-[#444] text-[3.5vw] md:text-[1.1vw] text-center mb-[4vw] md:mb-[2vw]">
+          <div className="section-content text-[#444] text-[4.5vw] md:text-[1.1vw] text-center mb-[6vw] md:mb-[2vw] leading-relaxed">
             Located in Yibin City, Sichuan Province, China, our factory has the capacity to produce 150,000 vehicles annually, even with a maximum capacity of 250,000 units. We offer smart solutions with outstanding technology innovation and advanced manufacturing, providing users with more eco-friendly, efficient, and reliable solutions.
           </div>
           {/* <div className="factory-video flex justify-center">
