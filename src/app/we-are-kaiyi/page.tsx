@@ -29,18 +29,36 @@ export default function WeAreKaiyiPage() {
         </div>
 
         {/* Content Section */}
-        <div className="content-section w-full flex justify-center items-center mt-[8vw] md:mt-[4vw] px-4">
-          <div className="content-wrapper max-w-[900px]">
-            <div className="content-title font-bruno-ace-sc text-[5vw] md:text-[2.5vw] text-[#222] text-center mb-[3vw] md:mb-[1vw]">
-              We Are KAIYI
+        <div className="cooperation-section mx-auto mt-[10vw] md:mt-[5vw] max-w-[1100px] px-4">
+          <div className="section-title font-bruno-ace-sc text-[4vw] md:text-[2vw] text-[#222] text-center mb-[4vw] md:mb-[2vw]">
+            We are Kaiyi
+          </div>
+          <div className="video-container flex justify-center">
+          </div>
+          <div className="stats-content flex flex-col md:flex-row justify-between items-start mt-[4vw] md:mt-[2vw] space-y-[4vw] md:space-y-0">
+            <div className="stats-grid grid grid-cols-2 md:flex gap-[4vw] md:gap-[2vw] w-full md:w-auto">
+              <div className="stat-item text-center">
+                <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">2024</div>
+                <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Since</div>
+              </div>
+              {/* <div className="stat-item text-center">
+                <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">4.727B</div>
+                <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Registered Capital (Yuan)</div>
+              </div>
+              <div className="stat-item text-center">
+                <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">2,800+</div>
+                <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Staff</div>
+              </div>
+              <div className="stat-item text-center">
+                <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">250,000</div>
+                <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Annual Capacity</div>
+              </div> */}
             </div>
-            <div className="content-text text-[#444] text-[3.5vw] md:text-[1.1vw] leading-relaxed text-center space-y-[2vw] md:space-y-[0.5vw]">
-              <p>We are Kind with a strong affinity to our users and global market.</p>
-              <p>We are Active in your daily activities and explore ways to make you see the beauty.</p>
-              <p>We are Innovative to give you a new definition of ownership experience.</p>
-              <p>We are Young and the new power.</p>
-              <p>We are Intelligent in respect of products characterized by constant technological innovation.</p>
-              <p>But we are relentless in our pursuit of a more fulfilling lifestyle.</p>
+            <div className="story-text w-full md:flex-1 md:ml-[3vw] text-[3vw] md:text-[1vw] text-[#444] space-y-[2vw] md:space-y-[1vw]">
+              <p>
+              Kaiyi UAE, part of Legend Holding Group, serves as the exclusive dealership of Kaiyi vehicles in the United Arab Emirates. Committed to deliver maximum innovation and customer satisfaction, we offer a dynamic range of technologically advanced vehicles designed to elevate your driving experience, in line with Kaiyi Auto Manufacturer. 
+              Strategically located in the heart of Dubai, our Showroom facility delivers comprehensive sales and after-sales services, ensuring convenience, trust, and excellence at every step. At Kaiyi UAE, we don’t just sell cars. We drive the future together forward.
+              </p>
             </div>
           </div>
         </div>
@@ -67,7 +85,7 @@ export default function WeAreKaiyiPage() {
                 <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">2014</div>
                 <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Since</div>
               </div>
-              <div className="stat-item text-center">
+              {/* <div className="stat-item text-center">
                 <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">4.727B</div>
                 <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Registered Capital (Yuan)</div>
               </div>
@@ -78,7 +96,7 @@ export default function WeAreKaiyiPage() {
               <div className="stat-item text-center">
                 <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">250,000</div>
                 <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Annual Capacity</div>
-              </div>
+              </div> */}
             </div>
             <div className="story-text w-full md:flex-1 md:ml-[3vw] text-[3vw] md:text-[1vw] text-[#444] space-y-[2vw] md:space-y-[1vw]">
               <p>
@@ -99,7 +117,7 @@ export default function WeAreKaiyiPage() {
           <div className="section-content text-[#444] text-[3.5vw] md:text-[1.1vw] text-center mb-[4vw] md:mb-[2vw]">
             Located in Yibin City, Sichuan Province, China, our factory has the capacity to produce 150,000 vehicles annually, even with a maximum capacity of 250,000 units. We offer smart solutions with outstanding technology innovation and advanced manufacturing, providing users with more eco-friendly, efficient, and reliable solutions.
           </div>
-          <div className="factory-video flex justify-center">
+          {/* <div className="factory-video flex justify-center">
             <div className="video-wrapper relative w-full md:w-[40vw] max-w-[600px]">
               <Image
                 src="https://www.kaiyiglobal.com/assets/hom3-efad44ac.jpg"
@@ -109,7 +127,7 @@ export default function WeAreKaiyiPage() {
                 className="w-full rounded-[2vw] md:rounded-[1vw]"
               />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       
