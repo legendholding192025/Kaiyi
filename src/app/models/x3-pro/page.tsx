@@ -4,11 +4,13 @@ import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
+import BrochureDownloadPopup from '../../../components/BrochureDownloadPopup';
 
 export default function X3ProPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const [selectedColor, setSelectedColor] = useState(0);
+  const [isBrochurePopupOpen, setIsBrochurePopupOpen] = useState(false);
 
   const carColors = [
     {
@@ -262,10 +264,7 @@ export default function X3ProPage() {
   };
 
   const handleDownloadBrochure = () => {
-    // Add brochure download logic here
-    console.log('Downloading X3 Pro brochure...');
-    // You can add actual download link here
-    // window.open('/brochures/x3-pro-brochure.pdf', '_blank');
+    setIsBrochurePopupOpen(true);
   };
 
   const handleColorChange = (index: number) => {
@@ -768,6 +767,13 @@ export default function X3ProPage() {
           </div>
         </div>
       </div>
+      
+      {/* Brochure Download Popup */}
+      <BrochureDownloadPopup
+        isOpen={isBrochurePopupOpen}
+        onClose={() => setIsBrochurePopupOpen(false)}
+        modelName="KAIYI X3 Pro"
+      />
       
       {/* Footer Component */}
       <Footer />

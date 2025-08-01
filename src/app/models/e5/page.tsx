@@ -4,11 +4,13 @@ import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
+import BrochureDownloadPopup from '../../../components/BrochureDownloadPopup';
 
 export default function E5Page() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const [selectedColor, setSelectedColor] = useState(0);
+  const [isBrochurePopupOpen, setIsBrochurePopupOpen] = useState(false);
 
   const carColors = [
     {
@@ -223,10 +225,7 @@ export default function E5Page() {
   };
 
   const handleDownloadBrochure = () => {
-    // Add brochure download logic here
-    console.log('Downloading E5 brochure...');
-    // You can add actual download link here
-    // window.open('/brochures/e5-brochure.pdf', '_blank');
+    setIsBrochurePopupOpen(true);
   };
 
   const handleColorChange = (index: number) => {
@@ -653,6 +652,13 @@ export default function E5Page() {
           </div>
         </div>
       </div>
+      
+      {/* Brochure Download Popup */}
+      <BrochureDownloadPopup
+        isOpen={isBrochurePopupOpen}
+        onClose={() => setIsBrochurePopupOpen(false)}
+        modelName="KAIYI E5"
+      />
       
       {/* Footer Component */}
       <Footer />

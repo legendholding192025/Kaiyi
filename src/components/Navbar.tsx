@@ -4,10 +4,13 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+
+
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isModelsDropdownOpen, setIsModelsDropdownOpen] = useState(false);
-  const [isServiceDropdownOpen, setIsServiceDropdownOpen] = useState(false);
+  const [isAfterSalesDropdownOpen, setIsAfterSalesDropdownOpen] = useState(false);
+  const [isContactDropdownOpen, setIsContactDropdownOpen] = useState(false);
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const [selectedLanguage, setSelectedLanguage] = useState('EN');
@@ -73,13 +76,19 @@ export default function Navbar() {
       if (isLanguageDropdownOpen) {
         setIsLanguageDropdownOpen(false);
       }
+      if (isContactDropdownOpen) {
+        setIsContactDropdownOpen(false);
+      }
+      if (isAfterSalesDropdownOpen) {
+        setIsAfterSalesDropdownOpen(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isLanguageDropdownOpen]);
+  }, [isLanguageDropdownOpen, isContactDropdownOpen, isAfterSalesDropdownOpen]);
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-gradient-to-b from-[#ebebeb] to-[#afb0b0] text-black">
@@ -191,37 +200,54 @@ export default function Navbar() {
 
             <div className="relative group">
               <button 
-                onClick={() => setIsServiceDropdownOpen(!isServiceDropdownOpen)}
-                onMouseEnter={() => setIsServiceDropdownOpen(true)}
-                onMouseLeave={() => setIsServiceDropdownOpen(false)}
+                onClick={() => setIsAfterSalesDropdownOpen(!isAfterSalesDropdownOpen)}
                 className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-black hover:text-gray-700 transition-colors"
               >
-                <span>SERVICE</span>
+                <span>AFTER SALES</span>
                 <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M7 10l5 5 5-5z"/>
                 </svg>
               </button>
               
-              {/* Service Dropdown */}
-              <div 
-                onMouseEnter={() => setIsServiceDropdownOpen(true)}
-                onMouseLeave={() => setIsServiceDropdownOpen(false)}
-                className={`absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[200px] transition-all duration-200 ${
-                  isServiceDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-                }`}
-              >
-                <a href="#customer-support" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
-                  Customer Support
-                </a>
-                <a href="#service-booking" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
-                  Service Booking
-                </a>
+              {/* After Sales Dropdown */}
+              <div className={`absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[200px] transition-all duration-200 ${
+                isAfterSalesDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
+              }`}>
+                                 <a href="/warranty" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
+                   Warranty
+                 </a>
+                 <a href="/service-booking" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
+                   Service Booking
+                 </a>
+                 <a href="/customer-support" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
+                   Customer Support
+                 </a>
               </div>
             </div>
 
-            <a href="#contact" className="flex items-center px-3 py-2 text-sm font-medium text-black hover:text-gray-700 transition-colors">
-              <span>CONTACT US</span>
-            </a>
+            <div className="relative group">
+              <button 
+                onClick={() => setIsContactDropdownOpen(!isContactDropdownOpen)}
+                className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-black hover:text-gray-700 transition-colors"
+              >
+                <span>CONTACT US</span>
+                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M7 10l5 5 5-5z"/>
+                </svg>
+              </button>
+              
+              {/* Contact Dropdown */}
+              <div className={`absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[200px] transition-all duration-200 ${
+                isContactDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
+              }`}>
+                <a href="/test-drive" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
+                  Test Drive
+                </a>
+                <a href="/contact-us" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
+                  Contact Us
+                </a>
+              </div>
+            </div>
           </div>
 
           {/* Right Section - Language & Social */}
@@ -300,12 +326,56 @@ export default function Navbar() {
             <a href="/we-are-kaiyi" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-black hover:text-gray-700 transition-colors">
               WE ARE KAIYI
             </a>
-            <a href="#service" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-black hover:text-gray-700 transition-colors">
-              SERVICE
-            </a>
-            <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-black hover:text-gray-700 transition-colors">
-              CONTACT US
-            </a>
+
+            <div className="relative">
+              <button 
+                onClick={() => setIsAfterSalesDropdownOpen(!isAfterSalesDropdownOpen)}
+                className="flex items-center justify-between w-full px-3 py-2 text-base font-medium text-black hover:text-gray-700 transition-colors"
+              >
+                <span>AFTER SALES</span>
+                <svg className={`w-4 h-4 transition-transform ${isAfterSalesDropdownOpen ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M7 10l5 5 5-5z"/>
+                </svg>
+              </button>
+              
+              {/* Mobile After Sales Dropdown */}
+              {isAfterSalesDropdownOpen && (
+                <div className="transition-all duration-200 max-h-32 opacity-100">
+                                               <a href="/warranty" onClick={() => setIsMobileMenuOpen(false)} className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors">
+                               Warranty
+                             </a>
+                             <a href="/service-booking" onClick={() => setIsMobileMenuOpen(false)} className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors">
+                               Service Booking
+                             </a>
+                             <a href="/customer-support" onClick={() => setIsMobileMenuOpen(false)} className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors">
+                               Customer Support
+                             </a>
+                </div>
+              )}
+            </div>
+            <div className="relative">
+              <button 
+                onClick={() => setIsContactDropdownOpen(!isContactDropdownOpen)}
+                className="flex items-center justify-between w-full px-3 py-2 text-base font-medium text-black hover:text-gray-700 transition-colors"
+              >
+                <span>CONTACT US</span>
+                <svg className={`w-4 h-4 transition-transform ${isContactDropdownOpen ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M7 10l5 5 5-5z"/>
+                </svg>
+              </button>
+              
+              {/* Mobile Contact Dropdown */}
+              {isContactDropdownOpen && (
+                <div className="transition-all duration-200 max-h-32 opacity-100">
+                  <a href="/test-drive" onClick={() => setIsMobileMenuOpen(false)} className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors">
+                    Test Drive
+                  </a>
+                  <a href="/contact-us" onClick={() => setIsMobileMenuOpen(false)} className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors">
+                    Contact Us
+                  </a>
+                </div>
+              )}
+            </div>
             
             {/* Mobile Language and Social */}
             <div className="pt-4 border-t border-gray-200">

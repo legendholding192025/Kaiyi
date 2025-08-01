@@ -95,35 +95,6 @@ export default function WeAreKaiyiPage() {
           </div>
         </div>
 
-        {/* Global Layout Section */}
-        <div className="global-section mx-auto mt-[10vw] md:mt-[5vw] max-w-[900px] px-4">
-          <div className="section-title font-bruno-ace-sc text-[4vw] md:text-[2vw] text-[#222] text-center mb-[3vw] md:mb-[1vw]">
-            GLOBAL LAYOUT & DIVERSE TALENT BASE
-          </div>
-          <div className="section-content text-[#444] text-[3.5vw] md:text-[1.1vw] text-center mb-[4vw] md:mb-[2vw]">
-            We have more than 500 dealers and 800 service providers around the world. Our user groups span across over 30 countries and regions including Eastern Europe, Middle East, Africa, Central and South America and Southeast Asia.
-          </div>
-          <div className="contact-button flex justify-center mb-[4vw] md:mb-[2vw]">
-            <button
-              onClick={goToContact}
-              className="bg-gradient-to-b from-[#ebebeb] to-[#afb0b0] rounded-full px-[4vw] md:px-[2vw] py-[2vw] md:py-[0.8vw] text-[#222] text-[3vw] md:text-[1vw] cursor-pointer border border-[#ddd] transition-colors hover:bg-[#ececec]"
-            >
-              Contact Us
-            </button>
-          </div>
-          
-          {/* Legend Holding Image */}
-          <div className="flex justify-center mb-[4vw] md:mb-[2vw]">
-            <Image
-              src="https://cdn.legendholding.com/images/cdn_688a15cd3575d9.32434529_20250730_125333.png"
-              alt="Legend Holding"
-              width={800}
-              height={600}
-              className="w-auto h-auto max-w-full"
-            />
-          </div>
-        </div>
-
         {/* Smart Factory Section */}
         <div className="factory-section mx-auto mt-[10vw] md:mt-[5vw] max-w-[900px] px-4">
           <div className="section-title font-bruno-ace-sc text-[4vw] md:text-[2vw] text-[#222] text-center mb-[3vw] md:mb-[1vw]">

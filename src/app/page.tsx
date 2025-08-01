@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useEffect, useState, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import BrochureDownloadPopup from '../components/BrochureDownloadPopup';
 
 // Type definitions for video fullscreen methods
 interface VideoWithFullscreen extends HTMLVideoElement {
@@ -14,6 +15,9 @@ interface VideoWithFullscreen extends HTMLVideoElement {
 export default function Home() {
 
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [currentModelIndex, setCurrentModelIndex] = useState(0);
+  const [isBrochurePopupOpen, setIsBrochurePopupOpen] = useState(false);
+  const [selectedModelName, setSelectedModelName] = useState('');
 
   const heroSlides = [
     {
@@ -31,12 +35,19 @@ export default function Home() {
       subtitle: 'All Around Hot Hatch',
       button1: 'Test Drive',
       button2: 'Download Brochure'
+    },
+    {
+      id: 3,
+      image: 'https://kaiyiglobal.com/upload/10/e4371844c1619b0f0f1c20b344ecd4.jpg',
+      title: 'KAIYI E5',
+      subtitle: 'Family Luxury Car',
+      button1: 'Test Drive',
+      button2: 'Download Brochure'
     }
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [hoveredModel, setHoveredModel] = useState<string | null>(null);
-  const [selectedModel, setSelectedModel] = useState<string | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -71,35 +82,35 @@ export default function Home() {
 
   const carModels = [
     {
-      name: 'X3',
+      name: 'X3 Pro',
       image: 'https://kaiyiglobal.com/upload/b1/d0ec3cd4b9c9ba7e0d6f2f8f7f7d69.png',
-      description: 'Compact SUV with modern design and advanced features',
+      description: 'All Around Hot Hatch',
       specs: {
-        length: '3720 mm',
-        width: '1700 mm',
-        height: '1608 mm',
-        wheelbase: '2520 mm'
+        length: '4400 mm',
+        width: '1831 mm',
+        height: '1653 mm',
+        wheelbase: '2632 mm'
       }
     },
     {
       name: 'X7',
       image: 'https://www.kaiyiglobal.com/upload/e6/6d37b19416d131b3c6651f28aad9b1.png',
-      description: 'Premium luxury SUV with exceptional performance',
+      description: 'HomeLike Mobile Space',
       specs: {
-        length: '4850 mm',
-        width: '1950 mm',
-        height: '1750 mm',
-        wheelbase: '2950 mm'
+        length: '4710 mm',
+        width: '1955 mm',
+        height: '1705 mm',
+        wheelbase: '2800 mm'
       }
     },
     {
       name: 'E5',
       image: 'https://kaiyiglobal.com/upload/99/b95b13234541763b68eccb90303e65.png',
-      description: 'Electric vehicle with cutting-edge technology',
+      description: 'Family Luxury Car',
       specs: {
-        length: '4200 mm',
-        width: '1800 mm',
-        height: '1650 mm',
+        length: '4666 mm',
+        width: '1825 mm',
+        height: '1484 mm',
         wheelbase: '2700 mm'
       }
     }
@@ -149,7 +160,13 @@ export default function Home() {
                 <a href="/test-drive" className="bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 border-2 border-white text-center">
                   {heroSlides[currentSlide].button1}
                 </a>
-                <button className="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-white hover:text-black transition-all duration-300">
+                <button 
+                  className="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-white hover:text-black transition-all duration-300"
+                  onClick={() => {
+                    setSelectedModelName(heroSlides[currentSlide].title);
+                    setIsBrochurePopupOpen(true);
+                  }}
+                >
                   {heroSlides[currentSlide].button2}
                 </button>
               </div>
@@ -187,17 +204,19 @@ export default function Home() {
           {/* Model Navigation */}
           <div className="flex justify-center mb-8 sm:mb-12">
             <div className="flex flex-wrap justify-center gap-4 sm:gap-8">
-              {carModels.map((model) => (
+              {carModels.map((model, index) => (
                 <button
                   key={model.name}
-                  className={`text-base sm:text-lg font-medium transition-all duration-300 ${
-                    (hoveredModel === model.name || selectedModel === model.name)
+                  className={`text-xl sm:text-2xl md:text-3xl font-bold transition-all duration-300 ${
+                    (hoveredModel === model.name || currentModelIndex === index)
                       ? 'text-purple-600 underline'
                       : 'text-gray-600 hover:text-gray-800'
                   }`}
                   onMouseEnter={() => setHoveredModel(model.name)}
                   onMouseLeave={() => setHoveredModel(null)}
-                  onClick={() => setSelectedModel(model.name)}
+                  onClick={() => {
+                    setCurrentModelIndex(index);
+                  }}
                 >
                   {model.name}
                 </button>
@@ -210,8 +229,8 @@ export default function Home() {
             <div className="bg-white rounded-2xl p-4 sm:p-8 shadow-lg">
               {/* Car Image */}
               <div className="relative h-64 sm:h-80 md:h-96 w-full mb-6 sm:mb-8">
-          <Image
-                  src={hoveredModel ? carModels.find(m => m.name === hoveredModel)?.image || carModels[0].image : selectedModel ? carModels.find(m => m.name === selectedModel)?.image || carModels[0].image : carModels[0].image}
+                <Image
+                  src={hoveredModel ? carModels.find(m => m.name === hoveredModel)?.image || carModels[currentModelIndex].image : carModels[currentModelIndex].image}
                   alt="KAIYI Car Model"
                   fill
                   className="object-contain transition-all duration-500"
@@ -220,31 +239,34 @@ export default function Home() {
               
               {/* Car Specifications */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-                {hoveredModel || selectedModel ? (
-                  carModels.find(m => m.name === (hoveredModel || selectedModel))?.specs && Object.entries(carModels.find(m => m.name === (hoveredModel || selectedModel))!.specs).map(([key, value]) => (
-                    <div key={key} className="text-center">
-                      <div className="text-lg sm:text-xl md:text-2xl font-bold text-black">{value}</div>
-                      <div className="text-xs sm:text-sm text-gray-600 uppercase">{key}</div>
-                    </div>
-                  ))
-                ) : (
-                  carModels[0].specs && Object.entries(carModels[0].specs).map(([key, value]) => (
-                    <div key={key} className="text-center">
-                      <div className="text-lg sm:text-xl md:text-2xl font-bold text-black">{value}</div>
-                      <div className="text-xs sm:text-sm text-gray-600 uppercase">{key}</div>
-                    </div>
-                  ))
-                )}
+                {(hoveredModel ? carModels.find(m => m.name === hoveredModel)?.specs : carModels[currentModelIndex].specs) && Object.entries(hoveredModel ? carModels.find(m => m.name === hoveredModel)!.specs : carModels[currentModelIndex].specs).map(([key, value]) => (
+                  <div key={key} className="text-center">
+                    <div className="text-lg sm:text-xl md:text-2xl font-bold text-black">{value}</div>
+                    <div className="text-xs sm:text-sm text-gray-600 uppercase">{key}</div>
+                  </div>
+                ))}
               </div>
             </div>
             
             {/* Navigation Arrows */}
-            <button className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors">
+            <button 
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors"
+              onClick={() => {
+                const newIndex = currentModelIndex === 0 ? carModels.length - 1 : currentModelIndex - 1;
+                setCurrentModelIndex(newIndex);
+              }}
+            >
               <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
-            <button className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors">
+            <button 
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors"
+              onClick={() => {
+                const newIndex = currentModelIndex === carModels.length - 1 ? 0 : currentModelIndex + 1;
+                setCurrentModelIndex(newIndex);
+              }}
+            >
               <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -310,7 +332,10 @@ export default function Home() {
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed">
               We specialize in delivering intelligent products that are backed by an ongoing commitment to technological innovation.
             </p>
-            <button className="border-2 border-black text-black px-8 py-3 rounded-none font-semibold text-lg hover:bg-black hover:text-white transition-all duration-300">
+            <button 
+              className="border-2 border-black text-black px-8 py-3 rounded-none font-semibold text-lg hover:bg-black hover:text-white transition-all duration-300"
+              onClick={() => window.location.href = '/we-are-kaiyi'}
+            >
               MORE
             </button>
           </div>
@@ -337,7 +362,10 @@ export default function Home() {
                   <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl drop-shadow-lg">
                     bringing you a worry-free driving experience
                   </p>
-                  <button className="bg-black text-white px-8 py-3 rounded-none font-semibold text-lg hover:bg-gray-800 transition-all duration-300">
+                  <button 
+                    className="bg-black text-white px-8 py-3 rounded-none font-semibold text-lg hover:bg-gray-800 transition-all duration-300"
+                    onClick={() => window.location.href = '/service-booking'}
+                  >
                     MORE
                   </button>
                 </div>
@@ -346,6 +374,15 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+
+
+      {/* Brochure Download Popup */}
+      <BrochureDownloadPopup
+        isOpen={isBrochurePopupOpen}
+        onClose={() => setIsBrochurePopupOpen(false)}
+        modelName={selectedModelName}
+      />
 
       {/* Footer Component */}
       <Footer />

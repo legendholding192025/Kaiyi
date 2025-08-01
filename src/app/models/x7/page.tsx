@@ -4,12 +4,14 @@ import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
+import BrochureDownloadPopup from '../../../components/BrochureDownloadPopup';
 
 export default function X7Page() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const [selectedColor, setSelectedColor] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isBrochurePopupOpen, setIsBrochurePopupOpen] = useState(false);
 
   const carColors = [
     {
@@ -278,10 +280,7 @@ export default function X7Page() {
   };
 
   const handleDownloadBrochure = () => {
-    // Add brochure download logic here
-    console.log('Downloading X7 brochure...');
-    // You can add actual download link here
-    // window.open('/brochures/x7-brochure.pdf', '_blank');
+    setIsBrochurePopupOpen(true);
   };
 
   const handleColorChange = (index: number) => {
@@ -793,6 +792,13 @@ export default function X7Page() {
         </div>
       </div>
 
+      {/* Brochure Download Popup */}
+      <BrochureDownloadPopup
+        isOpen={isBrochurePopupOpen}
+        onClose={() => setIsBrochurePopupOpen(false)}
+        modelName="KAIYI X7"
+      />
+      
       {/* Footer Component */}
       <Footer />
     </div>
