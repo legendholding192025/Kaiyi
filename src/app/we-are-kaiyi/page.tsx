@@ -5,10 +5,6 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
 export default function WeAreKaiyiPage() {
-  const goToContact = () => {
-    // Navigate to contact section or page
-    window.location.href = '/#contact';
-  };
 
   return (
     <div className="min-h-screen bg-white">

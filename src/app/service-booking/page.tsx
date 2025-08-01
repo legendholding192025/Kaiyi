@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
@@ -24,11 +25,7 @@ export default function ServiceBookingPage() {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const carModels = [
-    { id: 1, name: "KAIYI X7" },
-    { id: 2, name: "KAIYI X3 Pro" },
-    { id: 3, name: "KAIYI E5" }
-  ];
+
 
   const handleInputChange = (field: keyof FormData, value: string) => {
     setForm(prev => ({ ...prev, [field]: value }));
@@ -101,9 +98,11 @@ export default function ServiceBookingPage() {
            <div className="space-y-8">
              {/* Service Center Image */}
              <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-               <img
+               <Image
                  src="https://cdn.legendholding.com/images/cloudinary_688c79962032e3.30736361_20250801_082350.jpg"
                  alt="Kaiyi Service Center"
+                 width={800}
+                 height={320}
                  className="w-full h-80 object-cover"
                />
              </div>

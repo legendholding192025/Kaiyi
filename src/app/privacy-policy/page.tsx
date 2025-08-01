@@ -26,9 +26,9 @@ export default function PrivacyPolicyPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-lg max-w-none">
             <div className="space-y-8 text-gray-700">
-              <p>
-                Here at Legend Multi Motors L.L.C ("We"), we are committed to protecting and respecting your privacy.
-              </p>
+                             <p>
+                 Here at Legend Multi Motors L.L.C (&quot;We&quot;), we are committed to protecting and respecting your privacy.
+               </p>
               
               <p>
                 This policy (together with our Website Terms of Use and any other documents referred to in it) sets out the basis on which any personal data we collect from you, or that you provide to us, will be processed by us.
@@ -38,9 +38,9 @@ export default function PrivacyPolicyPage() {
                 Please read the following carefully to understand our views and practices regarding your personal data and how we will treat it. By visiting www.kaiyi.ae you are accepting and consenting to the practices described in this Policy.
               </p>
               
-              <p>
-                For the purpose of the Data Protection Act 1998 ("the Act") and the General Data Protection Regulation 2016 (GDPR), the data controller is you, the Customer, ("You") to whom Legend Multi Motors L.L.C (the data processor) provides the receipt reading services ("the Services").
-              </p>
+                             <p>
+                 For the purpose of the Data Protection Act 1998 (&quot;the Act&quot;) and the General Data Protection Regulation 2016 (GDPR), the data controller is you, the Customer, (&quot;You&quot;) to whom Legend Multi Motors L.L.C (the data processor) provides the receipt reading services (&quot;the Services&quot;).
+               </p>
 
               <section className="mt-12">
                 <h2 className="text-3xl font-bold text-black mb-6">INFORMATION WE COLLECT FROM YOU</h2>
@@ -49,9 +49,9 @@ export default function PrivacyPolicyPage() {
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-xl font-semibold text-black mb-3">Information you give us.</h3>
-                    <p className="mb-3">
-                      This is information about you that you give us by filling in forms on our site www.kaiyi.ae ("our Site") or by corresponding with us by phone or e-mail. It includes information you provide when you register to use our Site, subscribe to and/or order the Services, and when you report a problem with our Site. The information you give us may include your name, address, e-mail address and phone number, financial and payment information, personal details and proof of identity.
-                    </p>
+                                         <p className="mb-3">
+                       This is information about you that you give us by filling in forms on our site www.kaiyi.ae (&quot;our Site&quot;) or by corresponding with us by phone or e-mail. It includes information you provide when you register to use our Site, subscribe to and/or order the Services, and when you report a problem with our Site. The information you give us may include your name, address, e-mail address and phone number, financial and payment information, personal details and proof of identity.
+                     </p>
                   </div>
                   
                   <div>
@@ -150,7 +150,7 @@ export default function PrivacyPolicyPage() {
                         our business partners, suppliers and sub -contractors for the performance of any contract we enter into with them or you;
                       </li>
                       <li>
-                        advertisers and advertising networks that require the data to select and serve relevant adverts to you and others. We do not disclose information about identifiable individuals to our advertisers, but we will provide them with aggregate information about our users (for example, we may inform them that 150 women aged under 30 have clicked on their advertisement on any given day). We may also use such aggregate information to help advertisers reach the kind of audience they want to target (for example, women in a particular US State). We may make use of the personal data we have collected from you to enable us to comply with our advertisers' wishes by displaying their advertisement to that target audience; and
+                        advertisers and advertising networks that require the data to select and serve relevant adverts to you and others. We do not disclose information about identifiable individuals to our advertisers, but we will provide them with aggregate information about our users (for example, we may inform them that 150 women aged under 30 have clicked on their advertisement on any given day). We may also use such aggregate information to help advertisers reach the kind of audience they want to target (for example, women in a particular US State). We may make use of the personal data we have collected from you to enable us to comply with our advertisers&apos; wishes by displaying their advertisement to that target audience; and
                       </li>
                       <li>
                         analytics and search engine providers that assist us in the improvement and optimisation of our Site.

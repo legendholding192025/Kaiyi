@@ -36,7 +36,7 @@ export default function ContactUsPage() {
       {/* We're Here for You Section */}
       <section className="bg-black text-white py-20 px-4 text-center">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">We're Here for You</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">We&apos;re Here for You</h1>
           <p className="text-lg md:text-xl leading-relaxed">
             At Kaiyi, we value our customers and are committed to providing exceptional service. Contact us with any inquiries about our
             vehicles, services, or support. Your satisfaction is our priority.

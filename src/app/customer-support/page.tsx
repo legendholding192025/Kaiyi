@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
@@ -86,7 +87,7 @@ export default function CustomerSupportPage() {
             {/* Right Column - Content */}
             <div>
               <p className="text-lg text-gray-700 leading-relaxed text-justify">
-                Kaiyi boasts a network of professional service dealers across countries worldwide, including Russia, Chile, Peru and Italy. With the support of a comprehensive training program, complete technical materials and a professional technical team, Kaiyi ensures that all service dealers have a comprehensive understanding of customer's vehicles and offer customers the highest level of after-sales service support.
+                Kaiyi boasts a network of professional service dealers across countries worldwide, including Russia, Chile, Peru and Italy. With the support of a comprehensive training program, complete technical materials and a professional technical team, Kaiyi ensures that all service dealers have a comprehensive understanding of customer&apos;s vehicles and offer customers the highest level of after-sales service support.
               </p>
             </div>
           </div>
@@ -97,9 +98,11 @@ export default function CustomerSupportPage() {
         <section className="bg-white py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center">
-              <img
+              <Image
                 src="https://www.kaiyiglobal.com/assets/kaiyi99-b7ef4e4a.jpg"
                 alt="Kaiyi Global"
+                width={800}
+                height={600}
                 className="max-w-full h-auto rounded-lg shadow-lg"
               />
             </div>
@@ -122,9 +125,11 @@ export default function CustomerSupportPage() {
               
               {/* Right Column - Image */}
               <div className="flex justify-center">
-                <img
+                <Image
                   src="https://www.kaiyiglobal.com/assets/kaiyiimg21-4cce8dcf.png"
                   alt="Kaiyi EV Chassis and Genuine Spare Parts"
+                  width={600}
+                  height={400}
                   className="max-w-full h-auto rounded-lg shadow-lg"
                 />
               </div>
@@ -142,15 +147,17 @@ export default function CustomerSupportPage() {
                   Warranty Service
                 </h2>
                 <p className="text-lg text-gray-700 leading-relaxed text-justify">
-                  The warranty is a reflection of Kaiyi Automobile's confidence in product quality and commitment to its customers. All Kaiyi vehicles are supported by a standard vehicle warranty policy, which ensures that each new vehicle is manufactured to the manufacturer's highest standards and inspected before delivery.
+                  The warranty is a reflection of Kaiyi Automobile&apos;s confidence in product quality and commitment to its customers. All Kaiyi vehicles are supported by a standard vehicle warranty policy, which ensures that each new vehicle is manufactured to the manufacturer&apos;s highest standards and inspected before delivery.
                 </p>
               </div>
               
               {/* Right Column - Image */}
               <div className="flex justify-center">
-                <img
+                <Image
                   src="https://www.kaiyiglobal.com/assets/kaiyiimg22-890b8fa7.png"
                   alt="Kaiyi EV Chassis and Genuine Spare Parts"
+                  width={600}
+                  height={400}
                   className="max-w-full h-auto rounded-lg shadow-lg"
                 />
               </div>
