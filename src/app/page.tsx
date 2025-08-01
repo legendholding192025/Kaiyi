@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import BrochureDownloadPopup from '../components/BrochureDownloadPopup';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Type definitions for video fullscreen methods
 interface VideoWithFullscreen extends HTMLVideoElement {
@@ -13,6 +14,7 @@ interface VideoWithFullscreen extends HTMLVideoElement {
 }
 
 export default function Home() {
+  const { t } = useLanguage();
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const [currentModelIndex, setCurrentModelIndex] = useState(0);
@@ -23,26 +25,26 @@ export default function Home() {
     {
       id: 1,
       image: 'https://kaiyiglobal.com/upload/dd/87741cf96bb4d4d48290491df9b47d.png',
-      title: 'KAIYI X7',
-      subtitle: 'HomeLike Mobile Space',
-      button1: 'Test Drive',
-      button2: 'Download Brochure'
+      title: t('home.hero.title'),
+      subtitle: t('home.hero.subtitle'),
+      button1: t('home.hero.testDrive'),
+      button2: t('home.hero.downloadBrochure')
     },
     {
       id: 2,
       image: 'https://kaiyiglobal.com/upload/54/fb0a14b7c86bece73f7ddd0f9ce861.png',
-      title: 'KAIYI X3 PRO',
-      subtitle: 'All Around Hot Hatch',
-      button1: 'Test Drive',
-      button2: 'Download Brochure'
+      title: t('home.hero.title2'),
+      subtitle: t('home.hero.subtitle2'),
+      button1: t('home.hero.testDrive'),
+      button2: t('home.hero.downloadBrochure')
     },
     {
       id: 3,
       image: 'https://kaiyiglobal.com/upload/10/e4371844c1619b0f0f1c20b344ecd4.jpg',
-      title: 'KAIYI E5',
-      subtitle: 'Family Luxury Car',
-      button1: 'Test Drive',
-      button2: 'Download Brochure'
+      title: t('home.hero.title3'),
+      subtitle: t('home.hero.subtitle3'),
+      button1: t('home.hero.testDrive'),
+      button2: t('home.hero.downloadBrochure')
     }
   ];
 
@@ -327,16 +329,16 @@ export default function Home() {
         <div className="py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-5xl md:text-6xl font-bold text-black mb-6">
-              WE ARE KAIYI
+              {t('home.weAreKaiyi.title')}
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed">
-              We specialize in delivering intelligent products that are backed by an ongoing commitment to technological innovation.
+              {t('home.weAreKaiyi.description')}
             </p>
             <button 
               className="border-2 border-black text-black px-8 py-3 rounded-none font-semibold text-lg hover:bg-black hover:text-white transition-all duration-300"
               onClick={() => window.location.href = '/we-are-kaiyi'}
             >
-              MORE
+              {t('home.weAreKaiyi.more')}
             </button>
           </div>
         </div>
@@ -357,16 +359,16 @@ export default function Home() {
               <div className="absolute inset-0 flex flex-col justify-end items-center pb-16">
                 <div className="text-center">
                   <h3 className="text-6xl md:text-7xl font-bold text-white mb-4 drop-shadow-lg">
-                    SERVICE
+                    {t('home.service.title')}
                   </h3>
                   <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl drop-shadow-lg">
-                    bringing you a worry-free driving experience
+                    {t('home.service.subtitle')}
                   </p>
                   <button 
                     className="bg-black text-white px-8 py-3 rounded-none font-semibold text-lg hover:bg-gray-800 transition-all duration-300"
                     onClick={() => window.location.href = '/service-booking'}
                   >
-                    MORE
+                    {t('home.service.more')}
                   </button>
                 </div>
               </div>

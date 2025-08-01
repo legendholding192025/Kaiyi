@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 
 
@@ -13,7 +14,8 @@ export default function Navbar() {
   const [isContactDropdownOpen, setIsContactDropdownOpen] = useState(false);
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
-  const [selectedLanguage, setSelectedLanguage] = useState('EN');
+  
+  const { language, setLanguage, t, isRTL } = useLanguage();
 
   const tabsContent = [
     {
@@ -63,16 +65,22 @@ export default function Navbar() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const handleLanguageChange = (languageCode: string) => {
-    setSelectedLanguage(languageCode);
+  const handleLanguageChange = (languageCode: 'EN' | 'AR') => {
+    console.log('Language changing to:', languageCode);
+    setLanguage(languageCode);
     setIsLanguageDropdownOpen(false);
-    // Here you can add logic to change the site language
-    console.log(`Language changed to: ${languageCode}`);
   };
 
   // Close dropdowns when clicking outside
   useEffect(() => {
-    const handleClickOutside = () => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      
+      // Don't close language dropdown if clicking on language button or dropdown
+      if (target.closest('.language-selector')) {
+        return;
+      }
+      
       if (isLanguageDropdownOpen) {
         setIsLanguageDropdownOpen(false);
       }
@@ -195,7 +203,7 @@ export default function Navbar() {
             </div>
             
             <a href="/we-are-kaiyi" className="flex items-center px-3 py-2 text-sm font-medium text-black hover:text-gray-700 transition-colors">
-              <span>WE ARE KAIYI</span>
+              <span>{t('nav.weAreKaiyi')}</span>
             </a>
 
             <div className="relative group">
@@ -203,7 +211,7 @@ export default function Navbar() {
                 onClick={() => setIsAfterSalesDropdownOpen(!isAfterSalesDropdownOpen)}
                 className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-black hover:text-gray-700 transition-colors"
               >
-                <span>AFTER SALES</span>
+                <span>{t('nav.afterSales')}</span>
                 <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M7 10l5 5 5-5z"/>
                 </svg>
@@ -214,13 +222,13 @@ export default function Navbar() {
                 isAfterSalesDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
               }`}>
                                  <a href="/warranty" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
-                   Warranty
+                   {t('nav.warranty')}
                  </a>
                  <a href="/service-booking" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
-                   Service Booking
+                   {t('nav.serviceBooking')}
                  </a>
                  <a href="/customer-support" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
-                   Customer Support
+                   {t('nav.customerSupport')}
                  </a>
               </div>
             </div>
@@ -230,7 +238,7 @@ export default function Navbar() {
                 onClick={() => setIsContactDropdownOpen(!isContactDropdownOpen)}
                 className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-black hover:text-gray-700 transition-colors"
               >
-                <span>CONTACT US</span>
+                <span>{t('nav.contactUs')}</span>
                 <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M7 10l5 5 5-5z"/>
                 </svg>
@@ -241,10 +249,10 @@ export default function Navbar() {
                 isContactDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
               }`}>
                 <a href="/test-drive" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
-                  Test Drive
+                  {t('nav.testDrive')}
                 </a>
                 <a href="/contact-us" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
-                  Contact Us
+                  {t('nav.contact')}
                 </a>
               </div>
             </div>
@@ -253,7 +261,7 @@ export default function Navbar() {
           {/* Right Section - Language & Social */}
           <div className="hidden lg:flex items-center space-x-6">
             {/* Language Selector */}
-            <div className="relative">
+            <div className="relative language-selector">
               <button
                 onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
                 className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-black hover:text-gray-700 transition-colors"
@@ -261,28 +269,28 @@ export default function Navbar() {
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
                 </svg>
-                <span>{selectedLanguage}</span>
+                <span>{language}</span>
                 <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M7 10l5 5 5-5z"/>
                 </svg>
               </button>
               
               {/* Language Dropdown */}
-              {isLanguageDropdownOpen && (
-                <div className="absolute top-full right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[120px]">
-                  {languages.map((language) => (
-                    <button
-                      key={language.code}
-                      onClick={() => handleLanguageChange(language.code)}
-                      className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-50 transition-colors ${
-                        selectedLanguage === language.code ? 'bg-gray-100 font-medium' : ''
-                      }`}
-                    >
-                      {language.name}
-                    </button>
-                  ))}
-                </div>
-              )}
+              <div className={`absolute top-full right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[120px] transition-all duration-200 ${
+                isLanguageDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+              }`}>
+                {languages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => handleLanguageChange(lang.code as 'EN' | 'AR')}
+                    className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-50 transition-colors ${
+                      language === lang.code ? 'bg-gray-100 font-medium' : ''
+                    }`}
+                  >
+                    {lang.name}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Separator */}
@@ -321,10 +329,10 @@ export default function Navbar() {
         <div className={`lg:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
           <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
             <a href="#models" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-black hover:text-gray-700 transition-colors">
-              MODELS
+              {t('nav.models')}
             </a>
             <a href="/we-are-kaiyi" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-black hover:text-gray-700 transition-colors">
-              WE ARE KAIYI
+              {t('nav.weAreKaiyi')}
             </a>
 
             <div className="relative">
@@ -332,7 +340,7 @@ export default function Navbar() {
                 onClick={() => setIsAfterSalesDropdownOpen(!isAfterSalesDropdownOpen)}
                 className="flex items-center justify-between w-full px-3 py-2 text-base font-medium text-black hover:text-gray-700 transition-colors"
               >
-                <span>AFTER SALES</span>
+                <span>{t('nav.afterSales')}</span>
                 <svg className={`w-4 h-4 transition-transform ${isAfterSalesDropdownOpen ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 24 24">
                   <path d="M7 10l5 5 5-5z"/>
                 </svg>
@@ -342,13 +350,13 @@ export default function Navbar() {
               {isAfterSalesDropdownOpen && (
                 <div className="transition-all duration-200 max-h-32 opacity-100">
                                                <a href="/warranty" onClick={() => setIsMobileMenuOpen(false)} className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors">
-                               Warranty
+                               {t('nav.warranty')}
                              </a>
                              <a href="/service-booking" onClick={() => setIsMobileMenuOpen(false)} className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors">
-                               Service Booking
+                               {t('nav.serviceBooking')}
                              </a>
                              <a href="/customer-support" onClick={() => setIsMobileMenuOpen(false)} className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors">
-                               Customer Support
+                               {t('nav.customerSupport')}
                              </a>
                 </div>
               )}
@@ -358,7 +366,7 @@ export default function Navbar() {
                 onClick={() => setIsContactDropdownOpen(!isContactDropdownOpen)}
                 className="flex items-center justify-between w-full px-3 py-2 text-base font-medium text-black hover:text-gray-700 transition-colors"
               >
-                <span>CONTACT US</span>
+                <span>{t('nav.contactUs')}</span>
                 <svg className={`w-4 h-4 transition-transform ${isContactDropdownOpen ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 24 24">
                   <path d="M7 10l5 5 5-5z"/>
                 </svg>
@@ -368,10 +376,10 @@ export default function Navbar() {
               {isContactDropdownOpen && (
                 <div className="transition-all duration-200 max-h-32 opacity-100">
                   <a href="/test-drive" onClick={() => setIsMobileMenuOpen(false)} className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors">
-                    Test Drive
+                    {t('nav.testDrive')}
                   </a>
                   <a href="/contact-us" onClick={() => setIsMobileMenuOpen(false)} className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors">
-                    Contact Us
+                    {t('nav.contact')}
                   </a>
                 </div>
               )}
@@ -380,11 +388,28 @@ export default function Navbar() {
             {/* Mobile Language and Social */}
             <div className="pt-4 border-t border-gray-200">
               <div className="flex items-center justify-between px-3 py-2">
-                <div className="flex items-center space-x-1 text-sm font-medium text-black">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                  </svg>
-                  <span>{selectedLanguage}</span>
+                <div className="flex items-center space-x-3">
+                  <div className="flex items-center space-x-1 text-sm font-medium text-black">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    </svg>
+                    <span>Language:</span>
+                  </div>
+                  <div className="flex space-x-2">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => handleLanguageChange(lang.code as 'EN' | 'AR')}
+                        className={`px-3 py-1 text-xs rounded border transition-colors ${
+                          language === lang.code 
+                            ? 'bg-black text-white border-black' 
+                            : 'bg-white text-black border-gray-300 hover:bg-gray-50'
+                        }`}
+                      >
+                        {lang.code}
+                      </button>
+                    ))}
+                  </div>
                 </div>
                 <div className="flex items-center space-x-3">
                   {socialMediaIcons.map((social) => (

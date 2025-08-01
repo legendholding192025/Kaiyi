@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bruno_Ace_SC } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const brunoAceSC = Bruno_Ace_SC({
   weight: "400",
@@ -23,7 +24,9 @@ export default function RootLayout({
       <body
         className={`${brunoAceSC.variable} antialiased`}
       >
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );
