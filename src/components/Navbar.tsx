@@ -5,8 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-
-
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isModelsDropdownOpen, setIsModelsDropdownOpen] = useState(false);
@@ -15,8 +13,14 @@ export default function Navbar() {
   const [isMobileModelsDropdownOpen, setIsMobileModelsDropdownOpen] = useState(false);
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
+  const [isClient, setIsClient] = useState(false);
   
   const { language, setLanguage, t, isRTL } = useLanguage();
+
+  // Fix hydration mismatch by ensuring client-side rendering
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const tabsContent = [
     {
@@ -70,6 +74,41 @@ export default function Navbar() {
     console.log('Language changing to:', languageCode);
     setLanguage(languageCode);
     setIsLanguageDropdownOpen(false);
+  };
+
+  // Mobile navigation functions - Enhanced with proper state management
+  const handleMobileNavigation = (url: string) => {
+    // Close all mobile dropdowns and menu
+    setIsMobileMenuOpen(false);
+    setIsMobileModelsDropdownOpen(false);
+    setIsAfterSalesDropdownOpen(false);
+    setIsContactDropdownOpen(false);
+    
+    // Small delay to allow UI to update before navigation
+    setTimeout(() => {
+      window.location.href = url;
+    }, 100);
+  };
+
+  const toggleMobileModels = () => {
+    setIsMobileModelsDropdownOpen(!isMobileModelsDropdownOpen);
+    // Close other dropdowns
+    setIsAfterSalesDropdownOpen(false);
+    setIsContactDropdownOpen(false);
+  };
+
+  const toggleMobileAfterSales = () => {
+    setIsAfterSalesDropdownOpen(!isAfterSalesDropdownOpen);
+    // Close other dropdowns
+    setIsMobileModelsDropdownOpen(false);
+    setIsContactDropdownOpen(false);
+  };
+
+  const toggleMobileContact = () => {
+    setIsContactDropdownOpen(!isContactDropdownOpen);
+    // Close other dropdowns
+    setIsMobileModelsDropdownOpen(false);
+    setIsAfterSalesDropdownOpen(false);
   };
 
   // Close dropdowns when clicking outside
@@ -225,15 +264,15 @@ export default function Navbar() {
               <div className={`absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[200px] transition-all duration-200 ${
                 isAfterSalesDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
               }`}>
-                                 <a href="/warranty" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
-                   {t('nav.warranty')}
-                 </a>
-                 <a href="/service-booking" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
-                   {t('nav.serviceBooking')}
-                 </a>
-                 <a href="/customer-support" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
-                   {t('nav.customerSupport')}
-                 </a>
+                <a href="/warranty" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
+                  {t('nav.warranty')}
+                </a>
+                <a href="/service-booking" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
+                  {t('nav.serviceBooking')}
+                </a>
+                <a href="/customer-support" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
+                  {t('nav.customerSupport')}
+                </a>
               </div>
             </div>
 
@@ -329,93 +368,182 @@ export default function Navbar() {
           </div>
         </div>
         
-        {/* Mobile Menu */}
-        <div className={`lg:hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
-          <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
-            <div className="relative">
-              <button 
-                onClick={() => setIsMobileModelsDropdownOpen(!isMobileModelsDropdownOpen)}
-                className="flex items-center justify-between w-full px-3 py-2 text-base font-medium text-black hover:text-gray-700 transition-colors"
-              >
-                <span>{t('nav.models')}</span>
-                <svg className={`w-4 h-4 transition-transform ${isMobileModelsDropdownOpen ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M7 10l5 5 5-5z"/>
-                </svg>
-              </button>
+        {/* ENHANCED MOBILE MENU - Fixed all navigation issues */}
+        {isClient && (
+          <div className={`lg:hidden transition-all duration-300 ease-in-out overflow-hidden ${
+            isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+          }`}>
+          <div className="bg-white border-t border-gray-200 shadow-lg">
+            <div className="px-4 py-2">
               
-              {/* Mobile Models Dropdown */}
-              {isMobileModelsDropdownOpen && (
-                <div className="transition-all duration-200 max-h-48 opacity-100">
-                  {tabsContent.map((model) => (
-                    <a 
-                      key={model.id}
-                      href={model.link} 
-                      onClick={() => setIsMobileMenuOpen(false)} 
-                      className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors"
-                    >
-                      {model.car}
-                    </a>
-                  ))}
+              {/* Models Section */}
+              <div className="border-b border-gray-100">
+                <button 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleMobileModels();
+                  }}
+                  className="flex items-center justify-between w-full py-3 text-left text-base font-medium text-black hover:text-gray-700 transition-colors touch-manipulation"
+                  type="button"
+                >
+                  <span>MODELS</span>
+                  <svg className={`w-4 h-4 transition-transform duration-200 ${isMobileModelsDropdownOpen ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M7 10l5 5 5-5z"/>
+                  </svg>
+                </button>
+                
+                <div className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                  isMobileModelsDropdownOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
+                }`}>
+                  <div className="pb-2 space-y-1">
+                    {tabsContent.map((model) => (
+                      <button
+                        key={model.id}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          console.log('Navigating to:', model.link);
+                          handleMobileNavigation(model.link);
+                        }}
+                        className="block w-full text-left px-4 py-2 text-sm text-black hover:text-gray-700 hover:bg-gray-50 transition-colors touch-manipulation"
+                        type="button"
+                      >
+                        {model.car}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              )}
-            </div>
-            <a href="/we-are-kaiyi" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-black hover:text-gray-700 transition-colors">
-              {t('nav.weAreKaiyi')}
-            </a>
+              </div>
 
-            <div className="relative">
-              <button 
-                onClick={() => setIsAfterSalesDropdownOpen(!isAfterSalesDropdownOpen)}
-                className="flex items-center justify-between w-full px-3 py-2 text-base font-medium text-black hover:text-gray-700 transition-colors"
-              >
-                <span>{t('nav.afterSales')}</span>
-                <svg className={`w-4 h-4 transition-transform ${isAfterSalesDropdownOpen ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M7 10l5 5 5-5z"/>
-                </svg>
-              </button>
-              
-              {/* Mobile After Sales Dropdown */}
-              {isAfterSalesDropdownOpen && (
-                <div className="transition-all duration-200 max-h-32 opacity-100">
-                                               <a href="/warranty" onClick={() => setIsMobileMenuOpen(false)} className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors">
-                               {t('nav.warranty')}
-                             </a>
-                             <a href="/service-booking" onClick={() => setIsMobileMenuOpen(false)} className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors">
-                               {t('nav.serviceBooking')}
-                             </a>
-                             <a href="/customer-support" onClick={() => setIsMobileMenuOpen(false)} className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors">
-                               {t('nav.customerSupport')}
-                             </a>
+              {/* We Are Kaiyi - Direct Link */}
+              <div className="border-b border-gray-100">
+                <button 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Navigating to: /we-are-kaiyi');
+                    handleMobileNavigation('/we-are-kaiyi');
+                  }}
+                  className="w-full py-3 text-left text-base font-medium text-black hover:text-gray-700 transition-colors touch-manipulation"
+                  type="button"
+                >
+                  <span>{t('nav.weAreKaiyi')}</span>
+                </button>
+              </div>
+
+              {/* After Sales Section */}
+              <div className="border-b border-gray-100">
+                <button 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleMobileAfterSales();
+                  }}
+                  className="flex items-center justify-between w-full py-3 text-left text-base font-medium text-black hover:text-gray-700 transition-colors touch-manipulation"
+                  type="button"
+                >
+                  <span>{t('nav.afterSales')}</span>
+                  <svg className={`w-4 h-4 transition-transform duration-200 ${isAfterSalesDropdownOpen ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M7 10l5 5 5-5z"/>
+                  </svg>
+                </button>
+                
+                <div className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                  isAfterSalesDropdownOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
+                }`}>
+                  <div className="pb-2 space-y-1">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Navigating to: /warranty');
+                        handleMobileNavigation('/warranty');
+                      }}
+                      className="block w-full text-left px-4 py-2 text-sm text-black hover:text-gray-700 hover:bg-gray-50 transition-colors touch-manipulation"
+                      type="button"
+                    >
+                      {t('nav.warranty')}
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Navigating to: /service-booking');
+                        handleMobileNavigation('/service-booking');
+                      }}
+                      className="block w-full text-left px-4 py-2 text-sm text-black hover:text-gray-700 hover:bg-gray-50 transition-colors touch-manipulation"
+                      type="button"
+                    >
+                      {t('nav.serviceBooking')}
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Navigating to: /customer-support');
+                        handleMobileNavigation('/customer-support');
+                      }}
+                      className="block w-full text-left px-4 py-2 text-sm text-black hover:text-gray-700 hover:bg-gray-50 transition-colors touch-manipulation"
+                      type="button"
+                    >
+                      {t('nav.customerSupport')}
+                    </button>
+                  </div>
                 </div>
-              )}
-            </div>
-            <div className="relative">
-              <button 
-                onClick={() => setIsContactDropdownOpen(!isContactDropdownOpen)}
-                className="flex items-center justify-between w-full px-3 py-2 text-base font-medium text-black hover:text-gray-700 transition-colors"
-              >
-                <span>{t('nav.contactUs')}</span>
-                <svg className={`w-4 h-4 transition-transform ${isContactDropdownOpen ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M7 10l5 5 5-5z"/>
-                </svg>
-              </button>
-              
-              {/* Mobile Contact Dropdown */}
-              {isContactDropdownOpen && (
-                <div className="transition-all duration-200 max-h-32 opacity-100">
-                  <a href="/test-drive" onClick={() => setIsMobileMenuOpen(false)} className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors">
-                    {t('nav.testDrive')}
-                  </a>
-                  <a href="/contact-us" onClick={() => setIsMobileMenuOpen(false)} className="block px-6 py-2 text-sm text-black hover:text-gray-700 transition-colors">
-                    {t('nav.contact')}
-                  </a>
+              </div>
+
+              {/* Contact Section */}
+              <div className="border-b border-gray-100">
+                <button 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleMobileContact();
+                  }}
+                  className="flex items-center justify-between w-full py-3 text-left text-base font-medium text-black hover:text-gray-700 transition-colors touch-manipulation"
+                  type="button"
+                >
+                  <span>{t('nav.contactUs')}</span>
+                  <svg className={`w-4 h-4 transition-transform duration-200 ${isContactDropdownOpen ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M7 10l5 5 5-5z"/>
+                  </svg>
+                </button>
+                
+                <div className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                  isContactDropdownOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
+                }`}>
+                  <div className="pb-2 space-y-1">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Navigating to: /test-drive');
+                        handleMobileNavigation('/test-drive');
+                      }}
+                      className="block w-full text-left px-4 py-2 text-sm text-black hover:text-gray-700 hover:bg-gray-50 transition-colors touch-manipulation"
+                      type="button"
+                    >
+                      {t('nav.testDrive')}
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Navigating to: /contact-us');
+                        handleMobileNavigation('/contact-us');
+                      }}
+                      className="block w-full text-left px-4 py-2 text-sm text-black hover:text-gray-700 hover:bg-gray-50 transition-colors touch-manipulation"
+                      type="button"
+                    >
+                      {t('nav.contact')}
+                    </button>
+                  </div>
                 </div>
-              )}
-            </div>
-            
-            {/* Mobile Language and Social */}
-            <div className="pt-4 border-t border-gray-200">
-              <div className="flex items-center justify-between px-3 py-2">
+              </div>
+
+              {/* Language Section */}
+              <div className="py-3">
                 <div className="flex items-center space-x-3">
                   <div className="flex items-center space-x-1 text-sm font-medium text-black">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -427,35 +555,28 @@ export default function Navbar() {
                     {languages.map((lang) => (
                       <button
                         key={lang.code}
-                        onClick={() => handleLanguageChange(lang.code as 'EN' | 'AR')}
-                        className={`px-3 py-1 text-xs rounded border transition-colors ${
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleLanguageChange(lang.code as 'EN' | 'AR');
+                        }}
+                        className={`px-3 py-1 text-xs rounded border transition-colors touch-manipulation ${
                           language === lang.code 
                             ? 'bg-black text-white border-black' 
                             : 'bg-white text-black border-gray-300 hover:bg-gray-50'
                         }`}
+                        type="button"
                       >
                         {lang.code}
                       </button>
                     ))}
                   </div>
                 </div>
-                <div className="flex items-center space-x-3">
-                  {socialMediaIcons.map((social) => (
-                    <a
-                      key={social.name}
-                      href="#"
-                      className="p-1 text-black hover:text-gray-700 transition-colors"
-                    >
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d={social.icon} />
-                      </svg>
-                    </a>
-                  ))}
-                </div>
               </div>
             </div>
           </div>
         </div>
+        )}
       </div>
     </nav>
   );

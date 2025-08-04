@@ -153,24 +153,6 @@ export default function TestDrivePage() {
                 />
               </div>
 
-              {/* Verification Code */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Verification code</label>
-                <input
-                  type="text"
-                  value={form.verification_code}
-                  onChange={(e) => handleInputChange('verification_code', e.target.value)}
-                  placeholder="Please enter the verification code"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700 placeholder-gray-500"
-                />
-                {/* Captcha Image */}
-                <div className="mt-2 p-3 bg-gray-50 rounded border border-gray-200">
-                  <div className="text-center text-lg font-bold text-gray-800 tracking-wider">
-                    as 31
-                  </div>
-                </div>
-              </div>
-
               {/* Submit Button */}
               <div className="text-center">
                 <button
