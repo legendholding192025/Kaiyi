@@ -364,7 +364,7 @@ export default function E5Page() {
       </div>
       
       {/* First Full Size Image Section */}
-      <div className="w-full relative overflow-hidden" style={{ height: '100vh' }}>
+      <div className="w-full relative overflow-hidden h-64 md:h-screen">
         <Image
           src={firstSlideshowImages[0]}
           alt="KAIYI E5 Interior"
@@ -378,30 +378,33 @@ export default function E5Page() {
       {/* First Technical Features Section */}
       <div className="w-full bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden mx-auto" style={{ width: '1634px', height: '700px', maxWidth: '100%' }}>
-            {/* First Technical Images Slideshow */}
-            <div className="relative w-full h-full">
-              {firstTechnicalImages.map((image, index) => (
-                <div
-                  key={index}
-                  className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                    currentFirstTechnicalSlide === index ? 'opacity-100' : 'opacity-0'
-                  }`}
-                >
-                  <Image
-                    src={image}
-                    alt={`KAIYI E5 First Technical Feature ${index + 1}`}
-                    width={1634}
-                    height={700}
-                    className="w-full h-full object-cover"
-                    priority={index === 0}
-                  />
-                </div>
-              ))}
+          <div className="relative">
+            {/* Image container with overflow-hidden */}
+            <div className="relative overflow-hidden mx-auto h-64 md:h-[700px]" style={{ width: '1634px', maxWidth: '100%' }}>
+              {/* First Technical Images Slideshow */}
+              <div className="relative w-full h-full">
+                {firstTechnicalImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                      currentFirstTechnicalSlide === index ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
+                    <Image
+                      src={image}
+                      alt={`KAIYI E5 First Technical Feature ${index + 1}`}
+                      width={1634}
+                      height={700}
+                      className="w-full h-full object-cover"
+                      priority={index === 0}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
             
-            {/* First Technical Details Bar */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gray-800/90 backdrop-blur-sm">
+            {/* First Technical Details Bar - Outside image container for mobile visibility */}
+            <div className="mt-4 md:mt-0 md:absolute md:bottom-0 md:left-0 md:right-0 bg-gray-800/90 backdrop-blur-sm">
               <div className="flex flex-col md:flex-row justify-between items-center py-4 md:py-6">
                 {firstTechnicalDetails.map((detail, index) => (
                   <div
@@ -440,7 +443,7 @@ export default function E5Page() {
       </div>
       
       {/* Second Full Size Image Section */}
-      <div className="w-full relative overflow-hidden" style={{ height: '100vh' }}>
+      <div className="w-full relative overflow-hidden h-64 md:h-screen">
         <Image
           src={secondSlideshowImages[0]}
           alt="KAIYI E5 Interior"
@@ -454,30 +457,33 @@ export default function E5Page() {
       {/* Second Technical Features Section */}
       <div className="w-full bg-gray-100 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden mx-auto" style={{ width: '1634px', height: '700px', maxWidth: '100%' }}>
-            {/* Second Technical Images Slideshow */}
-            <div className="relative w-full h-full">
-              {secondTechnicalImages.map((image, index) => (
-                <div
-                  key={index}
-                  className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                    currentSecondTechnicalSlide === index ? 'opacity-100' : 'opacity-0'
-                  }`}
-                >
-                  <Image
-                    src={image}
-                    alt={`KAIYI E5 Second Technical Feature ${index + 1}`}
-                    width={1634}
-                    height={700}
-                    className="w-full h-full object-cover"
-                    priority={index === 0}
-                  />
-                </div>
-              ))}
+          <div className="relative">
+            {/* Image container with overflow-hidden */}
+            <div className="relative overflow-hidden mx-auto h-64 md:h-[700px]" style={{ width: '1634px', maxWidth: '100%' }}>
+              {/* Second Technical Images Slideshow */}
+              <div className="relative w-full h-full">
+                {secondTechnicalImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                      currentSecondTechnicalSlide === index ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
+                    <Image
+                      src={image}
+                      alt={`KAIYI E5 Second Technical Feature ${index + 1}`}
+                      width={1634}
+                      height={700}
+                      className="w-full h-full object-cover"
+                      priority={index === 0}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
             
-            {/* Second Technical Details Bar */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gray-800/90 backdrop-blur-sm">
+            {/* Second Technical Details Bar - Outside image container for mobile visibility */}
+            <div className="mt-4 md:mt-0 md:absolute md:bottom-0 md:left-0 md:right-0 bg-gray-800/90 backdrop-blur-sm">
               <div className="flex flex-col md:flex-row justify-between items-center py-4 md:py-6">
                 {secondTechnicalDetails.map((detail, index) => (
                   <div
@@ -516,7 +522,7 @@ export default function E5Page() {
       </div>
       
       {/* Third Full Size Image Section */}
-      <div className="w-full relative overflow-hidden" style={{ height: '100vh' }}>
+      <div className="w-full relative overflow-hidden h-64 md:h-screen">
         <Image
           src={thirdSlideshowImages[0]}
           alt="KAIYI E5 Interior"
@@ -530,30 +536,33 @@ export default function E5Page() {
       {/* Third Technical Features Section */}
       <div className="w-full bg-gray-100 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden mx-auto" style={{ width: '1634px', height: '700px', maxWidth: '100%' }}>
-            {/* Third Technical Images Slideshow */}
-            <div className="relative w-full h-full">
-              {thirdTechnicalImages.map((image, index) => (
-                <div
-                  key={index}
-                  className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                    currentThirdTechnicalSlide === index ? 'opacity-100' : 'opacity-0'
-                  }`}
-                >
-                  <Image
-                    src={image}
-                    alt={`KAIYI E5 Third Technical Feature ${index + 1}`}
-                    width={1634}
-                    height={700}
-                    className="w-full h-full object-cover"
-                    priority={index === 0}
-                  />
-                </div>
-              ))}
+          <div className="relative">
+            {/* Image container with overflow-hidden */}
+            <div className="relative overflow-hidden mx-auto h-64 md:h-[700px]" style={{ width: '1634px', maxWidth: '100%' }}>
+              {/* Third Technical Images Slideshow */}
+              <div className="relative w-full h-full">
+                {thirdTechnicalImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                      currentThirdTechnicalSlide === index ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
+                    <Image
+                      src={image}
+                      alt={`KAIYI E5 Third Technical Feature ${index + 1}`}
+                      width={1634}
+                      height={700}
+                      className="w-full h-full object-cover"
+                      priority={index === 0}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
             
-            {/* Third Technical Details Bar */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gray-800/90 backdrop-blur-sm">
+            {/* Third Technical Details Bar - Outside image container for mobile visibility */}
+            <div className="mt-4 md:mt-0 md:absolute md:bottom-0 md:left-0 md:right-0 bg-gray-800/90 backdrop-blur-sm">
               <div className="flex flex-col md:flex-row justify-between items-center py-4 md:py-6">
                 {thirdTechnicalDetails.map((detail, index) => (
                   <div
@@ -592,7 +601,7 @@ export default function E5Page() {
       </div>
       
       {/* Fourth Full Size Image Section */}
-      <div className="w-full relative overflow-hidden" style={{ height: '100vh' }}>
+      <div className="w-full relative overflow-hidden h-64 md:h-screen">
         <Image
           src={fourthSlideshowImages[0]}
           alt="KAIYI E5 Interior"
@@ -606,30 +615,33 @@ export default function E5Page() {
       {/* Fourth Technical Features Section */}
       <div className="w-full bg-gray-100 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden mx-auto" style={{ width: '1634px', height: '700px', maxWidth: '100%' }}>
-            {/* Fourth Technical Images Slideshow */}
-            <div className="relative w-full h-full">
-              {fourthTechnicalImages.map((image, index) => (
-                <div
-                  key={index}
-                  className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                    currentFourthTechnicalSlide === index ? 'opacity-100' : 'opacity-0'
-                  }`}
-                >
-                  <Image
-                    src={image}
-                    alt={`KAIYI E5 Fourth Technical Feature ${index + 1}`}
-                    width={1634}
-                    height={700}
-                    className="w-full h-full object-cover"
-                    priority={index === 0}
-                  />
-                </div>
-              ))}
+          <div className="relative">
+            {/* Image container with overflow-hidden */}
+            <div className="relative overflow-hidden mx-auto h-64 md:h-[700px]" style={{ width: '1634px', maxWidth: '100%' }}>
+              {/* Fourth Technical Images Slideshow */}
+              <div className="relative w-full h-full">
+                {fourthTechnicalImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                      currentFourthTechnicalSlide === index ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
+                    <Image
+                      src={image}
+                      alt={`KAIYI E5 Fourth Technical Feature ${index + 1}`}
+                      width={1634}
+                      height={700}
+                      className="w-full h-full object-cover"
+                      priority={index === 0}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
             
-            {/* Fourth Technical Details Bar */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gray-800/90 backdrop-blur-sm">
+            {/* Fourth Technical Details Bar - Outside image container for mobile visibility */}
+            <div className="mt-4 md:mt-0 md:absolute md:bottom-0 md:left-0 md:right-0 bg-gray-800/90 backdrop-blur-sm">
               <div className="flex flex-col md:flex-row justify-between items-center py-4 md:py-6">
                 {fourthTechnicalDetails.map((detail, index) => (
                   <div

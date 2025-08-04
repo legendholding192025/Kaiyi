@@ -58,9 +58,9 @@ export default function TestDrivePage() {
       {/* Navbar Component */}
       <Navbar />
       
-      <div className="flex pt-16">
-        {/* Left Side - Image (50% width) */}
-        <div className="w-1/2 relative">
+      <div className="flex flex-col lg:flex-row pt-16">
+        {/* Image Section - Full width on mobile, 50% on desktop */}
+        <div className="w-full lg:w-1/2 relative h-64 lg:h-auto">
           <Image
             src="https://www.kaiyiglobal.com/assets/joinus-e41a44c9.jpg"
             alt="Test Drive Landscape"
@@ -70,8 +70,8 @@ export default function TestDrivePage() {
           />
         </div>
 
-        {/* Right Side - Form (50% width) */}
-        <div className="w-1/2 bg-white p-8 flex flex-col justify-center">
+        {/* Form Section - Full width on mobile, 50% on desktop */}
+        <div className="w-full lg:w-1/2 bg-white p-4 lg:p-8 flex flex-col justify-center">
           <div className="max-w-md mx-auto w-full">
             <h1 className="text-2xl font-bold text-black mb-8 text-center">TEST DRIVE</h1>
             
