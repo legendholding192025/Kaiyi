@@ -4,7 +4,7 @@ export const CRM_CONFIG = {
   API_KEY: '6807da3c6c9a35dad0d98355',
   COMPANY_ID: 'KAIYI-001',
   COMPANY_CODE: 'KAIYI',
-  DEALERSHIP_ID: '68084c7835cef3626fca1532'
+  DEALERSHIP_ID: '6807da3c6c9a35dad0d98355'
 } as const
 
 // Lead source codes for different traffic sources

@@ -4,7 +4,7 @@ export const CRM_CONFIG = {
   API_KEY: process.env.NEXT_PUBLIC_CRM_API_KEY || '6807da3c6c9a35dad0d98355',
   COMPANY_ID: 'KAIYI-001',
   COMPANY_CODE: 'KAIYI',
-  DEALERSHIP_ID: '68084c7835cef3626fca1532',
+  DEALERSHIP_ID: '6807da3c6c9a35dad0d98355',
   LEAD_SOURCE_CODES: {
     default: "TD-WEB-001",   // Default for direct website visits
     facebook: "FB-SOC-101",  // Facebook/Messenger
