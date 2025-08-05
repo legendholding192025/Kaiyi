@@ -122,11 +122,9 @@ export async function submitToCRM(leadData: CRMLead): Promise<{ success: boolean
       throw new Error(`HTTP error! status: ${response.status}, response: ${errorText}`);
     }
 
-    const result = await response.text();
-    console.log('CRM submission successful:', result);
+    await response.text();
     return { success: true };
   } catch (error) {
-    console.error('CRM submission error:', error);
     return { 
       success: false, 
       error: error instanceof Error ? error.message : 'Unknown error occurred' 
@@ -136,16 +134,16 @@ export async function submitToCRM(leadData: CRMLead): Promise<{ success: boolean
 
 // Create CRM lead from form data
 export function createCRMLead(
-  formData: any, 
+  formData: Record<string, string | undefined>, 
   formType: 'test_drive' | 'service_booking' | 'brochure_download'
 ): CRMLead {
   const leadSource = getLeadSource();
   const utmParams = getUTMParams();
   
   const baseLead: CRMLead = {
-    full_name: formData.full_name || formData.name,
-    phone: formData.phone,
-    email: formData.email,
+    full_name: formData.full_name || formData.name || '',
+    phone: formData.phone || '',
+    email: formData.email || '',
     lead_source: leadSource,
     form_type: formType,
     ...utmParams

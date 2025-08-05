@@ -90,7 +90,7 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
         setIsSubmitting(false);
         alert('Error submitting form. Please try again.');
       }
-    } catch (error) {
+    } catch {
       setIsSubmitting(false);
       alert('Error submitting form. Please try again.');
     }

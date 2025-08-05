@@ -164,7 +164,7 @@ export async function submitToCRM(lead: CRMLead): Promise<{ success: boolean; er
       headers
     })
 
-    const responseText = await response.text()
+    await response.text()
 
     if (!response.ok) {
       throw new Error(`CRM API error: ${response.status} ${response.statusText}`)
