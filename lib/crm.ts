@@ -133,9 +133,8 @@ export async function submitToCRM(leadData: CRMLead): Promise<{ success: boolean
 }
 
 // Create CRM lead from form data
-// @ts-ignore - Using any type for flexibility with different form data structures
 export function createCRMLead(
-  formData: any, 
+  formData: Record<string, string | undefined>, 
   formType: 'test_drive' | 'service_booking' | 'brochure_download'
 ): CRMLead {
   const leadSource = getLeadSource();

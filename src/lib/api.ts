@@ -41,7 +41,7 @@ export async function submitTestDriveBooking(data: TestDriveFormData) {
 
           // Submit to CRM (non-blocking)
       try {
-        const crmLead = createCRMLead(data, 'test_drive')
+        const crmLead = createCRMLead(data as Record<string, string | undefined>, 'test_drive')
         await submitToCRM(crmLead)
       } catch {
         // CRM submission failed silently
@@ -68,7 +68,7 @@ export async function submitServiceBooking(data: ServiceBookingFormData) {
 
     // Submit to CRM (non-blocking)
     try {
-      const crmLead = createCRMLead(data, 'service_booking')
+      const crmLead = createCRMLead(data as Record<string, string | undefined>, 'service_booking')
       await submitToCRM(crmLead)
     } catch {
       // CRM submission failed silently
@@ -95,7 +95,7 @@ export async function submitBrochureDownload(data: BrochureDownloadFormData) {
 
     // Submit to CRM (non-blocking)
     try {
-      const crmLead = createCRMLead(data, 'brochure_download')
+      const crmLead = createCRMLead(data as Record<string, string | undefined>, 'brochure_download')
       await submitToCRM(crmLead)
     } catch {
       // CRM submission failed silently
