@@ -40,14 +40,13 @@ export async function submitTestDriveBooking(data: TestDriveFormData) {
       throw new Error(error.message)
     }
 
-    // Submit to CRM (non-blocking)
-    try {
-      const crmLead = createCRMLead(data, 'test_drive')
-      const crmResult = await submitToCRM(crmLead)
-      console.log('CRM submission result:', crmResult)
-    } catch (crmError) {
-      console.error('CRM submission failed (non-blocking):', crmError)
-    }
+          // Submit to CRM (non-blocking)
+      try {
+        const crmLead = createCRMLead(data, 'test_drive')
+        await submitToCRM(crmLead)
+      } catch (crmError) {
+        // CRM submission failed silently
+      }
 
     return { success: true, data: result }
   } catch (error) {
@@ -73,10 +72,9 @@ export async function submitServiceBooking(data: ServiceBookingFormData) {
     // Submit to CRM (non-blocking)
     try {
       const crmLead = createCRMLead(data, 'service_booking')
-      const crmResult = await submitToCRM(crmLead)
-      console.log('CRM submission result:', crmResult)
+      await submitToCRM(crmLead)
     } catch (crmError) {
-      console.error('CRM submission failed (non-blocking):', crmError)
+      // CRM submission failed silently
     }
 
     return { success: true, data: result }
@@ -103,10 +101,9 @@ export async function submitBrochureDownload(data: BrochureDownloadFormData) {
     // Submit to CRM (non-blocking)
     try {
       const crmLead = createCRMLead(data, 'brochure_download')
-      const crmResult = await submitToCRM(crmLead)
-      console.log('CRM submission result:', crmResult)
+      await submitToCRM(crmLead)
     } catch (crmError) {
-      console.error('CRM submission failed (non-blocking):', crmError)
+      // CRM submission failed silently
     }
 
     return { success: true, data: result }

@@ -38,7 +38,6 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
         alert('Brochure for E5 model is not available yet.');
         return;
       default:
-        console.log('Model name received:', modelName);
         alert(`Brochure not found for model: ${modelName}`);
         return;
     }
@@ -90,11 +89,9 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
       } else {
         setIsSubmitting(false);
         alert('Error submitting form. Please try again.');
-        console.error('Form submission error:', result.error);
       }
     } catch (error) {
       setIsSubmitting(false);
-      console.error('Error in handleSubmit:', error);
       alert('Error submitting form. Please try again.');
     }
   };

@@ -15,7 +15,7 @@ export default function Navbar() {
   const [activeTab, setActiveTab] = useState(0);
   const [isClient, setIsClient] = useState(false);
   
-  const { language, setLanguage, t, isRTL } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
 
   // Fix hydration mismatch by ensuring client-side rendering
   useEffect(() => {
@@ -71,7 +71,6 @@ export default function Navbar() {
   };
 
   const handleLanguageChange = (languageCode: 'EN' | 'AR') => {
-    console.log('Language changing to:', languageCode);
     setLanguage(languageCode);
     setIsLanguageDropdownOpen(false);
   };

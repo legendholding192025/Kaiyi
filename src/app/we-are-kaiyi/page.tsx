@@ -57,7 +57,7 @@ export default function WeAreKaiyiPage() {
             <div className="story-text w-full md:flex-1 md:ml-[3vw] text-[4vw] md:text-[1vw] text-[#444] space-y-[3vw] md:space-y-[1vw] leading-relaxed">
               <p>
               Kaiyi UAE, part of Legend Holding Group, serves as the exclusive dealership of Kaiyi vehicles in the United Arab Emirates. Committed to deliver maximum innovation and customer satisfaction, we offer a dynamic range of technologically advanced vehicles designed to elevate your driving experience, in line with Kaiyi Auto Manufacturer. 
-              Strategically located in the heart of Dubai, our Showroom facility delivers comprehensive sales and after-sales services, ensuring convenience, trust, and excellence at every step. At Kaiyi UAE, we don't just sell cars. We drive the future together forward.
+              Strategically located in the heart of Dubai, our Showroom facility delivers comprehensive sales and after-sales services, ensuring convenience, trust, and excellence at every step. At Kaiyi UAE, we don&apos;t just sell cars. We drive the future together forward.
               </p>
             </div>
           </div>

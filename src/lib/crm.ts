@@ -151,31 +151,20 @@ export async function submitToCRM(lead: CRMLead): Promise<{ success: boolean; er
     headers.append('BookingTime', new Date().toTimeString().split(' ')[0])
     headers.append('Email', lead.email)
     headers.append('AdditionalInformation', `${lead.formType} - ${lead.additionalInfo || ''}`)
-    headers.append('UTMSource', utmParams.utm_source)
-    headers.append('UTMMedium', utmParams.utm_medium)
-    headers.append('UTMCampaign', utmParams.utm_campaign)
-    headers.append('UTMTerm', utmParams.utm_term)
-    headers.append('UTMContent', utmParams.utm_content)
+    headers.append('UTMSource', utmParams.utm_source || '')
+    headers.append('UTMMedium', utmParams.utm_medium || '')
+    headers.append('UTMCampaign', utmParams.utm_campaign || '')
+    headers.append('UTMTerm', utmParams.utm_term || '')
+    headers.append('UTMContent', utmParams.utm_content || '')
 
-    console.log('Submitting to CRM:', {
-      url: CRM_CONFIG.API_URL,
-      leadSourceCode,
-      lead
-    })
+
 
     const response = await fetch(CRM_CONFIG.API_URL, {
       method: 'POST',
-      headers,
-      timeout: 30000
+      headers
     })
 
     const responseText = await response.text()
-    
-    console.log('CRM Response:', {
-      status: response.status,
-      statusText: response.statusText,
-      body: responseText
-    })
 
     if (!response.ok) {
       throw new Error(`CRM API error: ${response.status} ${response.statusText}`)
@@ -183,7 +172,7 @@ export async function submitToCRM(lead: CRMLead): Promise<{ success: boolean; er
 
     return { success: true }
   } catch (error) {
-    console.error('CRM submission error:', error)
+
     return { 
       success: false, 
       error: error instanceof Error ? error.message : 'Unknown CRM error' 
@@ -193,7 +182,7 @@ export async function submitToCRM(lead: CRMLead): Promise<{ success: boolean; er
 
 // Create CRM lead from form data
 export function createCRMLead(
-  formData: any, 
+  formData: Record<string, string | undefined>, 
   formType: 'test_drive' | 'service_booking' | 'brochure_download'
 ): CRMLead {
   const baseLead: CRMLead = {

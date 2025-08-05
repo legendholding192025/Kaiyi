@@ -224,9 +224,7 @@ export default function E5Page() {
     window.location.href = '/test-drive';
   };
 
-  const handleDownloadBrochure = () => {
-    setIsBrochurePopupOpen(true);
-  };
+
 
   const handleColorChange = (index: number) => {
     setSelectedColor(index);
