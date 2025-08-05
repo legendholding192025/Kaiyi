@@ -278,12 +278,7 @@ export default function E5Page() {
           >
             Test Drive
           </button>
-          <button
-            onClick={handleDownloadBrochure}
-            className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-white hover:text-black transition-colors shadow-lg"
-          >
-            Download Brochure
-          </button>
+          {/* Download Brochure button hidden for E5 model */}
         </div>
       </div>
       

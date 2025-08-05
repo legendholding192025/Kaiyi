@@ -10,7 +10,7 @@ const brunoAceSC = Bruno_Ace_SC({
 });
 
 export const metadata: Metadata = {
-  title: "KAIYI - Innovation Meets Excellence",
+  title: "KAIYI UAE",
   description: "Discover KAIYI's cutting-edge solutions and innovative approach to technology and design.",
 };
 

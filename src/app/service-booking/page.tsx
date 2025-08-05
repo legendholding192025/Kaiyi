@@ -4,13 +4,13 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import SuccessPopup from '../../components/SuccessPopup';
 
 interface FormData {
   fullName: string;
   phone: string;
   email: string;
   carModel: string;
-  date: string;
   numberPlate: string;
 }
 
@@ -20,10 +20,15 @@ export default function ServiceBookingPage() {
     phone: '',
     email: '',
     carModel: '',
-    date: '',
     numberPlate: ''
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+
+  const carModels = [
+    { id: 1, name: "KAIYI X7" },
+    { id: 2, name: "KAIYI X3 Pro" },
+    { id: 3, name: "KAIYI E5" }
+  ];
 
 
 
@@ -31,19 +36,48 @@ export default function ServiceBookingPage() {
     setForm(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = () => {
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setForm({
-        fullName: '',
-        phone: '',
-        email: '',
-        carModel: '',
-        date: '',
-        numberPlate: ''
+  const handleSubmit = async () => {
+    try {
+      // Validate required fields
+      if (!form.fullName || !form.phone || !form.email || !form.carModel || !form.numberPlate) {
+        alert('Please fill in all required fields');
+        return;
+      }
+
+      // Validate phone number (must be exactly 9 digits)
+      if (!/^\d{9}$/.test(form.phone)) {
+        alert('Phone number must be exactly 9 digits');
+        return;
+      }
+
+      // Import the API function
+      const { submitServiceBooking } = await import('@/lib/api');
+      
+      const result = await submitServiceBooking({
+        full_name: form.fullName,
+        phone: `+971${form.phone}`,
+        email: form.email,
+        car_model: form.carModel,
+        number_plate: form.numberPlate
       });
-    }, 3000);
+
+      if (result.success) {
+        setShowSuccessPopup(true);
+        setForm({
+          fullName: '',
+          phone: '',
+          email: '',
+          carModel: '',
+          numberPlate: ''
+        });
+      } else {
+        alert('Error submitting form. Please try again.');
+        console.error('Form submission error:', result.error);
+      }
+    } catch (error) {
+      console.error('Error in handleSubmit:', error);
+      alert('Error submitting form. Please try again.');
+    }
   };
 
   return (
@@ -160,67 +194,76 @@ export default function ServiceBookingPage() {
              <form className="space-y-6">
                {/* Full Name */}
                <div>
+                 <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
                  <input
                    type="text"
                    value={form.fullName}
                    onChange={(e) => handleInputChange('fullName', e.target.value)}
-                   placeholder="Full Name"
-                   className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-gray-50 text-gray-700 placeholder-gray-500 text-lg"
+                   placeholder="Please enter your name"
+                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700 placeholder-gray-500"
                  />
                </div>
 
                {/* Phone */}
                <div>
-                 <input
-                   type="tel"
-                   value={form.phone}
-                   onChange={(e) => handleInputChange('phone', e.target.value)}
-                   placeholder="Phone"
-                   className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-gray-50 text-gray-700 placeholder-gray-500 text-lg"
-                 />
+                 <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                 <div className="relative">
+                   <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium z-10">
+                     +971
+                   </div>
+                   <input
+                     type="tel"
+                     value={form.phone}
+                     onChange={(e) => {
+                       const value = e.target.value.replace(/\D/g, '').slice(0, 9);
+                       handleInputChange('phone', value);
+                     }}
+                     placeholder="5XXXXXXXX"
+                     className="w-full pl-16 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700 placeholder-gray-500"
+                     maxLength={9}
+                   />
+                 </div>
+                 <p className="text-xs text-gray-500 mt-1">Enter 9-digit mobile number (e.g., 501234567)</p>
                </div>
 
                {/* Email */}
                <div>
+                 <label className="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
                  <input
                    type="email"
                    value={form.email}
                    onChange={(e) => handleInputChange('email', e.target.value)}
-                   placeholder="Email"
-                   className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-gray-50 text-gray-700 placeholder-gray-500 text-lg"
+                   placeholder="Please enter your e-mail"
+                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700 placeholder-gray-500"
                  />
                </div>
 
                {/* Car Model */}
                <div>
-                 <input
-                   type="text"
+                 <label className="block text-sm font-medium text-gray-700 mb-2">Model</label>
+                 <select
                    value={form.carModel}
                    onChange={(e) => handleInputChange('carModel', e.target.value)}
-                   placeholder="Car Model"
-                   className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-gray-50 text-gray-700 placeholder-gray-500 text-lg"
-                 />
-               </div>
-
-               {/* Date */}
-               <div>
-                 <input
-                   type="text"
-                   value={form.date}
-                   onChange={(e) => handleInputChange('date', e.target.value)}
-                   placeholder="Date"
-                   className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-gray-50 text-gray-700 placeholder-gray-500 text-lg"
-                 />
+                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700"
+                 >
+                   <option value="" className="text-gray-500">Please select the vehicle model</option>
+                   {carModels.map((model) => (
+                     <option key={model.id} value={model.name} className="text-gray-700">
+                       {model.name}
+                     </option>
+                   ))}
+                 </select>
                </div>
 
                {/* Number Plate */}
                <div>
+                 <label className="block text-sm font-medium text-gray-700 mb-2">Number Plate</label>
                  <input
                    type="text"
                    value={form.numberPlate}
                    onChange={(e) => handleInputChange('numberPlate', e.target.value)}
-                   placeholder="Number Plate"
-                   className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-gray-50 text-gray-700 placeholder-gray-500 text-lg"
+                   placeholder="Please enter your number plate"
+                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700 placeholder-gray-500"
                  />
                </div>
 
@@ -236,16 +279,13 @@ export default function ServiceBookingPage() {
                </div>
              </form>
 
-             {submitted && (
-               <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                 <div className="flex items-center space-x-3">
-                   <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 24 24">
-                     <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                   </svg>
-                   <p className="text-green-800 font-semibold">Thank you! Your service booking request has been received.</p>
-                 </div>
-               </div>
-             )}
+             {/* Success Popup */}
+             <SuccessPopup
+               isVisible={showSuccessPopup}
+               onClose={() => setShowSuccessPopup(false)}
+               title="Service Booking Submitted!"
+               message="Thank you! Your service booking request has been received. We will contact you shortly to confirm your appointment details."
+             />
            </div>
          </div>
        </div>

@@ -4,11 +4,11 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import SuccessPopup from '../../components/SuccessPopup';
 
 interface FormData {
   car_id: string;
   name: string;
-  country: string;
   phone: string;
   email: string;
   message: string;
@@ -19,13 +19,12 @@ export default function TestDrivePage() {
   const [form, setForm] = useState<FormData>({
     car_id: '',
     name: '',
-    country: '',
     phone: '',
     email: '',
     message: '',
     verification_code: ''
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const models = [
     { id: 1, name: "KAIYI X7" },
@@ -37,20 +36,53 @@ export default function TestDrivePage() {
     setForm(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = () => {
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setForm({
-        car_id: '',
-        name: '',
-        country: '',
-        phone: '',
-        email: '',
-        message: '',
-        verification_code: ''
+  const handleSubmit = async () => {
+    try {
+      // Validate required fields
+      if (!form.car_id || !form.name || !form.phone || !form.email) {
+        alert('Please fill in all required fields');
+        return;
+      }
+
+      // Validate phone number (must be exactly 9 digits)
+      if (!/^\d{9}$/.test(form.phone)) {
+        alert('Phone number must be exactly 9 digits');
+        return;
+      }
+
+      // Import the API function
+      const { submitTestDriveBooking } = await import('@/lib/api');
+      
+                    // Get the model name from the selected car_id
+      const selectedModel = models.find(model => model.id.toString() === form.car_id);
+      
+      const result = await submitTestDriveBooking({
+        car_id: form.car_id, // Keep the original ID
+        car_model: selectedModel?.name || '', // Store the model name in new field
+        name: form.name,
+        phone: `+971${form.phone}`,
+        email: form.email,
+        message: form.message || undefined
       });
-    }, 3000);
+
+      if (result.success) {
+        setShowSuccessPopup(true);
+        setForm({
+          car_id: '',
+          name: '',
+          phone: '',
+          email: '',
+          message: '',
+          verification_code: ''
+        });
+      } else {
+        alert('Error submitting form. Please try again.');
+        console.error('Form submission error:', result.error);
+      }
+    } catch (error) {
+      console.error('Error in handleSubmit:', error);
+      alert('Error submitting form. Please try again.');
+    }
   };
 
   return (
@@ -105,28 +137,26 @@ export default function TestDrivePage() {
                 />
               </div>
 
-              {/* Country */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Country</label>
-                <input
-                  type="text"
-                  value={form.country}
-                  onChange={(e) => handleInputChange('country', e.target.value)}
-                  placeholder="Please enter your country"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700 placeholder-gray-500"
-                />
-              </div>
-
               {/* Phone */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
-                <input
-                  type="tel"
-                  value={form.phone}
-                  onChange={(e) => handleInputChange('phone', e.target.value)}
-                  placeholder="Please enter your phone"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700 placeholder-gray-500"
-                />
+                <div className="relative">
+                  <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium z-10">
+                    +971
+                  </div>
+                  <input
+                    type="tel"
+                    value={form.phone}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/\D/g, '').slice(0, 9);
+                      handleInputChange('phone', value);
+                    }}
+                    placeholder="5XXXXXXXX"
+                    className="w-full pl-16 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700 placeholder-gray-500"
+                    maxLength={9}
+                  />
+                </div>
+                <p className="text-xs text-gray-500 mt-1">Enter 9-digit mobile number (e.g., 501234567)</p>
               </div>
 
               {/* Email */}
@@ -165,11 +195,14 @@ export default function TestDrivePage() {
               </div>
             </form>
 
-            {submitted && (
-              <div className="success-message text-center text-green-600 font-bold mt-6">
-                Thank you! Your test drive request has been received.
-              </div>
-            )}
+
+            {/* Success Popup */}
+            <SuccessPopup
+              isVisible={showSuccessPopup}
+              onClose={() => setShowSuccessPopup(false)}
+              title="Test Drive Request Submitted!"
+              message="Thank you! Your test drive request has been received. We will contact you shortly to confirm the details and arrange your personalized test drive experience."
+            />
           </div>
         </div>
       </div>
