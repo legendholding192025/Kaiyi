@@ -36,7 +36,6 @@ export async function submitTestDriveBooking(data: TestDriveFormData) {
       .select()
 
     if (error) {
-      console.error('Error submitting test drive booking:', error)
       throw new Error(error.message)
     }
 
@@ -50,7 +49,6 @@ export async function submitTestDriveBooking(data: TestDriveFormData) {
 
     return { success: true, data: result }
   } catch (error) {
-    console.error('Error in submitTestDriveBooking:', error)
     return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
   }
 }
@@ -65,7 +63,6 @@ export async function submitServiceBooking(data: ServiceBookingFormData) {
       .select()
 
     if (error) {
-      console.error('Error submitting service booking:', error)
       throw new Error(error.message)
     }
 
@@ -79,7 +76,6 @@ export async function submitServiceBooking(data: ServiceBookingFormData) {
 
     return { success: true, data: result }
   } catch (error) {
-    console.error('Error in submitServiceBooking:', error)
     return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
   }
 }
@@ -94,7 +90,6 @@ export async function submitBrochureDownload(data: BrochureDownloadFormData) {
       .select()
 
     if (error) {
-      console.error('Error submitting brochure download:', error)
       throw new Error(error.message)
     }
 
@@ -108,7 +103,6 @@ export async function submitBrochureDownload(data: BrochureDownloadFormData) {
 
     return { success: true, data: result }
   } catch (error) {
-    console.error('Error in submitBrochureDownload:', error)
     return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
   }
 }
@@ -124,7 +118,6 @@ export async function getTestDriveBookings() {
     if (error) throw new Error(error.message)
     return { success: true, data }
   } catch (error) {
-    console.error('Error fetching test drive bookings:', error)
     return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
   }
 }
@@ -139,7 +132,6 @@ export async function getServiceBookings() {
     if (error) throw new Error(error.message)
     return { success: true, data }
   } catch (error) {
-    console.error('Error fetching service bookings:', error)
     return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
   }
 }
@@ -154,7 +146,6 @@ export async function getBrochureDownloads() {
     if (error) throw new Error(error.message)
     return { success: true, data }
   } catch (error) {
-    console.error('Error fetching brochure downloads:', error)
     return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
   }
 } 
