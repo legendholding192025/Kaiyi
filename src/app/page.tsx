@@ -345,6 +345,46 @@ export default function Home() {
             </button>
           </div>
         </div>
+
+        {/* Image Section - Cross-wise Layout */}
+        <div className="py-20 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Image 1 */}
+              <div className="relative overflow-hidden rounded-xl shadow-lg">
+                <Image
+                  src="https://cdn.legendholding.com/images/cdn_68934f98360432.89609659_20250806_125032.jpg"
+                  alt="KAIYI Innovation"
+                  width={400}
+                  height={500}
+                  className="w-full h-80 object-cover"
+                />
+              </div>
+
+              {/* Image 2 */}
+              <div className="relative overflow-hidden rounded-xl shadow-lg">
+                <Image
+                  src="https://cdn.legendholding.com/images/cdn_68933ff403d2b1.16599158_20250806_114348.jpg"
+                  alt="KAIYI Quality"
+                  width={400}
+                  height={500}
+                  className="w-full h-80 object-cover"
+                />
+              </div>
+
+              {/* Image 3 */}
+              <div className="relative overflow-hidden rounded-xl shadow-lg">
+                <Image
+                  src="https://cdn.legendholding.com/images/cdn_689350637bc023.32741045_20250806_125355.jpg"
+                  alt="KAIYI Performance"
+                  width={400}
+                  height={500}
+                  className="w-full h-80 object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
         
         {/* Bottom Section - SERVICE with Car Interior Image */}
         <div className="relative bg-gray-100">

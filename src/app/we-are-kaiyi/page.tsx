@@ -79,6 +79,7 @@ export default function WeAreKaiyiPage() {
               />
             </div>
           </div>
+
           <div className="stats-content flex flex-col md:flex-row justify-between items-start mt-[6vw] md:mt-[2vw] space-y-[6vw] md:space-y-0">
             <div className="stats-grid flex justify-center md:justify-start gap-[6vw] md:gap-[2vw] w-full md:w-auto">
               <div className="stat-item text-center">
