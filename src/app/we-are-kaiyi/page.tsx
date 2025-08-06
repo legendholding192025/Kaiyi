@@ -71,7 +71,7 @@ export default function WeAreKaiyiPage() {
           <div className="video-container flex justify-center">
             <div className="video-wrapper relative w-full md:w-[40vw] max-w-[600px]">
               <Image
-                src="https://www.kaiyiglobal.com/assets/hom3-efad44ac.jpg"
+                src="https://cdn.legendholding.com/images/cdn_68934ccb8dcf25.67672295_20250806_123835.jpg"
                 alt="Kaiyi Factory"
                 width={600}
                 height={400}

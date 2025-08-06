@@ -33,24 +33,17 @@ export default function ContactUsPage() {
       `}</style>
       <Navbar />
 
-      {/* We're Here for You Section */}
-      <section className="relative text-white py-32 px-4 text-center min-h-[80vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <img 
-          src="https://cdn.legendholding.com/images/cdn_689344d73e9e57.73056438_20250806_120439.jpg"
-          alt="Kaiyi Contact Background"
-          className="absolute inset-0 w-full h-full object-cover"
-          onError={(e) => {
-            console.error('Background image failed to load:', e);
-            e.currentTarget.style.display = 'none';
+              {/* We're Here for You Section */}
+        <section 
+          className="relative text-white py-32 px-4 text-center min-h-[80vh] flex items-center justify-center overflow-hidden"
+          style={{
+            background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://cdn.legendholding.com/images/cdn_689344d73e9e57.73056438_20250806_120439.jpg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment: 'fixed'
           }}
-        />
-        
-        {/* Fallback gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800"></div>
-        
-        {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+        >
         
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto">

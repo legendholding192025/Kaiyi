@@ -35,22 +35,22 @@ export default function WarrantyPage() {
       <Navbar />
 
       {/* Hero Section with Car Interior */}
-      <section className="relative h-96 md:h-[500px] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50 z-10"></div>
-        <Image
-          src="https://kaiyiglobal.com/upload/10/e4371844c1619b0f0f1c20b344ecd4.jpg"
-          alt="Kaiyi Car Interior"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="relative z-20 flex items-center justify-center h-full">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Warranty</h1>
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto px-4">
-              Comprehensive coverage for your peace of mind
-            </p>
-          </div>
+      <section 
+        className="relative text-white py-32 px-4 text-center min-h-[80vh] flex items-center justify-center overflow-hidden"
+        style={{
+          background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://cdn.legendholding.com/images/cdn_689348c34c7913.45400682_20250806_122123.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed'
+        }}
+      >
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-7xl font-bold mb-8">Warranty</h1>
+          <p className="text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto">
+            Comprehensive coverage for your peace of mind
+          </p>
         </div>
       </section>
 

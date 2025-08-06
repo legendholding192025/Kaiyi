@@ -111,19 +111,27 @@ export default function ServiceBookingPage() {
       <Navbar />
       
              {/* Hero Section */}
-       <div className="bg-gradient-to-r from-gray-50 to-white py-20">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           <div className="text-center mb-16">
-             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-               <span className="text-red-600">SERVICE</span>
-               <span className="text-black"> BOOKING</span>
-             </h1>
-             <p className="text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-               At Kaiyi, we understand the importance of keeping your vehicle in top condition. Our service booking process is designed for your convenience, ensuring a seamless experience from scheduling to completion. Trust our certified technicians and state-of-the-art facilities to provide the best care for your Kaiyi.
-             </p>
-           </div>
+       <section 
+         className="relative text-white py-32 px-4 text-center min-h-[80vh] flex items-center justify-center overflow-hidden"
+         style={{
+           background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://cdn.legendholding.com/images/cdn_68934909c669f0.07959011_20250806_122233.jpg')`,
+           backgroundSize: 'cover',
+           backgroundPosition: 'center',
+           backgroundRepeat: 'no-repeat',
+           backgroundAttachment: 'fixed'
+         }}
+       >
+         {/* Content */}
+         <div className="relative z-10 max-w-4xl mx-auto">
+           <h1 className="text-5xl md:text-7xl font-bold mb-8">
+             <span className="text-red-600">SERVICE</span>
+             <span className="text-white"> BOOKING</span>
+           </h1>
+           <p className="text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto">
+             At Kaiyi, we understand the importance of keeping your vehicle in top condition. Our service booking process is designed for your convenience, ensuring a seamless experience from scheduling to completion. Trust our certified technicians and state-of-the-art facilities to provide the best care for your Kaiyi.
+           </p>
          </div>
-       </div>
+       </section>
 
        {/* Main Content Section */}
        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

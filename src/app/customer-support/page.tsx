@@ -36,14 +36,23 @@ export default function CustomerSupportPage() {
       <Navbar />
       
              {/* Hero Banner */}
-       <div className="relative bg-gradient-to-r from-gray-900 to-gray-700 py-48">
-         <div className="absolute inset-0 bg-black opacity-60"></div>
-         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                       <h1 className="text-4xl md:text-6xl font-medium text-white mb-8 tracking-widest uppercase">
-              CUSTOMER SUPPORT
-            </h1>
+       <section 
+         className="relative text-white py-32 px-4 text-center min-h-[80vh] flex items-center justify-center overflow-hidden"
+         style={{
+           background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://cdn.legendholding.com/images/cdn_68934916cf82d2.64487024_20250806_122246.jpg')`,
+           backgroundSize: 'cover',
+           backgroundPosition: 'center',
+           backgroundRepeat: 'no-repeat',
+           backgroundAttachment: 'fixed'
+         }}
+       >
+         {/* Content */}
+         <div className="relative z-10 max-w-4xl mx-auto">
+           <h1 className="text-5xl md:text-7xl font-medium mb-8 tracking-widest uppercase">
+             CUSTOMER SUPPORT
+           </h1>
          </div>
-       </div>
+       </section>
 
       {/* Customer Support Section */}
       <section className="bg-gray-100 py-20">
