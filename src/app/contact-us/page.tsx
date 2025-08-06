@@ -34,10 +34,28 @@ export default function ContactUsPage() {
       <Navbar />
 
       {/* We're Here for You Section */}
-      <section className="bg-black text-white py-20 px-4 text-center">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">We&apos;re Here for You</h1>
-          <p className="text-lg md:text-xl leading-relaxed">
+      <section className="relative text-white py-32 px-4 text-center min-h-[80vh] flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <img 
+          src="https://cdn.legendholding.com/images/cdn_689344d73e9e57.73056438_20250806_120439.jpg"
+          alt="Kaiyi Contact Background"
+          className="absolute inset-0 w-full h-full object-cover"
+          onError={(e) => {
+            console.error('Background image failed to load:', e);
+            e.currentTarget.style.display = 'none';
+          }}
+        />
+        
+        {/* Fallback gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800"></div>
+        
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+        
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-7xl font-bold mb-8">We&apos;re Here for You</h1>
+          <p className="text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto">
             At Kaiyi, we value our customers and are committed to providing exceptional service. Contact us with any inquiries about our
             vehicles, services, or support. Your satisfaction is our priority.
           </p>

@@ -24,7 +24,7 @@ export default function Home() {
   const heroSlides = [
     {
       id: 1,
-      image: 'https://kaiyiglobal.com/upload/dd/87741cf96bb4d4d48290491df9b47d.png',
+      image: 'https://cdn.legendholding.com/images/cdn_68933f58b721e4.14363203_20250806_114112.jpg',
       title: t('home.hero.title'),
       subtitle: t('home.hero.subtitle'),
       button1: t('home.hero.testDrive'),
@@ -32,7 +32,7 @@ export default function Home() {
     },
     {
       id: 2,
-      image: 'https://kaiyiglobal.com/upload/54/fb0a14b7c86bece73f7ddd0f9ce861.png',
+      image: 'https://cdn.legendholding.com/images/cdn_68933ff403d2b1.16599158_20250806_114348.jpg',
       title: t('home.hero.title2'),
       subtitle: t('home.hero.subtitle2'),
       button1: t('home.hero.testDrive'),
@@ -40,7 +40,7 @@ export default function Home() {
     },
     {
       id: 3,
-      image: 'https://kaiyiglobal.com/upload/10/e4371844c1619b0f0f1c20b344ecd4.jpg',
+      image: 'https://cdn.legendholding.com/images/cdn_6893408dd09af2.58861825_20250806_114621.jpg',
       title: t('home.hero.title3'),
       subtitle: t('home.hero.subtitle3'),
       button1: t('home.hero.testDrive'),
@@ -351,7 +351,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-8 py-16">
             <div className="relative">
           <Image
-                src="https://www.kaiyiglobal.com/assets/hom3-efad44ac.jpg"
+                src="https://cdn.legendholding.com/images/cdn_689342a28e2521.57250656_20250806_115514.jpg"
                 alt="KAIYI Car Interior"
                 width={1200}
                 height={600}

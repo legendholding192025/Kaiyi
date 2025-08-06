@@ -25,7 +25,7 @@ export default function Navbar() {
   const tabsContent = [
     {
       src: "https://www.kaiyiglobal.com/upload/1a/d147a490cbc17bc9e4459ce608a1e3.png",
-      car: t('models.x7.name'),
+      car: "X7",
       carcent: t('models.x7.description'),
       id: 1,
       canshu: [t('models.x7.specs.engine'), t('models.x7.specs.length'), t('models.x7.specs.wheelbase')],
@@ -33,7 +33,7 @@ export default function Navbar() {
     },
     {
       src: "https://kaiyiglobal.com/upload/52/8804af2de37a9d90c77b223cb5eac0.png",
-      car: t('models.x3pro.name'),
+      car: "X3 Pro",
       carcent: t('models.x3pro.description'),
       id: 2,
       canshu: [t('models.x3pro.specs.engine'), t('models.x3pro.specs.length'), t('models.x3pro.specs.wheelbase')],
@@ -41,7 +41,7 @@ export default function Navbar() {
     },
     {
       src: "https://kaiyiglobal.com/upload/f1/fc637859eee69a6faa255e9a0b2c67.png",
-      car: t('models.e5.name'),
+      car: "E5",
       carcent: t('models.e5.description'),
       id: 3,
       canshu: [t('models.e5.specs.engine'), t('models.e5.specs.length'), t('models.e5.specs.wheelbase')],
@@ -185,7 +185,7 @@ export default function Navbar() {
                           className={`cursor-pointer transition-all duration-300 ${validActiveTab === index ? 'font-bold text-lg' : 'text-base'}`}
                           onMouseEnter={() => setActiveTab(index)}
                         >
-                          <div className={`${validActiveTab === index ? 'border-b-4 lg:border-b-0 lg:border-l-4 border-black pb-2 lg:pb-0 lg:pl-2' : 'pb-2 lg:pb-0 lg:pl-2'}`}>
+                          <div className={`${validActiveTab === index ? 'border-b-4 lg:border-b-0 lg:border-l-4 border-[#0e62a8] pb-2 lg:pb-0 lg:pl-2' : 'pb-2 lg:pb-0 lg:pl-2'}`}>
                             {model.car}
                           </div>
                         </Link>
@@ -211,7 +211,13 @@ export default function Navbar() {
                         {/* Model Info */}
                         <div className="w-full lg:w-1/2">
                           <div className="text-2xl lg:text-3xl font-bold text-black mb-2">
-                            {tabsContent[validActiveTab].car}
+                            <Image
+                              src={`/logo/${tabsContent[validActiveTab].car}.svg`}
+                              alt={tabsContent[validActiveTab].car}
+                              width={120}
+                              height={40}
+                              className="h-8 w-auto"
+                            />
                           </div>
                           <div className="text-base lg:text-lg text-gray-600 mb-4 lg:mb-6">
                             {tabsContent[validActiveTab].carcent}
