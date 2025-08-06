@@ -57,11 +57,6 @@ export default function CustomerSupportPage() {
       {/* Customer Support Section */}
       <section className="bg-gray-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-                         <h2 className="text-3xl md:text-4xl font-medium text-black mb-8 tracking-widest uppercase">
-               CUSTOMER SUPPORT
-             </h2>
-          </div>
           <div className="max-w-4xl mx-auto">
             <p className="text-lg text-gray-700 leading-relaxed text-justify">
               We are committed to providing you with the highest quality service, meeting your personalized needs, effectively improving your driving experience, and restoring your vehicle to its optimal condition in the shortest possible time. Based on the condition of your vehicle, we provide you with high-quality maintenance, repair and spare parts services. Our high-quality and sincere service accompanies you throughout the journey, providing you with 24/7 responsive customer service support and bringing you a worry-free driving experience.

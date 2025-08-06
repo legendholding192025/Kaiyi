@@ -391,7 +391,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-8 py-16">
             <div className="relative">
           <Image
-                src="https://cdn.legendholding.com/images/cdn_689342a28e2521.57250656_20250806_115514.jpg"
+                src="https://cdn.legendholding.com/images/cdn_68935e577bba84.38122423_20250806_135327.jpg"
                 alt="KAIYI Car Interior"
                 width={1200}
                 height={600}

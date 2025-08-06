@@ -124,7 +124,7 @@ export default function ServiceBookingPage() {
          {/* Content */}
          <div className="relative z-10 max-w-4xl mx-auto">
            <h1 className="text-5xl md:text-7xl font-bold mb-8">
-             <span className="text-red-600">SERVICE</span>
+             <span className="text-white-600">SERVICE</span>
              <span className="text-white"> BOOKING</span>
            </h1>
            <p className="text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto">
