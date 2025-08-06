@@ -26,17 +26,17 @@ export default function Footer() {
             <ul className="space-y-2 text-gray-300">
               <li>
                 <Link href="/models/x3-pro" className="hover:text-white transition-colors">
-                  Kaiyi X-3 Pro
+                  {t('models.x3pro.name')}
                 </Link>
               </li>
               <li>
                 <Link href="/models/e5" className="hover:text-white transition-colors">
-                  Kaiyi E5
+                  {t('models.e5.name')}
                 </Link>
               </li>
               <li>
                 <Link href="/models/x7" className="hover:text-white transition-colors">
-                  Kaiyi X7
+                  {t('models.x7.name')}
                 </Link>
               </li>
             </ul>
@@ -48,17 +48,17 @@ export default function Footer() {
             <ul className="space-y-2 text-gray-300">
               <li>
                 <Link href="/warranty" className="hover:text-white transition-colors">
-                  Warranty
+                  {t('nav.warranty')}
                 </Link>
               </li>
               <li>
                 <Link href="/service-booking" className="hover:text-white transition-colors">
-                  Service Booking
+                  {t('nav.serviceBooking')}
                 </Link>
               </li>
               <li>
                 <Link href="/customer-support" className="hover:text-white transition-colors">
-                  Customer Support
+                  {t('nav.customerSupport')}
                 </Link>
               </li>
             </ul>
@@ -70,12 +70,12 @@ export default function Footer() {
              <ul className="space-y-2 text-gray-300">
                <li>
                  <Link href="/we-are-kaiyi" className="hover:text-white transition-colors">
-                   We Are Kaiyi
+                   {t('nav.weAreKaiyi')}
                  </Link>
                </li>
                <li>
                  <Link href="/contact-us" className="hover:text-white transition-colors">
-                   Contact
+                   {t('nav.contact')}
                  </Link>
                </li>
              </ul>
@@ -85,8 +85,8 @@ export default function Footer() {
           <div>
                          <h3 className="text-lg font-semibold mb-4">{t('footer.showroom')}</h3>
             <div className="space-y-2 text-gray-300">
-              <p>787M+3WW - Al Ittihad Rd - Al Khabaisi - Dubai</p>
-              <p>Sunday-Saturday-9:00A.M. To 7:00 P.M.</p>
+              <p>{t('footer.address')}</p>
+              <p>{t('footer.hours')}</p>
               <div className="flex items-center space-x-2">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
@@ -105,24 +105,24 @@ export default function Footer() {
           {/* Connect with us on social */}
           <div>
                          <h3 className="text-lg font-semibold mb-4">{t('footer.connectSocial')}</h3>
-            <div className="flex space-x-3 mb-6">
-              {socialMediaIcons.map((social) => (
-                <a
-                  key={social.name}
-                  href="#"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d={social.icon} />
-                  </svg>
-                </a>
-              ))}
-            </div>
+                         <div className="flex space-x-3 mb-6">
+               {socialMediaIcons.map((social) => (
+                 <a
+                   key={social.name}
+                   href="#"
+                   className="text-white hover:text-gray-300 transition-colors"
+                 >
+                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                     <path d={social.icon} />
+                   </svg>
+                 </a>
+               ))}
+             </div>
             
             {/* KAIYI Logo */}
             <div className="mb-4">
               <Image
-                src="https://www.kaiyiglobal.com/assets/kaiyilogo-a405c56a.png"
+                src="/logo/Kaiyi_logo_white.svg"
                 alt="KAIYI Logo"
                 width={120}
                 height={40}

@@ -7,7 +7,7 @@ type Language = 'EN' | 'AR';
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  t: (key: string, params?: Record<string, string>) => string;
   isRTL: boolean;
 }
 
@@ -42,12 +42,16 @@ const translations = {
     'home.service.title': 'SERVICE',
     'home.service.subtitle': 'bringing you a worry-free driving experience',
     'home.service.more': 'MORE',
+    'home.video.title': 'KAIYI Showcase',
+    'home.video.subtitle': 'Click to play in fullscreen',
     
     // Footer
     'footer.lineup': 'Check out the line up:',
     'footer.afterSales': 'After Sales:',
     'footer.about': 'About:',
     'footer.showroom': 'Showroom:',
+    'footer.address': '787M+3WW - Al Ittihad Rd - Al Khabaisi - Dubai',
+    'footer.hours': 'Sunday-Saturday-9:00A.M. To 7:00 P.M.',
     'footer.connectSocial': 'Connect with us on social:',
     'footer.privacyPolicy': 'Privacy Policy',
     'footer.copyright': 'All right reserved by legend holding group',
@@ -63,6 +67,50 @@ const translations = {
     'common.back': 'Back',
     'common.next': 'Next',
     'common.previous': 'Previous',
+    'common.more': 'More',
+    
+    // Models
+    'models.x7.name': 'X7',
+    'models.x7.description': 'HomeLike Mobile Space',
+    'models.x7.specs.engine': 'ENGINE: 1.6T/ 2.0T',
+    'models.x7.specs.length': 'LENGTH: 4710 mm',
+    'models.x7.specs.width': 'WIDTH: 1955 mm',
+    'models.x7.specs.height': 'HEIGHT: 1705 mm',
+    'models.x7.specs.wheelbase': 'WHEELBASE: 2800 mm',
+    
+    'models.x3pro.name': 'X3 Pro',
+    'models.x3pro.description': 'All Around Hot Hatch',
+    'models.x3pro.specs.engine': 'ENGINE: 1.5T/ 1.5L',
+    'models.x3pro.specs.length': 'LENGTH: 4400 mm',
+    'models.x3pro.specs.width': 'WIDTH: 1831 mm',
+    'models.x3pro.specs.height': 'HEIGHT: 1653 mm',
+    'models.x3pro.specs.wheelbase': 'WHEELBASE: 2632 mm',
+    
+    'models.e5.name': 'E5',
+    'models.e5.description': 'Family Luxury Car',
+    'models.e5.specs.engine': 'ENGINE: 1.5T',
+    'models.e5.specs.length': 'LENGTH: 4666 mm',
+    'models.e5.specs.width': 'WIDTH: 1825 mm',
+    'models.e5.specs.height': 'HEIGHT: 1484 mm',
+    'models.e5.specs.wheelbase': 'WHEELBASE: 2700 mm',
+    
+    // Popup
+    'popup.e5NotAvailable': 'Brochure for E5 model is not available yet.',
+    'popup.brochureNotFound': 'Brochure not found for model: {modelName}',
+    'popup.phoneValidation': 'Phone number must be exactly 9 digits',
+    'popup.submitError': 'Error submitting form. Please try again.',
+    'popup.downloadBrochure': 'Download {modelName} Brochure',
+    'popup.provideDetails': 'Please provide your details to access the brochure',
+    'popup.fullName': 'Full Name',
+    'popup.fullNamePlaceholder': 'Enter your full name',
+    'popup.phoneNumber': 'Phone Number',
+    'popup.phoneHelp': 'Enter 9-digit mobile number (e.g., 501234567)',
+    'popup.emailAddress': 'Email Address',
+    'popup.emailPlaceholder': 'Enter your email address',
+    'popup.processing': 'Processing...',
+    'popup.downloadBrochureButton': 'Download Brochure',
+    'popup.thankYou': 'Thank You!',
+    'popup.brochureWillOpen': 'Your {modelName} brochure will open in a new browser tab!',
   },
   AR: {
     // Navigation
@@ -91,12 +139,16 @@ const translations = {
     'home.service.title': 'الخدمة',
     'home.service.subtitle': 'نقدم لك تجربة قيادة خالية من القلق',
     'home.service.more': 'المزيد',
+    'home.video.title': 'عرض كايي',
+    'home.video.subtitle': 'انقر للعب في ملء الشاشة',
     
     // Footer
     'footer.lineup': 'تحقق من التشكيلة:',
     'footer.afterSales': 'ما بعد البيع:',
     'footer.about': 'حول:',
     'footer.showroom': 'المعرض:',
+    'footer.address': '787M+3WW - طريق الاتحاد - الخبيصي - دبي',
+    'footer.hours': 'الأحد-السبت-9:00 صباحاً إلى 7:00 مساءً',
     'footer.connectSocial': 'تواصل معنا على وسائل التواصل الاجتماعي:',
     'footer.privacyPolicy': 'سياسة الخصوصية',
     'footer.copyright': 'جميع الحقوق محفوظة لمجموعة ليجند القابضة',
@@ -112,6 +164,50 @@ const translations = {
     'common.back': 'رجوع',
     'common.next': 'التالي',
     'common.previous': 'السابق',
+    'common.more': 'المزيد',
+    
+    // Models
+    'models.x7.name': 'إكس 7',
+    'models.x7.description': 'مساحة متنقلة تشبه المنزل',
+    'models.x7.specs.engine': 'المحرك: 1.6T/ 2.0T',
+    'models.x7.specs.length': 'الطول: 4710 مم',
+    'models.x7.specs.width': 'العرض: 1955 مم',
+    'models.x7.specs.height': 'الارتفاع: 1705 مم',
+    'models.x7.specs.wheelbase': 'قاعدة العجلات: 2800 مم',
+    
+    'models.x3pro.name': 'إكس 3 برو',
+    'models.x3pro.description': 'هاتشباك شامل',
+    'models.x3pro.specs.engine': 'المحرك: 1.5T/ 1.5L',
+    'models.x3pro.specs.length': 'الطول: 4400 مم',
+    'models.x3pro.specs.width': 'العرض: 1831 مم',
+    'models.x3pro.specs.height': 'الارتفاع: 1653 مم',
+    'models.x3pro.specs.wheelbase': 'قاعدة العجلات: 2632 مم',
+    
+    'models.e5.name': 'إي 5',
+    'models.e5.description': 'سيارة عائلية فاخرة',
+    'models.e5.specs.engine': 'المحرك: 1.5T',
+    'models.e5.specs.length': 'الطول: 4666 مم',
+    'models.e5.specs.width': 'العرض: 1825 مم',
+    'models.e5.specs.height': 'الارتفاع: 1484 مم',
+    'models.e5.specs.wheelbase': 'قاعدة العجلات: 2700 مم',
+    
+    // Popup
+    'popup.e5NotAvailable': 'الكتيب غير متوفر بعد لموديل إي 5.',
+    'popup.brochureNotFound': 'الكتيب غير موجود للموديل: {modelName}',
+    'popup.phoneValidation': 'يجب أن يكون رقم الهاتف 9 أرقام بالضبط',
+    'popup.submitError': 'خطأ في إرسال النموذج. يرجى المحاولة مرة أخرى.',
+    'popup.downloadBrochure': 'تحميل كتيب {modelName}',
+    'popup.provideDetails': 'يرجى تقديم بياناتك للوصول إلى الكتيب',
+    'popup.fullName': 'الاسم الكامل',
+    'popup.fullNamePlaceholder': 'أدخل اسمك الكامل',
+    'popup.phoneNumber': 'رقم الهاتف',
+    'popup.phoneHelp': 'أدخل رقم الهاتف المكون من 9 أرقام (مثال: 501234567)',
+    'popup.emailAddress': 'عنوان البريد الإلكتروني',
+    'popup.emailPlaceholder': 'أدخل عنوان بريدك الإلكتروني',
+    'popup.processing': 'جاري المعالجة...',
+    'popup.downloadBrochureButton': 'تحميل الكتيب',
+    'popup.thankYou': 'شكراً لك!',
+    'popup.brochureWillOpen': 'سيتم فتح كتيب {modelName} في تبويب جديد!',
   }
 };
 
@@ -145,8 +241,16 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('language', lang);
   };
 
-  const t = (key: string): string => {
-    const translation = translations[language][key as keyof typeof translations[typeof language]] || key;
+  const t = (key: string, params?: Record<string, string>): string => {
+    let translation = translations[language][key as keyof typeof translations[typeof language]] || key;
+    
+    // Handle parameter interpolation
+    if (params) {
+      Object.entries(params).forEach(([param, value]) => {
+        translation = translation.replace(`{${param}}`, value);
+      });
+    }
+    
     console.log(`Translation: ${key} -> ${translation} (language: ${language})`);
     return translation;
   };

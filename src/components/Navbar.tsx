@@ -25,26 +25,26 @@ export default function Navbar() {
   const tabsContent = [
     {
       src: "https://www.kaiyiglobal.com/upload/1a/d147a490cbc17bc9e4459ce608a1e3.png",
-      car: "X7",
-      carcent: "Homelike Mobile Space",
+      car: t('models.x7.name'),
+      carcent: t('models.x7.description'),
       id: 1,
-      canshu: ["ENGINE: 1.6T/ 2.0T", "LENGTH: 4710 mm", "WHEELBASE: 2800 mm"],
+      canshu: [t('models.x7.specs.engine'), t('models.x7.specs.length'), t('models.x7.specs.wheelbase')],
       link: "/models/x7"
     },
     {
       src: "https://kaiyiglobal.com/upload/52/8804af2de37a9d90c77b223cb5eac0.png",
-      car: "X3 Pro",
-      carcent: "All Around Hot Hatch",
+      car: t('models.x3pro.name'),
+      carcent: t('models.x3pro.description'),
       id: 2,
-      canshu: ["ENGINE: 1.5T/ 1.5L", "LENGTH: 4400 mm", "WHEELBASE: 2632 mm"],
+      canshu: [t('models.x3pro.specs.engine'), t('models.x3pro.specs.length'), t('models.x3pro.specs.wheelbase')],
       link: "/models/x3-pro"
     },
     {
       src: "https://kaiyiglobal.com/upload/f1/fc637859eee69a6faa255e9a0b2c67.png",
-      car: "E5",
-      carcent: "Family Luxury Car",
+      car: t('models.e5.name'),
+      carcent: t('models.e5.description'),
       id: 3,
-      canshu: ["ENGINE: 1.5T", "LENGTH: 4666 mm", "WHEELBASE: 2700 mm"],
+      canshu: [t('models.e5.specs.engine'), t('models.e5.specs.length'), t('models.e5.specs.wheelbase')],
       link: "/models/e5"
     },
   ];
@@ -148,7 +148,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link href="/" className="cursor-pointer">
               <Image
-                src="https://www.kaiyiglobal.com/assets/kaiyilogo-a405c56a.png"
+                src="/logo/Kaiyi_logo_black.svg"
                 alt="KAIYI Logo"
                 width={120}
                 height={40}
@@ -164,7 +164,7 @@ export default function Navbar() {
                 onClick={() => setIsModelsDropdownOpen(!isModelsDropdownOpen)}
                 className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-black hover:text-gray-700 transition-colors"
               >
-                <span>MODELS</span>
+                <span>{t('nav.models')}</span>
                 <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M7 10l5 5 5-5z"/>
                 </svg>
@@ -220,10 +220,10 @@ export default function Navbar() {
                           {/* Action Buttons */}
                           <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 mb-6 lg:mb-8">
                             <a href="/test-drive" className="px-6 lg:px-8 py-2 lg:py-3 rounded-full border border-black bg-white text-black hover:bg-gray-50 transition-colors text-sm lg:text-base text-center">
-                              Test Drive
+                              {t('nav.testDrive')}
                             </a>
                             <Link href={tabsContent[validActiveTab].link} className="px-6 lg:px-8 py-2 lg:py-3 rounded-full border border-black bg-white text-black hover:bg-gray-50 transition-colors text-sm lg:text-base text-center">
-                              More
+                              {t('common.more')}
                             </Link>
                           </div>
                           
@@ -231,8 +231,8 @@ export default function Navbar() {
                           <div className="grid grid-cols-3 gap-4 lg:gap-8">
                             {tabsContent[validActiveTab].canshu.map((spec, index) => (
                               <div key={index} className="text-center">
-                                <div className="text-lg lg:text-xl font-bold text-black mb-1">{spec.split(': ')[1]}</div>
-                                <div className="text-xs lg:text-sm text-gray-600 uppercase">{spec.split(': ')[0]}</div>
+                                <div className="text-lg lg:text-xl font-bold text-black mb-1">{spec.split(': ')[1] || spec}</div>
+                                <div className="text-xs lg:text-sm text-gray-600 uppercase">{spec.split(': ')[0] || ''}</div>
                               </div>
                             ))}
                           </div>
@@ -377,20 +377,20 @@ export default function Navbar() {
               
               {/* Models Section */}
               <div className="border-b border-gray-100">
-                <button 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    toggleMobileModels();
-                  }}
-                  className="flex items-center justify-between w-full py-3 text-left text-base font-medium text-black hover:text-gray-700 transition-colors touch-manipulation"
-                  type="button"
-                >
-                  <span>MODELS</span>
-                  <svg className={`w-4 h-4 transition-transform duration-200 ${isMobileModelsDropdownOpen ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M7 10l5 5 5-5z"/>
-                  </svg>
-                </button>
+                                  <button 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      toggleMobileModels();
+                    }}
+                    className="flex items-center justify-between w-full py-3 text-left text-base font-medium text-black hover:text-gray-700 transition-colors touch-manipulation"
+                    type="button"
+                  >
+                    <span>{t('nav.models')}</span>
+                    <svg className={`w-4 h-4 transition-transform duration-200 ${isMobileModelsDropdownOpen ? 'rotate-180' : ''}`} fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M7 10l5 5 5-5z"/>
+                    </svg>
+                  </button>
                 
                 <div className={`transition-all duration-300 ease-in-out overflow-hidden ${
                   isMobileModelsDropdownOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'

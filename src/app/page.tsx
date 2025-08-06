@@ -84,36 +84,36 @@ export default function Home() {
 
   const carModels = [
     {
-      name: 'X3 Pro',
+      name: t('models.x3pro.name'),
       image: 'https://kaiyiglobal.com/upload/b1/d0ec3cd4b9c9ba7e0d6f2f8f7f7d69.png',
-      description: 'All Around Hot Hatch',
+      description: t('models.x3pro.description'),
       specs: {
-        length: '4400 mm',
-        width: '1831 mm',
-        height: '1653 mm',
-        wheelbase: '2632 mm'
+        length: t('models.x3pro.specs.length'),
+        width: t('models.x3pro.specs.width'),
+        height: t('models.x3pro.specs.height'),
+        wheelbase: t('models.x3pro.specs.wheelbase')
       }
     },
     {
-      name: 'X7',
+      name: t('models.x7.name'),
       image: 'https://www.kaiyiglobal.com/upload/e6/6d37b19416d131b3c6651f28aad9b1.png',
-      description: 'HomeLike Mobile Space',
+      description: t('models.x7.description'),
       specs: {
-        length: '4710 mm',
-        width: '1955 mm',
-        height: '1705 mm',
-        wheelbase: '2800 mm'
+        length: t('models.x7.specs.length'),
+        width: t('models.x7.specs.width'),
+        height: t('models.x7.specs.height'),
+        wheelbase: t('models.x7.specs.wheelbase')
       }
     },
     {
-      name: 'E5',
+      name: t('models.e5.name'),
       image: 'https://kaiyiglobal.com/upload/99/b95b13234541763b68eccb90303e65.png',
-      description: 'Family Luxury Car',
+      description: t('models.e5.description'),
       specs: {
-        length: '4666 mm',
-        width: '1825 mm',
-        height: '1484 mm',
-        wheelbase: '2700 mm'
+        length: t('models.e5.specs.length'),
+        width: t('models.e5.specs.width'),
+        height: t('models.e5.specs.height'),
+        wheelbase: t('models.e5.specs.wheelbase')
       }
     }
   ];
@@ -214,7 +214,7 @@ export default function Home() {
                   key={model.name}
                   className={`text-xl sm:text-2xl md:text-3xl font-bold transition-all duration-300 ${
                     (hoveredModel === model.name || currentModelIndex === index)
-                      ? 'text-purple-600 underline'
+                      ? 'text-[#0e62a8] underline'
                       : 'text-gray-600 hover:text-gray-800'
                   }`}
                   onMouseEnter={() => setHoveredModel(model.name)}
@@ -246,8 +246,8 @@ export default function Home() {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
                 {(hoveredModel ? carModels.find(m => m.name === hoveredModel)?.specs : carModels[currentModelIndex].specs) && Object.entries(hoveredModel ? carModels.find(m => m.name === hoveredModel)!.specs : carModels[currentModelIndex].specs).map(([key, value]) => (
                   <div key={key} className="text-center">
-                    <div className="text-lg sm:text-xl md:text-2xl font-bold text-black">{value}</div>
-                    <div className="text-xs sm:text-sm text-gray-600 uppercase">{key}</div>
+                    <div className="text-lg sm:text-xl md:text-2xl font-bold text-black">{value.split(': ')[1] || value}</div>
+                    <div className="text-xs sm:text-sm text-gray-600 uppercase">{value.split(': ')[0] || key}</div>
                   </div>
                 ))}
               </div>
@@ -321,8 +321,8 @@ export default function Home() {
         
         {/* Video Info */}
         <div className="absolute bottom-8 left-8 text-white">
-          <p className="text-2xl font-bold">KAIYI Showcase</p>
-          <p className="text-lg text-gray-300">Click to play in fullscreen</p>
+          <p className="text-2xl font-bold">{t('home.video.title')}</p>
+          <p className="text-lg text-gray-300">{t('home.video.subtitle')}</p>
         </div>
       </section>
 

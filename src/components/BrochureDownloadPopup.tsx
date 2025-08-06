@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface BrochureDownloadPopupProps {
   isOpen: boolean;
@@ -9,6 +10,7 @@ interface BrochureDownloadPopupProps {
 }
 
 export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: BrochureDownloadPopupProps) {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
@@ -35,10 +37,10 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
         break;
       case 'KAIYI E5':
         // For E5, we don't have a brochure, so we'll show a message
-        alert('Brochure for E5 model is not available yet.');
+        alert(t('popup.e5NotAvailable'));
         return;
       default:
-        alert(`Brochure not found for model: ${modelName}`);
+        alert(t('popup.brochureNotFound', { modelName }));
         return;
     }
     
@@ -62,7 +64,7 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
       
       // Validate phone number (must be exactly 9 digits)
       if (!/^\d{9}$/.test(formData.phone)) {
-        alert('Phone number must be exactly 9 digits');
+        alert(t('popup.phoneValidation'));
         return;
       }
 
@@ -88,11 +90,11 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
         }, 3000);
       } else {
         setIsSubmitting(false);
-        alert('Error submitting form. Please try again.');
+        alert(t('popup.submitError'));
       }
     } catch {
       setIsSubmitting(false);
-      alert('Error submitting form. Please try again.');
+      alert(t('popup.submitError'));
     }
   };
 
@@ -116,10 +118,10 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
             {/* Header */}
             <div className="text-center mb-6">
               <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                Download {modelName} Brochure
+                {t('popup.downloadBrochure', { modelName })}
               </h2>
               <p className="text-gray-600">
-                Please provide your details to access the brochure
+                {t('popup.provideDetails')}
               </p>
             </div>
 
@@ -128,7 +130,7 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
               {/* Full Name */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Full Name <span className="text-red-600">*</span>
+                  {t('popup.fullName')} <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
@@ -136,14 +138,14 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
                   value={formData.fullName}
                   onChange={(e) => handleInputChange('fullName', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700 placeholder-gray-500"
-                  placeholder="Enter your full name"
+                  placeholder={t('popup.fullNamePlaceholder')}
                 />
               </div>
 
                                             {/* Phone Number */}
                <div>
                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                   Phone Number <span className="text-red-600">*</span>
+                   {t('popup.phoneNumber')} <span className="text-red-600">*</span>
                  </label>
                  <div className="relative">
                    <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium z-10">
@@ -162,13 +164,13 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
                      maxLength={9}
                    />
                  </div>
-                 <p className="text-xs text-gray-500 mt-1">Enter 9-digit mobile number (e.g., 501234567)</p>
+                 <p className="text-xs text-gray-500 mt-1">{t('popup.phoneHelp')}</p>
                </div>
 
               {/* Email */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Email Address <span className="text-red-600">*</span>
+                  {t('popup.emailAddress')} <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="email"
@@ -176,7 +178,7 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700 placeholder-gray-500"
-                  placeholder="Enter your email address"
+                  placeholder={t('popup.emailPlaceholder')}
                 />
               </div>
 
@@ -186,7 +188,7 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
                 disabled={isSubmitting}
                 className="w-full bg-black text-white py-3 px-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? 'Processing...' : 'Download Brochure'}
+                {isSubmitting ? t('popup.processing') : t('popup.downloadBrochureButton')}
               </button>
             </form>
           </>
@@ -199,10 +201,10 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
               </svg>
             </div>
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
-              Thank You!
+              {t('popup.thankYou')}
             </h3>
                          <p className="text-gray-600">
-               Your {modelName} brochure will open in a new browser tab!
+               {t('popup.brochureWillOpen', { modelName })}
              </p>
           </div>
         )}
