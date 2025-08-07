@@ -124,7 +124,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section id="home" className="pt-16 min-h-[70vh] sm:min-h-[80vh] flex items-center justify-center relative overflow-hidden">
+      <section id="home" className="pt-16 min-h-[70vh] sm:min-h-[95vh] flex items-center justify-center relative overflow-hidden">
         {/* Background Images */}
         {heroSlides.map((slide, index) => (
           <div
@@ -147,7 +147,7 @@ export default function Home() {
         
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-center min-h-[40vh] sm:min-h-[60vh]">
+          <div className="flex items-center justify-center min-h-[50vh] sm:min-h-[70vh]">
             {/* Text Content */}
             <div className="text-center space-y-4 sm:space-y-6 lg:space-y-8 max-w-4xl px-4">
               <div className="space-y-2 sm:space-y-3 lg:space-y-4">
