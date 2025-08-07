@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import PrivacyPolicyBar from "@/components/PrivacyPolicyBar";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -55,6 +56,7 @@ export default function RootLayout({
       >
         <LanguageProvider>
           {children}
+          <PrivacyPolicyBar />
         </LanguageProvider>
       </body>
     </html>
