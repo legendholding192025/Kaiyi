@@ -16,7 +16,7 @@ export default function WeAreKaiyiPage() {
         <div className="hero-section relative w-full min-h-screen overflow-hidden">
           <div className="hero-image w-full h-full">
             <Image
-              src="https://www.kaiyiglobal.com/assets/wearekaiimg-59afc21d.jpg"
+              src="https://cdn.legendholding.com/images/cdn_689344d73e9e57.73056438_20250806_120439.jpg"
               alt="We Are Kaiyi"
               fill
               className="object-cover"
@@ -69,13 +69,13 @@ export default function WeAreKaiyiPage() {
             KAIYI COOPERATION STORY
           </div>
           <div className="video-container flex justify-center">
-            <div className="video-wrapper relative w-full md:w-[40vw] max-w-[600px]">
+            <div className="video-wrapper relative w-full">
               <Image
                 src="https://cdn.legendholding.com/images/cdn_68934ccb8dcf25.67672295_20250806_123835.jpg"
                 alt="Kaiyi Factory"
-                width={600}
-                height={400}
-                className="w-full rounded-[2vw] md:rounded-[1vw]"
+                width={1200}
+                height={600}
+                className="w-full h-[60vh] md:h-[70vh] object-cover rounded-[2vw] md:rounded-[1vw]"
               />
             </div>
           </div>

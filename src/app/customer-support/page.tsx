@@ -158,7 +158,7 @@ export default function CustomerSupportPage() {
               {/* Right Column - Image */}
               <div className="flex justify-center">
                 <Image
-                  src="https://www.kaiyiglobal.com/assets/kaiyiimg22-890b8fa7.png"
+                  src="https://cdn.legendholding.com/images/cdn_689480b1df9646.53543181_20250807_103217.jpg"
                   alt="Kaiyi EV Chassis and Genuine Spare Parts"
                   width={600}
                   height={400}

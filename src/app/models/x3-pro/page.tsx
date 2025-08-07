@@ -53,7 +53,7 @@ export default function X3ProPage() {
   ];
 
   const fifthSlideshowImages = [
-    "https://cdn.legendholding.com/images/cdn_689444ced73c81.02060415_20250807_061646.jpg"
+    "https://cdn.legendholding.com/images/cdn_689471cc7cbf43.92434800_20250807_092844.jpg"
   ];
 
   const technicalImages = [

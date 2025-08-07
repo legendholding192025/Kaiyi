@@ -38,7 +38,7 @@ export default function WarrantyPage() {
       <section 
         className="relative text-white py-32 px-4 text-center min-h-[80vh] flex items-center justify-center overflow-hidden"
         style={{
-          background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://cdn.legendholding.com/images/cdn_689348c34c7913.45400682_20250806_122123.jpg')`,
+          background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://cdn.legendholding.com/images/cdn_68947e6c590e79.53045565_20250807_102236.jpg')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -77,7 +77,7 @@ export default function WarrantyPage() {
                         The whole vehicle and several unspecified parts shock Absorber, Shock Absorber Rubber, Shock Absorber Dust Cover, Absorber Spring, Oil Seal, Horn, Ball Head, Steering Connection Lever, Water Pump, Brake Disc/ Drum, Wheel Hub Bearing, Air Conditioning Fan, Glass Lifter, Cooling Fan, Sensons, Steering Rod Ball Head, Clutch Plate, Belt Tensioner, Belt, Catalytic Convertor, Oxygen Sensor, Injector
                       </div>
                       <div className="font-semibold text-blue-600">
-                        5 years / 150,000 Km
+                        10 years / 1,000,000 KM
                       </div>
                     </td>
                   </tr>
@@ -92,13 +92,13 @@ export default function WarrantyPage() {
                         Shock Absorber, Shock Absorber Rubber, Shock Absorber Dust Cover, Absorber Spring, Oil Seal, Horn, Ball Head, Steering Connection Lever, Water Pump, Brake Disc/ Drum, Wheel Hub Bearing, Air Conditioning Fan, Glass Lifter, Cooling Fan, Sensons, Steering Rod Ball Head, Clutch Plate, Belt Tensioner, Belt, Catalytic Convertor, Oxygen Sensor, Injector
                       </div>
                       <div className="font-semibold text-green-600">
-                        3 years / 60,000 km
+                        2 years / 40,000 KM
                       </div>
                     </td>
                   </tr>
 
                   {/* Vulnerable and Consumable Parts */}
-                  <tr className="border-b border-gray-200">
+                  {/* <tr className="border-b border-gray-200">
                     <td className="px-6 py-4 bg-gray-50 font-semibold text-gray-800 w-1/3">
                       Vulnerable and Consumable Parts
                     </td>
@@ -110,7 +110,7 @@ export default function WarrantyPage() {
                         3 Months / 5000 km
                       </div>
                     </td>
-                  </tr>
+                  </tr> */}
 
                   {/* Other Details */}
                   <tr>

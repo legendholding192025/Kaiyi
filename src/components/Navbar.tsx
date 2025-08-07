@@ -79,7 +79,7 @@ export default function Navbar() {
       link: "/models/x7"
     },
     {
-      src: "https://kaiyiglobal.com/upload/52/8804af2de37a9d90c77b223cb5eac0.png",
+      src: "https://cdn.legendholding.com/images/cdn_68948169a1eb32.29119204_20250807_103521.png",
       car: "X3 Pro",
       carcent: t('models.x3pro.description'),
       id: 2,
@@ -268,9 +268,10 @@ export default function Navbar() {
                             <Image 
                               src={tabsContent[validActiveTab].src}
                               alt={tabsContent[validActiveTab].car}
-                              width={400}
-                              height={300}
-                              className="w-full h-auto"
+                              width={tabsContent[validActiveTab].car === "X3 Pro" ? 700 : 500}
+                              height={tabsContent[validActiveTab].car === "X3 Pro" ? 525 : 375}
+                              className={`w-full h-auto ${tabsContent[validActiveTab].car === "X3 Pro" ? 'scale-125' : 'scale-110'} ${tabsContent[validActiveTab].car === "X3 Pro" ? 'x3-pro-image' : ''}`}
+                              style={tabsContent[validActiveTab].car === "X3 Pro" ? { backgroundColor: 'transparent', mixBlendMode: 'multiply', marginTop: '10px', transform: 'scale(1.25) translateY(10px)' } : {}}
                               priority
                             />
                           </Link>
