@@ -239,7 +239,7 @@ export default function Navbar() {
               
               {/* Models Dropdown */}
               <div className={`fixed top-16 left-1/2 transform -translate-x-1/2 mt-1 w-[95vw] sm:w-[90vw] max-w-6xl bg-white shadow-2xl rounded-lg transition-all duration-300 z-50 ${
-                isModelsDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                isModelsDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
               }`}>
                 <div className="p-4 sm:p-6">
                   <div className="flex flex-col lg:flex-row">
@@ -338,7 +338,7 @@ export default function Navbar() {
               
               {/* After Sales Dropdown */}
               <div className={`absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[200px] transition-all duration-200 ${
-                isAfterSalesDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                isAfterSalesDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
               }`}>
                 <a href="/warranty" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
                   {t('nav.warranty')}
@@ -368,7 +368,7 @@ export default function Navbar() {
               
               {/* Contact Dropdown */}
               <div className={`absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[200px] transition-all duration-200 ${
-                isContactDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                isContactDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
               }`}>
                 <a href="/test-drive" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
                   {t('nav.testDrive')}
