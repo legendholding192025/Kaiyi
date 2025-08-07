@@ -79,7 +79,7 @@ export default function Navbar() {
       link: "/models/x7"
     },
     {
-      src: "https://cdn.legendholding.com/images/cdn_68948169a1eb32.29119204_20250807_103521.png",
+      src: "https://cdn.legendholding.com/images/cdn_68948169a1eb32.29119204_20250807_103521.png?v=2",
       car: "X3 Pro",
       carcent: t('models.x3pro.description'),
       id: 2,
@@ -264,7 +264,7 @@ export default function Navbar() {
                       <div className="flex flex-col lg:flex-row">
                         {/* Car Image - Now Clickable */}
                         <div className="w-full lg:w-1/2 lg:pr-8 mb-6 lg:mb-0">
-                          <Link href={tabsContent[validActiveTab].link} className="block cursor-pointer hover:opacity-90 transition-opacity">
+                          <Link href={tabsContent[validActiveTab].link} className="block cursor-pointer">
                             <Image 
                               src={tabsContent[validActiveTab].src}
                               alt={tabsContent[validActiveTab].car}
