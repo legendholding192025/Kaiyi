@@ -14,7 +14,12 @@ export const metadata: Metadata = {
   title: "KAIYI UAE",
   description: "Discover KAIYI's cutting-edge solutions and innovative approach to technology and design.",
   icons: {
-    icon: '/kaiyi.ico',
+    icon: [
+      { url: '/kaiyi.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/kaiyi.ico', sizes: '16x16', type: 'image/x-icon' },
+    ],
+    shortcut: '/kaiyi.ico',
+    apple: '/kaiyi.ico',
   },
 };
 
@@ -26,6 +31,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="icon" type="image/x-icon" href="/kaiyi.ico?v=2" />
+        <link rel="shortcut icon" type="image/x-icon" href="/kaiyi.ico?v=2" />
+        <link rel="apple-touch-icon" href="/kaiyi.ico?v=2" />
         <link
           rel="preconnect"
           href="https://fonts.googleapis.com"
