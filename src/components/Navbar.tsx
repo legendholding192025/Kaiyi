@@ -249,7 +249,7 @@ export default function Navbar() {
                         <Link 
                           key={model.id}
                           href={model.link}
-                          className={`cursor-pointer transition-all duration-300 ${validActiveTab === index ? 'font-bold text-lg' : 'text-base'}`}
+                                                      className={`cursor-pointer transition-all duration-300 px-3 py-2 rounded ${validActiveTab === index ? 'font-bold text-lg bg-gray-50' : 'text-base hover:bg-[#0e62a8] hover:text-white'}`}
                           onMouseEnter={() => setActiveTab(index)}
                         >
                           <div className={`${validActiveTab === index ? 'border-b-4 lg:border-b-0 lg:border-l-4 border-[#0e62a8] pb-2 lg:pb-0 lg:pl-2' : 'pb-2 lg:pb-0 lg:pl-2'}`}>
@@ -341,13 +341,13 @@ export default function Navbar() {
               <div className={`absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[200px] transition-all duration-200 ${
                 isAfterSalesDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
               }`}>
-                <a href="/warranty" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
+                <a href="/warranty" className="block px-4 py-2 text-sm text-black hover:bg-[#0e62a8] hover:text-white transition-colors rounded mx-1 my-1">
                   {t('nav.warranty')}
                 </a>
-                <a href="/service-booking" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
+                <a href="/service-booking" className="block px-4 py-2 text-sm text-black hover:bg-[#0e62a8] hover:text-white transition-colors rounded mx-1 my-1">
                   {t('nav.serviceBooking')}
                 </a>
-                <a href="/customer-support" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
+                <a href="/customer-support" className="block px-4 py-2 text-sm text-black hover:bg-[#0e62a8] hover:text-white transition-colors rounded mx-1 my-1">
                   {t('nav.customerSupport')}
                 </a>
               </div>
@@ -371,10 +371,10 @@ export default function Navbar() {
               <div className={`absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[200px] transition-all duration-200 ${
                 isContactDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
               }`}>
-                <a href="/test-drive" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
+                <a href="/test-drive" className="block px-4 py-2 text-sm text-black hover:bg-[#0e62a8] hover:text-white transition-colors rounded mx-1 my-1">
                   {t('nav.testDrive')}
                 </a>
-                <a href="/contact-us" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
+                <a href="/contact-us" className="block px-4 py-2 text-sm text-black hover:bg-[#0e62a8] hover:text-white transition-colors rounded mx-1 my-1">
                   {t('nav.contact')}
                 </a>
               </div>
