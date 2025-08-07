@@ -236,7 +236,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }, [language]);
 
   const setLanguage = (lang: Language) => {
-    console.log('LanguageContext: Setting language to', lang);
     setLanguageState(lang);
     localStorage.setItem('language', lang);
   };
@@ -251,7 +250,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       });
     }
     
-    console.log(`Translation: ${key} -> ${translation} (language: ${language})`);
     return translation;
   };
 

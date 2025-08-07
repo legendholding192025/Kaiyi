@@ -14,6 +14,9 @@ export default function Navbar() {
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const [isClient, setIsClient] = useState(false);
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isScrollListenerActive, setIsScrollListenerActive] = useState(false);
   
   const { language, setLanguage, t } = useLanguage();
 
@@ -21,6 +24,50 @@ export default function Navbar() {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  // Reset mobile menu states when component mounts
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    setIsMobileModelsDropdownOpen(false);
+    setIsAfterSalesDropdownOpen(false);
+    setIsContactDropdownOpen(false);
+  }, []);
+
+  // Handle scroll events for navbar visibility
+  useEffect(() => {
+    // Only activate scroll listener after component has mounted
+    if (!isClient) return;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Show navbar at the top of the page
+      if (currentScrollY < 100) {
+        setIsNavbarVisible(true);
+        setLastScrollY(currentScrollY);
+        return;
+      }
+      
+      // Hide navbar when scrolling down, show when scrolling up
+      if (currentScrollY > lastScrollY && isNavbarVisible) {
+        setIsNavbarVisible(false);
+      } else if (currentScrollY < lastScrollY && !isNavbarVisible) {
+        setIsNavbarVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    // Set initial scroll position
+    setLastScrollY(window.scrollY);
+    setIsScrollListenerActive(true);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isClient, lastScrollY, isNavbarVisible]);
 
   const tabsContent = [
     {
@@ -65,7 +112,16 @@ export default function Navbar() {
   ];
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+    if (isMobileMenuOpen) {
+      // When closing the mobile menu, also close all submenus
+      setIsMobileMenuOpen(false);
+      setIsMobileModelsDropdownOpen(false);
+      setIsAfterSalesDropdownOpen(false);
+      setIsContactDropdownOpen(false);
+    } else {
+      // When opening the mobile menu, just open it
+      setIsMobileMenuOpen(true);
+    }
   };
 
   const handleLanguageChange = (languageCode: 'EN' | 'AR') => {
@@ -75,7 +131,7 @@ export default function Navbar() {
 
   // Mobile navigation functions - Enhanced with proper state management
   const handleMobileNavigation = (url: string) => {
-    // Close all mobile dropdowns and menu
+    // Close all mobile dropdowns and menu immediately
     setIsMobileMenuOpen(false);
     setIsMobileModelsDropdownOpen(false);
     setIsAfterSalesDropdownOpen(false);
@@ -113,13 +169,20 @@ export default function Navbar() {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element;
       
-      // Don't close language dropdown if clicking on language button or dropdown
-      if (target.closest('.language-selector')) {
+      // Don't close dropdowns if clicking on dropdown content, buttons, or language selector
+      if (target.closest('.language-selector') || 
+          target.closest('[data-dropdown="models"]') ||
+          target.closest('[data-dropdown="afterSales"]') ||
+          target.closest('[data-dropdown="contact"]') ||
+          target.closest('button')) {
         return;
       }
       
       if (isLanguageDropdownOpen) {
         setIsLanguageDropdownOpen(false);
+      }
+      if (isModelsDropdownOpen) {
+        setIsModelsDropdownOpen(false);
       }
       if (isContactDropdownOpen) {
         setIsContactDropdownOpen(false);
@@ -136,10 +199,12 @@ export default function Navbar() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isLanguageDropdownOpen, isContactDropdownOpen, isAfterSalesDropdownOpen, isMobileModelsDropdownOpen]);
+  }, [isLanguageDropdownOpen, isModelsDropdownOpen, isContactDropdownOpen, isAfterSalesDropdownOpen, isMobileModelsDropdownOpen]);
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-gradient-to-b from-[#ebebeb] to-[#afb0b0] text-black">
+    <nav className={`fixed top-0 w-full z-50 bg-gradient-to-b from-[#ebebeb] to-[#afb0b0] text-black transition-transform duration-300 ease-in-out ${
+      isScrollListenerActive && !isNavbarVisible ? '-translate-y-full' : 'translate-y-0'
+    }`}>
       <div className="w-full px-8">
         <div className="flex items-center justify-between h-16">
           {/* Left Section - Logo */}
@@ -151,15 +216,19 @@ export default function Navbar() {
                 width={120}
                 height={40}
                 className="h-8 w-auto"
+                priority
               />
             </Link>
           </div>
 
           {/* Center Section - Navigation Menu */}
           <div className="hidden lg:flex items-center space-x-8">
-            <div className="relative group">
+            <div className="relative group" data-dropdown="models">
               <button 
-                onClick={() => setIsModelsDropdownOpen(!isModelsDropdownOpen)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsModelsDropdownOpen(!isModelsDropdownOpen);
+                }}
                 className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-black hover:text-gray-700 transition-colors"
               >
                 <span>{t('nav.models')}</span>
@@ -170,7 +239,7 @@ export default function Navbar() {
               
               {/* Models Dropdown */}
               <div className={`fixed top-16 left-1/2 transform -translate-x-1/2 mt-1 w-[95vw] sm:w-[90vw] max-w-6xl bg-white shadow-2xl rounded-lg transition-all duration-300 z-50 ${
-                isModelsDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
+                isModelsDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
               }`}>
                 <div className="p-4 sm:p-6">
                   <div className="flex flex-col lg:flex-row">
@@ -202,6 +271,7 @@ export default function Navbar() {
                               width={400}
                               height={300}
                               className="w-full h-auto"
+                              priority
                             />
                           </Link>
                         </div>
@@ -252,9 +322,12 @@ export default function Navbar() {
               <span>{t('nav.weAreKaiyi')}</span>
             </a>
 
-            <div className="relative group">
+            <div className="relative group" data-dropdown="afterSales">
               <button 
-                onClick={() => setIsAfterSalesDropdownOpen(!isAfterSalesDropdownOpen)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsAfterSalesDropdownOpen(!isAfterSalesDropdownOpen);
+                }}
                 className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-black hover:text-gray-700 transition-colors"
               >
                 <span>{t('nav.afterSales')}</span>
@@ -265,7 +338,7 @@ export default function Navbar() {
               
               {/* After Sales Dropdown */}
               <div className={`absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[200px] transition-all duration-200 ${
-                isAfterSalesDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
+                isAfterSalesDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
               }`}>
                 <a href="/warranty" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
                   {t('nav.warranty')}
@@ -279,9 +352,12 @@ export default function Navbar() {
               </div>
             </div>
 
-            <div className="relative group">
+            <div className="relative group" data-dropdown="contact">
               <button 
-                onClick={() => setIsContactDropdownOpen(!isContactDropdownOpen)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsContactDropdownOpen(!isContactDropdownOpen);
+                }}
                 className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-black hover:text-gray-700 transition-colors"
               >
                 <span>{t('nav.contactUs')}</span>
@@ -292,7 +368,7 @@ export default function Navbar() {
               
               {/* Contact Dropdown */}
               <div className={`absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[200px] transition-all duration-200 ${
-                isContactDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
+                isContactDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
               }`}>
                 <a href="/test-drive" className="block px-4 py-2 text-sm text-black hover:bg-gray-50 transition-colors">
                   {t('nav.testDrive')}
@@ -408,7 +484,6 @@ export default function Navbar() {
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          console.log('Navigating to:', model.link);
                           handleMobileNavigation(model.link);
                         }}
                         className="block w-full text-left px-4 py-2 text-sm text-black hover:text-gray-700 hover:bg-gray-50 transition-colors touch-manipulation"
@@ -427,7 +502,6 @@ export default function Navbar() {
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    console.log('Navigating to: /we-are-kaiyi');
                     handleMobileNavigation('/we-are-kaiyi');
                   }}
                   className="w-full py-3 text-left text-base font-medium text-black hover:text-gray-700 transition-colors touch-manipulation"
@@ -462,7 +536,6 @@ export default function Navbar() {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        console.log('Navigating to: /warranty');
                         handleMobileNavigation('/warranty');
                       }}
                       className="block w-full text-left px-4 py-2 text-sm text-black hover:text-gray-700 hover:bg-gray-50 transition-colors touch-manipulation"
@@ -474,7 +547,6 @@ export default function Navbar() {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        console.log('Navigating to: /service-booking');
                         handleMobileNavigation('/service-booking');
                       }}
                       className="block w-full text-left px-4 py-2 text-sm text-black hover:text-gray-700 hover:bg-gray-50 transition-colors touch-manipulation"
@@ -486,7 +558,6 @@ export default function Navbar() {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        console.log('Navigating to: /customer-support');
                         handleMobileNavigation('/customer-support');
                       }}
                       className="block w-full text-left px-4 py-2 text-sm text-black hover:text-gray-700 hover:bg-gray-50 transition-colors touch-manipulation"
@@ -523,7 +594,6 @@ export default function Navbar() {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        console.log('Navigating to: /test-drive');
                         handleMobileNavigation('/test-drive');
                       }}
                       className="block w-full text-left px-4 py-2 text-sm text-black hover:text-gray-700 hover:bg-gray-50 transition-colors touch-manipulation"
@@ -535,7 +605,6 @@ export default function Navbar() {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        console.log('Navigating to: /contact-us');
                         handleMobileNavigation('/contact-us');
                       }}
                       className="block w-full text-left px-4 py-2 text-sm text-black hover:text-gray-700 hover:bg-gray-50 transition-colors touch-manipulation"

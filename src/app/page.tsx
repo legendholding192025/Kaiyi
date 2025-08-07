@@ -124,7 +124,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section id="home" className="pt-16 min-h-screen flex items-center justify-center relative overflow-hidden">
+      <section id="home" className="pt-16 min-h-[80vh] sm:min-h-screen flex items-center justify-center relative overflow-hidden">
         {/* Background Images */}
         {heroSlides.map((slide, index) => (
           <div
@@ -146,26 +146,26 @@ export default function Home() {
         
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-center min-h-[80vh]">
+          <div className="flex items-center justify-center min-h-[60vh] sm:min-h-[80vh]">
             {/* Text Content */}
-            <div className="text-center space-y-6 sm:space-y-8 max-w-4xl px-4">
-              <div className="space-y-3 sm:space-y-4">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight">
+            <div className="text-center space-y-4 sm:space-y-6 lg:space-y-8 max-w-4xl px-4">
+              <div className="space-y-2 sm:space-y-3 lg:space-y-4">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-bold text-white leading-tight">
                   {heroSlides[currentSlide].title}
                 </h1>
-                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 font-medium">
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-300 font-medium">
                   {heroSlides[currentSlide].subtitle}
                 </p>
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-                <a href="/test-drive" className="bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 border-2 border-white text-center">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4 justify-center">
+                <a href="/test-drive" className="bg-white text-black px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 border-2 border-white text-center">
                   {heroSlides[currentSlide].button1}
                 </a>
                 {/* Hide Download Brochure button for E5 model (slide index 2) */}
                 {currentSlide !== 2 && (
                   <button 
-                    className="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-white hover:text-black transition-all duration-300"
+                    className="border-2 border-white text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg hover:bg-white hover:text-black transition-all duration-300"
                     onClick={() => {
                       setSelectedModelName(heroSlides[currentSlide].title);
                       setIsBrochurePopupOpen(true);
@@ -281,7 +281,7 @@ export default function Home() {
       </section>
 
       {/* Video Section */}
-      <section id="video" className="relative h-screen">
+      <section id="video" className="relative h-[70vh] sm:h-screen">
         <video
           ref={videoRef}
           id="kaiyi-video"
@@ -312,17 +312,17 @@ export default function Home() {
             }
           }}
         >
-          <div className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110">
-            <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <div className="w-16 h-16 sm:w-24 sm:h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110">
+            <svg className="w-8 h-8 sm:w-12 sm:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z"/>
             </svg>
           </div>
         </div>
         
         {/* Video Info */}
-        <div className="absolute bottom-8 left-8 text-white">
-          <p className="text-2xl font-bold">{t('home.video.title')}</p>
-          <p className="text-lg text-gray-300">{t('home.video.subtitle')}</p>
+        <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 text-white">
+          <p className="text-lg sm:text-2xl font-bold">{t('home.video.title')}</p>
+          <p className="text-sm sm:text-lg text-gray-300">{t('home.video.subtitle')}</p>
         </div>
       </section>
 
@@ -388,27 +388,27 @@ export default function Home() {
         
         {/* Bottom Section - SERVICE with Car Interior Image */}
         <div className="relative bg-gray-100">
-          <div className="max-w-7xl mx-auto px-8 py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-16">
             <div className="relative">
-          <Image
+              <Image
                 src="https://cdn.legendholding.com/images/cdn_68935e577bba84.38122423_20250806_135327.jpg"
                 alt="KAIYI Car Interior"
                 width={1200}
                 height={600}
-                className="w-full h-auto object-cover rounded-lg shadow-2xl"
+                className="w-full h-48 sm:h-auto object-cover rounded-lg shadow-2xl"
               />
               
               {/* Text Overlay */}
-              <div className="absolute inset-0 flex flex-col justify-end items-center pb-16">
-                <div className="text-center">
-                  <h3 className="text-6xl md:text-7xl font-bold text-white mb-4 drop-shadow-lg">
+              <div className="absolute inset-0 flex flex-col justify-end items-center pb-4 sm:pb-8 lg:pb-16">
+                <div className="text-center px-4">
+                  <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-2 sm:mb-4 drop-shadow-lg">
                     {t('home.service.title')}
                   </h3>
-                  <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl drop-shadow-lg">
+                  <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white mb-4 sm:mb-6 lg:mb-8 max-w-2xl drop-shadow-lg">
                     {t('home.service.subtitle')}
                   </p>
                   <button 
-                    className="bg-black text-white px-8 py-3 rounded-none font-semibold text-lg hover:bg-gray-800 transition-all duration-300"
+                    className="bg-black text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-3 rounded-none font-semibold text-sm sm:text-base lg:text-lg hover:bg-gray-800 transition-all duration-300"
                     onClick={() => window.location.href = '/service-booking'}
                   >
                     {t('home.service.more')}

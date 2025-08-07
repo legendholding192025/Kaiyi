@@ -48,7 +48,7 @@ export default function CustomerSupportPage() {
        >
          {/* Content */}
          <div className="relative z-10 max-w-4xl mx-auto">
-           <h1 className="text-5xl md:text-7xl font-medium mb-8 tracking-widest uppercase">
+           <h1 className="text-5xl md:text-7xl font-bold mb-8 tracking-widest uppercase">
              CUSTOMER SUPPORT
            </h1>
          </div>
