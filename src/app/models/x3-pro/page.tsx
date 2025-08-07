@@ -41,19 +41,19 @@ export default function X3ProPage() {
   ];
 
   const secondSlideshowImages = [
-    "https://kaiyiglobal.com/upload/e3/34fd83f67136f5d2827fd84d4804c7.jpg"
+    "https://cdn.legendholding.com/images/cdn_6894435c9ed5c5.65628034_20250807_061036.jpg"
   ];
 
   const thirdSlideshowImages = [
-    "https://kaiyiglobal.com/upload/b4/d6e8755dab78e986587ff0fb705c7e.jpg"
+    "https://cdn.legendholding.com/images/cdn_689444014140e8.17795597_20250807_061321.jpg"
   ];
 
   const fourthSlideshowImages = [
-    "https://kaiyiglobal.com/upload/5c/4559812c710591f2f1343a1a3c9deb.jpg"
+    "https://cdn.legendholding.com/images/cdn_6894446d231073.78047756_20250807_061509.jpg"
   ];
 
   const fifthSlideshowImages = [
-    "https://kaiyiglobal.com/upload/18/557b1c7fc06e422aac95f33675cd30.jpg"
+    "https://cdn.legendholding.com/images/cdn_689444ced73c81.02060415_20250807_061646.jpg"
   ];
 
   const technicalImages = [
@@ -405,7 +405,7 @@ export default function X3ProPage() {
       {/* Full Size Image Section */}
       <div className="w-full relative overflow-hidden h-64 md:h-screen">
         <Image
-          src="https://kaiyiglobal.com/upload/ed/14a2757e693c6b66f51fe02d672442.jpg"
+          src="https://cdn.legendholding.com/images/cdn_68933ff403d2b1.16599158_20250806_114348.jpg"
           alt="KAIYI X3 Pro Interior"
           width={1920}
           height={1080}
