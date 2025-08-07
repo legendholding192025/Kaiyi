@@ -25,6 +25,7 @@ export default function TestDrivePage() {
     verification_code: ''
   });
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const models = [
     { id: 1, name: "KAIYI X7" },
@@ -37,7 +38,11 @@ export default function TestDrivePage() {
   };
 
   const handleSubmit = async () => {
+    if (isLoading) return; // Prevent multiple submissions
+    
     try {
+      setIsLoading(true);
+      
       // Validate required fields
       if (!form.car_id || !form.name || !form.phone || !form.email) {
         alert('Please fill in all required fields');
@@ -82,6 +87,8 @@ export default function TestDrivePage() {
     } catch (error) {
       console.error('Error in handleSubmit:', error);
       alert('Error submitting form. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -188,9 +195,21 @@ export default function TestDrivePage() {
                 <button
                   type="button"
                   onClick={handleSubmit}
-                  className="bg-white border border-gray-300 text-black py-3 px-8 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+                  disabled={isLoading}
+                  className={`bg-[#0e62a8] border border-[#0e62a8] text-white py-3 px-8 rounded-lg font-medium transition-colors ${
+                    isLoading 
+                      ? 'opacity-50 cursor-not-allowed' 
+                      : 'hover:bg-[#0a4a7a] hover:border-[#0a4a7a]'
+                  }`}
                 >
-                  Submit
+                  {isLoading ? (
+                    <div className="flex items-center justify-center space-x-2">
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                      <span>Submitting...</span>
+                    </div>
+                  ) : (
+                    'Submit'
+                  )}
                 </button>
               </div>
             </form>

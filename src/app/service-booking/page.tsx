@@ -23,6 +23,7 @@ export default function ServiceBookingPage() {
     numberPlate: ''
   });
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const carModels = [
     { id: 1, name: "KAIYI X7" },
@@ -37,7 +38,11 @@ export default function ServiceBookingPage() {
   };
 
   const handleSubmit = async () => {
+    if (isLoading) return; // Prevent multiple submissions
+    
     try {
+      setIsLoading(true);
+      
       // Validate required fields
       if (!form.fullName || !form.phone || !form.email || !form.carModel || !form.numberPlate) {
         alert('Please fill in all required fields');
@@ -77,6 +82,8 @@ export default function ServiceBookingPage() {
     } catch (error) {
       console.error('Error in handleSubmit:', error);
       alert('Error submitting form. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -280,9 +287,21 @@ export default function ServiceBookingPage() {
                  <button
                    type="button"
                    onClick={handleSubmit}
-                   className="w-full bg-black text-white py-4 px-8 rounded-lg font-semibold text-lg hover:bg-gray-800 transition-all duration-300 transform hover:scale-105"
+                   disabled={isLoading}
+                   className={`w-full py-4 px-8 rounded-lg font-semibold text-lg transition-all duration-300 transform ${
+                     isLoading 
+                       ? 'bg-gray-400 cursor-not-allowed' 
+                       : 'bg-[#0e62a8] text-white hover:bg-[#0a4a7a] hover:scale-105'
+                   }`}
                  >
-                   BOOK NOW
+                   {isLoading ? (
+                     <div className="flex items-center justify-center space-x-2">
+                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                       <span>Booking...</span>
+                     </div>
+                   ) : (
+                     'BOOK NOW'
+                   )}
                  </button>
                </div>
              </form>
