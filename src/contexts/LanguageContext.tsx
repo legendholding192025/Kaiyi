@@ -47,7 +47,7 @@ const translations = {
     
     // We Are Kaiyi page
     'weAreKaiyi.hero.title': 'We Are Kaiyi',
-    'weAreKaiyi.section.title': 'We are Kaiyi',
+    'weAreKaiyi.section.title': 'WE ARE KAIYI',
     'weAreKaiyi.story.content': 'Kaiyi UAE, part of Legend Holding Group, is the exclusive dealership of Kaiyi vehicles in the United Arab Emirates. As the official dealership of Kaiyi UAE, we\'re dedicated to providing reliable service and vehicles that fit your lifestyle.\n\nWe proudly bring Kaiyi\'s fresh and dynamic spirit to the UAE, offering models like the Kaiyi X3 Pro, X7 and E5, designed for growing families, young drivers, and anyone looking for a bold, stylish ride.\n\nLocated in the heart of Dubai, our welcoming showroom offers complete sales and after-sales support. Discover our standout model, the Kaiyi X7, now available across the UAE.\n\nLooking for a car that fits your family or your next adventure? Book your test drive today. Our team is ready to guide you every step of the way.\n\nAt Kaiyi UAE, we\'re not just about cars. We\'re about creating moments, memories, and journeys that matter.',
     
     // Footer
