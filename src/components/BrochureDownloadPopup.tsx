@@ -29,16 +29,15 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
     // Map model names to PDF files
     switch (modelName) {
       case 'KAIYI X7':
-        fileName = 'KAIYI X7 Specs - 2026.pdf';
+        fileName = 'KAIYI X7 Specs.pdf';
         break;
       case 'KAIYI X3 PRO':
       case 'KAIYI X3 Pro':
-        fileName = 'KAIYI X3 Pro Specs - 2026.pdf';
+        fileName = 'KAIYI X3 Pro Specs.pdf';
         break;
       case 'KAIYI E5':
-        // For E5, we don't have a brochure, so we'll show a message
-        alert(t('popup.e5NotAvailable'));
-        return;
+        fileName = 'KAIYI E5 Specs.pdf';
+        break;
       default:
         alert(t('popup.brochureNotFound', { modelName }));
         return;

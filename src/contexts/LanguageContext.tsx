@@ -29,21 +29,26 @@ const translations = {
     
     // Home page
     'home.hero.title': 'KAIYI X7',
-    'home.hero.subtitle': 'HomeLike Mobile Space',
+    'home.hero.subtitle': 'Where Family Adventures Begin.',
     'home.hero.testDrive': 'Test Drive',
     'home.hero.downloadBrochure': 'Download Brochure',
     'home.hero.title2': 'KAIYI X3 PRO',
-    'home.hero.subtitle2': 'All Around Hot Hatch',
+    'home.hero.subtitle2': 'Designed for comfort and styled to fit your life.',
     'home.hero.title3': 'KAIYI E5',
-    'home.hero.subtitle3': 'Family Luxury Car',
-    'home.weAreKaiyi.title': 'WE ARE KAIYI',
-    'home.weAreKaiyi.description': 'We specialize in delivering intelligent products that are backed by an ongoing commitment to technological innovation.',
+    'home.hero.subtitle3': 'Sporty efficiency with the power you need every day.',
+    'home.weAreKaiyi.title': 'We Are Kaiyi',
+    'home.weAreKaiyi.description': 'Craft smart, stylish cars designed for modern families and young drivers. Driven by innovation, we\'re here to make every journey more comfortable, enjoyable, and connected to your lifestyle.',
     'home.weAreKaiyi.more': 'MORE',
     'home.service.title': 'SERVICE',
     'home.service.subtitle': 'bringing you a worry-free driving experience',
     'home.service.more': 'MORE',
     'home.video.title': 'KAIYI Showcase',
     'home.video.subtitle': 'Click to play in fullscreen',
+    
+    // We Are Kaiyi page
+    'weAreKaiyi.hero.title': 'We Are Kaiyi',
+    'weAreKaiyi.section.title': 'We are Kaiyi',
+    'weAreKaiyi.story.content': 'Kaiyi UAE, part of Legend Holding Group, is the exclusive dealership of Kaiyi vehicles in the United Arab Emirates. As the official dealership of Kaiyi UAE, we\'re dedicated to providing reliable service and vehicles that fit your lifestyle.\n\nWe proudly bring Kaiyi\'s fresh and dynamic spirit to the UAE, offering models like the Kaiyi X3 Pro, X7 and E5, designed for growing families, young drivers, and anyone looking for a bold, stylish ride.\n\nLocated in the heart of Dubai, our welcoming showroom offers complete sales and after-sales support. Discover our standout model, the Kaiyi X7, now available across the UAE.\n\nLooking for a car that fits your family or your next adventure? Book your test drive today. Our team is ready to guide you every step of the way.\n\nAt Kaiyi UAE, we\'re not just about cars. We\'re about creating moments, memories, and journeys that matter.',
     
     // Footer
     'footer.lineup': 'Check out the line up:',
@@ -71,7 +76,7 @@ const translations = {
     
     // Models
     'models.x7.name': 'X7',
-    'models.x7.description': 'HomeLike Mobile Space',
+    'models.x7.description': 'Where Family Adventures Begin.',
     'models.x7.specs.engine': 'ENGINE: 1.6T/ 2.0T',
     'models.x7.specs.length': 'LENGTH: 4710 mm',
     'models.x7.specs.width': 'WIDTH: 1955 mm',
@@ -79,7 +84,7 @@ const translations = {
     'models.x7.specs.wheelbase': 'WHEELBASE: 2800 mm',
     
     'models.x3pro.name': 'X3 Pro',
-    'models.x3pro.description': 'All Around Hot Hatch',
+    'models.x3pro.description': 'Designed for comfort and styled to fit your life.',
     'models.x3pro.specs.engine': 'ENGINE: 1.5T/ 1.5L',
     'models.x3pro.specs.length': 'LENGTH: 4400 mm',
     'models.x3pro.specs.width': 'WIDTH: 1831 mm',
@@ -87,7 +92,7 @@ const translations = {
     'models.x3pro.specs.wheelbase': 'WHEELBASE: 2632 mm',
     
     'models.e5.name': 'E5',
-    'models.e5.description': 'Family Luxury Car',
+    'models.e5.description': 'Sporty efficiency with the power you need every day.',
     'models.e5.specs.engine': 'ENGINE: 1.5T',
     'models.e5.specs.length': 'LENGTH: 4666 mm',
     'models.e5.specs.width': 'WIDTH: 1825 mm',
@@ -125,22 +130,27 @@ const translations = {
     'nav.contact': 'اتصل',
     
     // Home page
-    'home.hero.title': 'كايي إكس 7',
-    'home.hero.subtitle': 'مساحة متنقلة تشبه المنزل',
+    'home.hero.title': 'كاييي X7',
+    'home.hero.subtitle': 'هنا تبدأ مغامرات عائلتك.',
     'home.hero.testDrive': 'تجربة القيادة',
     'home.hero.downloadBrochure': 'تحميل الكتيب',
-    'home.hero.title2': 'كايي إكس 3 برو',
-    'home.hero.subtitle2': 'هاتشباك شامل',
-    'home.hero.title3': 'كايي إي 5',
-    'home.hero.subtitle3': 'سيارة عائلية فاخرة',
-    'home.weAreKaiyi.title': 'نحن كايي',
-    'home.weAreKaiyi.description': 'نحن متخصصون في تقديم منتجات ذكية مدعومة بالتزام مستمر بالابتكار التكنولوجي.',
+    'home.hero.title2': 'كاييي X3 برو',
+    'home.hero.subtitle2': 'مصمم للراحة ومصمم ليناسب أسلوب حياتك.',
+    'home.hero.title3': 'كاييي E5',
+    'home.hero.subtitle3': 'كفاءة رياضية مع القوة التي تحتاجها يوميًا.',
+    'home.weAreKaiyi.title': 'نحن كاييي',
+    'home.weAreKaiyi.description': 'نصنع سيارات ذكية وأنيقة تناسب العائلات والسائقين الشباب. مدفوعون بالابتكار، نسعى لجعل كل رحلة أكثر راحة ومتعة وترابطًا مع أسلوب حياتك.',
     'home.weAreKaiyi.more': 'المزيد',
     'home.service.title': 'الخدمة',
     'home.service.subtitle': 'نقدم لك تجربة قيادة خالية من القلق',
     'home.service.more': 'المزيد',
     'home.video.title': 'عرض كايي',
     'home.video.subtitle': 'انقر للعب في ملء الشاشة',
+    
+    // We Are Kaiyi page
+    'weAreKaiyi.hero.title': 'نحن كاييي',
+    'weAreKaiyi.section.title': 'نحن كاييي',
+    'weAreKaiyi.story.content': 'كاييي الإمارات، جزء من مجموعة ليجند هولدينغ، هي الوكيل الحصري لسيارات كاييي في الإمارات العربية المتحدة. بصفتنا الوكيل الرسمي، نلتزم بتقديم خدمة موثوقة وسيارات تناسب أسلوب حياتك.\n\nنفخر بأن نقدم روح كاييي الجديدة والديناميكية في الإمارات، مع موديلات مثل كاييي X3 برو، X7، وE5، المصممة للعائلات، والسائقين الشباب، وكل من يبحث عن قيادة جريئة وأنيقة.\n\nيقع معرضنا الترحيبي في قلب دبي، ويوفر دعمًا كاملاً للمبيعات وما بعد البيع. اكتشف موديلنا المميز كاييي X7، المتوفر الآن في جميع أنحاء الإمارات.\n\nهل تبحث عن سيارة تناسب عائلتك أو مغامرتك القادمة؟ احجز تجربة قيادة اليوم. فريقنا جاهز لمساعدتك في كل خطوة.\n\nفي كاييي الإمارات، نحن لا نقدم فقط سيارات، بل نخلق لحظات وذكريات ورحلات تستحق أن تعيشها.',
     
     // Footer
     'footer.lineup': 'تحقق من التشكيلة:',
@@ -167,24 +177,24 @@ const translations = {
     'common.more': 'المزيد',
     
     // Models
-    'models.x7.name': 'إكس 7',
-    'models.x7.description': 'مساحة متنقلة تشبه المنزل',
+    'models.x7.name': 'X7',
+    'models.x7.description': 'هنا تبدأ مغامرات عائلتك.',
     'models.x7.specs.engine': 'المحرك: 1.6T/ 2.0T',
     'models.x7.specs.length': 'الطول: 4710 مم',
     'models.x7.specs.width': 'العرض: 1955 مم',
     'models.x7.specs.height': 'الارتفاع: 1705 مم',
     'models.x7.specs.wheelbase': 'قاعدة العجلات: 2800 مم',
     
-    'models.x3pro.name': 'إكس 3 برو',
-    'models.x3pro.description': 'هاتشباك شامل',
+    'models.x3pro.name': 'X3 برو',
+    'models.x3pro.description': 'مصمم للراحة ومصمم ليناسب أسلوب حياتك.',
     'models.x3pro.specs.engine': 'المحرك: 1.5T/ 1.5L',
     'models.x3pro.specs.length': 'الطول: 4400 مم',
     'models.x3pro.specs.width': 'العرض: 1831 مم',
     'models.x3pro.specs.height': 'الارتفاع: 1653 مم',
     'models.x3pro.specs.wheelbase': 'قاعدة العجلات: 2632 مم',
     
-    'models.e5.name': 'إي 5',
-    'models.e5.description': 'سيارة عائلية فاخرة',
+    'models.e5.name': 'كاييي E5',
+    'models.e5.description': 'كفاءة رياضية مع القوة التي تحتاجها يوميًا.',
     'models.e5.specs.engine': 'المحرك: 1.5T',
     'models.e5.specs.length': 'الطول: 4666 مم',
     'models.e5.specs.width': 'العرض: 1825 مم',

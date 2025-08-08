@@ -5,8 +5,10 @@ import Image from 'next/image';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import BrochureDownloadPopup from '../../../components/BrochureDownloadPopup';
+import { useLanguage } from '../../../contexts/LanguageContext';
 
 export default function X3ProPage() {
+  const { t } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const [selectedColor, setSelectedColor] = useState(0);
@@ -299,7 +301,7 @@ export default function X3ProPage() {
               KAIYI X3 Pro
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-200">
-              All Around Hot Hatch
+              {t('models.x3pro.description')}
             </p>
             <div className="text-lg md:text-xl text-gray-300 space-y-2">
               <p>• Engine: 1.5T/ 1.5L</p>

@@ -406,8 +406,8 @@ export default function Navbar() {
                   <button
                     key={lang.code}
                     onClick={() => handleLanguageChange(lang.code as 'EN' | 'AR')}
-                    className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-50 transition-colors ${
-                      language === lang.code ? 'bg-gray-100 font-medium' : ''
+                    className={`w-full px-4 py-2 text-left text-sm text-black hover:bg-[#0e62a8] hover:text-white transition-colors rounded ${
+                      language === lang.code ? 'bg-[#0e62a8] text-white font-medium' : ''
                     }`}
                   >
                     {lang.name}

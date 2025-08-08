@@ -163,18 +163,15 @@ export default function Home() {
                 <a href="/test-drive" className="bg-white text-black px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 border-2 border-white text-center">
                   {heroSlides[currentSlide].button1}
                 </a>
-                {/* Hide Download Brochure button for E5 model (slide index 2) */}
-                {currentSlide !== 2 && (
-                  <button 
-                    className="border-2 border-white text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg hover:bg-white hover:text-black transition-all duration-300"
-                    onClick={() => {
-                      setSelectedModelName(heroSlides[currentSlide].title);
-                      setIsBrochurePopupOpen(true);
-                    }}
-                  >
-                    {heroSlides[currentSlide].button2}
-                  </button>
-                )}
+                <button 
+                  className="border-2 border-white text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg hover:bg-white hover:text-black transition-all duration-300"
+                  onClick={() => {
+                    setSelectedModelName(heroSlides[currentSlide].title);
+                    setIsBrochurePopupOpen(true);
+                  }}
+                >
+                  {heroSlides[currentSlide].button2}
+                </button>
               </div>
             </div>
           </div>

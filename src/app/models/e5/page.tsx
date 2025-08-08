@@ -5,8 +5,10 @@ import Image from 'next/image';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import BrochureDownloadPopup from '../../../components/BrochureDownloadPopup';
+import { useLanguage } from '../../../contexts/LanguageContext';
 
 export default function E5Page() {
+  const { t } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const [selectedColor, setSelectedColor] = useState(0);
@@ -224,7 +226,9 @@ export default function E5Page() {
     window.location.href = '/test-drive';
   };
 
-
+  const handleDownloadBrochure = () => {
+    setIsBrochurePopupOpen(true);
+  };
 
   const handleColorChange = (index: number) => {
     setSelectedColor(index);
@@ -258,7 +262,7 @@ export default function E5Page() {
               KAIYI E5
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-200">
-              FAMILY LUXURY CAR
+              {t('models.e5.description')}
             </p>
             <div className="text-lg md:text-xl text-gray-300 space-y-2">
               <p>• Engine: 1.5T</p>
@@ -276,7 +280,12 @@ export default function E5Page() {
           >
             Test Drive
           </button>
-          {/* Download Brochure button hidden for E5 model */}
+          <button
+            onClick={handleDownloadBrochure}
+            className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-white hover:text-black transition-colors shadow-lg"
+          >
+            Download Brochure
+          </button>
         </div>
       </div>
       

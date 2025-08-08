@@ -3,8 +3,10 @@
 import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function WeAreKaiyiPage() {
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen bg-white">
@@ -24,14 +26,14 @@ export default function WeAreKaiyiPage() {
             />
           </div>
           <div className="hero-title absolute left-[5vw] md:left-[10vw] top-[35vh] md:top-[30vh] text-white font-bruno-ace-sc text-[8vw] md:text-[4vw] z-10 drop-shadow-lg">
-            We Are Kaiyi
+            {t('weAreKaiyi.hero.title')}
           </div>
         </div>
 
         {/* Content Section */}
         <div className="cooperation-section mx-auto mt-[12vw] md:mt-[5vw] max-w-[1100px] px-4">
           <div className="section-title font-bruno-ace-sc text-[5vw] md:text-[2vw] text-[#222] text-center mb-[6vw] md:mb-[2vw]">
-            We are Kaiyi
+            {t('weAreKaiyi.section.title')}
           </div>
           <div className="video-container flex justify-center">
           </div>
@@ -41,24 +43,13 @@ export default function WeAreKaiyiPage() {
                 <div className="stat-number text-[6vw] md:text-[2vw] text-[#dc0000] font-bold">2024</div>
                 <div className="stat-label text-[3.5vw] md:text-[1vw] text-[#222]">Since</div>
               </div>
-              {/* <div className="stat-item text-center">
-                <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">4.727B</div>
-                <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Registered Capital (Yuan)</div>
-              </div>
-              <div className="stat-item text-center">
-                <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">2,800+</div>
-                <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Staff</div>
-              </div>
-              <div className="stat-item text-center">
-                <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">250,000</div>
-                <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Annual Capacity</div>
-              </div> */}
             </div>
             <div className="story-text w-full md:flex-1 md:ml-[3vw] text-[4vw] md:text-[1vw] text-[#444] space-y-[3vw] md:space-y-[1vw] leading-relaxed">
-              <p>
-              Kaiyi UAE, part of Legend Holding Group, serves as the exclusive dealership of Kaiyi vehicles in the United Arab Emirates. Committed to deliver maximum innovation and customer satisfaction, we offer a dynamic range of technologically advanced vehicles designed to elevate your driving experience, in line with Kaiyi Auto Manufacturer. 
-              Strategically located in the heart of Dubai, our Showroom facility delivers comprehensive sales and after-sales services, ensuring convenience, trust, and excellence at every step. At Kaiyi UAE, we don&apos;t just sell cars. We drive the future together forward.
-              </p>
+              {t('weAreKaiyi.story.content').split('\n\n').map((paragraph, index) => (
+                <p key={index}>
+                  {paragraph}
+                </p>
+              ))}
             </div>
           </div>
         </div>
@@ -86,18 +77,6 @@ export default function WeAreKaiyiPage() {
                 <div className="stat-number text-[6vw] md:text-[2vw] text-[#dc0000] font-bold">2014</div>
                 <div className="stat-label text-[3.5vw] md:text-[1vw] text-[#222]">Since</div>
               </div>
-              {/* <div className="stat-item text-center">
-                <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">4.727B</div>
-                <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Registered Capital (Yuan)</div>
-              </div>
-              <div className="stat-item text-center">
-                <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">2,800+</div>
-                <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Staff</div>
-              </div>
-              <div className="stat-item text-center">
-                <div className="stat-number text-[4vw] md:text-[2vw] text-[#dc0000] font-bold">250,000</div>
-                <div className="stat-label text-[2.5vw] md:text-[1vw] text-[#222]">Annual Capacity</div>
-              </div> */}
             </div>
             <div className="story-text w-full md:flex-1 md:ml-[3vw] text-[4vw] md:text-[1vw] text-[#444] space-y-[3vw] md:space-y-[1vw] leading-relaxed">
               <p>
