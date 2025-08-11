@@ -12,7 +12,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "KAIYI UAE",
+  title: "KAIYI | UAE",
   description: "Discover KAIYI's cutting-edge solutions and innovative approach to technology and design.",
   icons: {
     icon: '/kaiyi.ico',
