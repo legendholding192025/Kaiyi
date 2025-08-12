@@ -100,6 +100,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-401233023"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-401233023');
+            `,
+          }}
+        />
+
         {/* Bing Webmaster Tools Verification */}
         <meta name="msvalidate.01" content="8F6CEAF64432436F0288577E8A27755A" />
         
