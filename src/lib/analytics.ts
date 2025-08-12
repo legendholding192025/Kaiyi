@@ -6,10 +6,14 @@ declare global {
   }
 }
 
-export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING_ID || 'G-401233023';
+// Use the GA4 Measurement ID from env only. Avoid hardcoded fallback to prevent
+// sending data to the wrong property. If it's missing, the helpers below will
+// no-op safely.
+export const GA_TRACKING_ID: string | undefined = process.env.NEXT_PUBLIC_GA_TRACKING_ID;
 
 // Initialize Google Analytics
 export const initGA = () => {
+  if (!GA_TRACKING_ID) return;
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('config', GA_TRACKING_ID, {
       page_title: document.title,
@@ -21,6 +25,7 @@ export const initGA = () => {
 
 // Track page views
 export const trackPageView = (url: string, title?: string) => {
+  if (!GA_TRACKING_ID) return;
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('config', GA_TRACKING_ID, {
       page_path: url,
@@ -31,6 +36,7 @@ export const trackPageView = (url: string, title?: string) => {
 
 // Track custom events
 export const trackEvent = (action: string, category: string, label?: string, value?: number) => {
+  if (!GA_TRACKING_ID) return;
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', action, {
       event_category: category,
@@ -42,6 +48,7 @@ export const trackEvent = (action: string, category: string, label?: string, val
 
 // Track form submissions
 export const trackFormSubmission = (formType: 'test_drive' | 'service_booking' | 'brochure_download' | 'contact', leadSource?: string) => {
+  if (!GA_TRACKING_ID) return;
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'form_submit', {
       event_category: 'engagement',
@@ -62,6 +69,7 @@ export const trackFormSubmission = (formType: 'test_drive' | 'service_booking' |
 
 // Track brochure downloads
 export const trackBrochureDownload = (modelName: string, leadSource?: string) => {
+  if (!GA_TRACKING_ID) return;
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'file_download', {
       event_category: 'engagement',
@@ -74,6 +82,7 @@ export const trackBrochureDownload = (modelName: string, leadSource?: string) =>
 
 // Track test drive bookings
 export const trackTestDriveBooking = (modelName: string, leadSource?: string) => {
+  if (!GA_TRACKING_ID) return;
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'test_drive_booking', {
       event_category: 'conversion',
@@ -87,6 +96,7 @@ export const trackTestDriveBooking = (modelName: string, leadSource?: string) =>
 
 // Track service bookings
 export const trackServiceBooking = (serviceType: string, leadSource?: string) => {
+  if (!GA_TRACKING_ID) return;
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'service_booking', {
       event_category: 'conversion',
@@ -100,6 +110,7 @@ export const trackServiceBooking = (serviceType: string, leadSource?: string) =>
 
 // Track user engagement
 export const trackEngagement = (action: string, element: string, value?: number) => {
+  if (!GA_TRACKING_ID) return;
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', action, {
       event_category: 'engagement',
@@ -111,6 +122,7 @@ export const trackEngagement = (action: string, element: string, value?: number)
 
 // Track video interactions
 export const trackVideoInteraction = (action: 'play' | 'pause' | 'complete', videoName: string) => {
+  if (!GA_TRACKING_ID) return;
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', `video_${action}`, {
       event_category: 'video',
@@ -121,6 +133,7 @@ export const trackVideoInteraction = (action: 'play' | 'pause' | 'complete', vid
 
 // Track scroll depth
 export const trackScrollDepth = (percentage: number) => {
+  if (!GA_TRACKING_ID) return;
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'scroll', {
       event_category: 'engagement',
@@ -132,6 +145,7 @@ export const trackScrollDepth = (percentage: number) => {
 
 // Track outbound links
 export const trackOutboundLink = (url: string) => {
+  if (!GA_TRACKING_ID) return;
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'click', {
       event_category: 'outbound',
@@ -143,6 +157,7 @@ export const trackOutboundLink = (url: string) => {
 
 // Enhanced ecommerce tracking for lead generation
 export const trackLead = (leadType: string, leadValue: number, leadSource?: string) => {
+  if (!GA_TRACKING_ID) return;
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'purchase', {
       transaction_id: `lead_${Date.now()}`,

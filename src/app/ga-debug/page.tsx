@@ -28,7 +28,7 @@ export default function GADebugPage() {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: 'v=2&tid=G-401233023&cid=test&t=pageview&dp=%2Ftest',
+        body: `v=2&tid=${process.env.NEXT_PUBLIC_GA_TRACKING_ID || ''}&cid=test&t=pageview&dp=%2Ftest`,
       });
       
       if (response.status === 200 || response.status === 204) {
@@ -105,7 +105,7 @@ export default function GADebugPage() {
 
   const checkGAProperty = () => {
     addLog('🔍 Checking GA Property Configuration...');
-    addLog('📋 Current GA Property: Kaiyi GA4 (G-401233023)');
+    addLog(`📋 Current GA Property: Kaiyi GA4 (${process.env.NEXT_PUBLIC_GA_TRACKING_ID || 'unset'})`);
     addLog('🌐 Expected Domain: https://kaiyi.ae');
     addLog(`🔍 Current Domain: ${window.location.hostname}`);
     addLog(`🔧 Environment Variable: ${process.env.NEXT_PUBLIC_GA_TRACKING_ID || 'Not set'}`);
@@ -144,7 +144,7 @@ export default function GADebugPage() {
             <h2 className="text-lg font-semibold text-blue-800 mb-2">Status Overview</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600">G-401233023</div>
+                <div className="text-2xl font-bold text-blue-600">{process.env.NEXT_PUBLIC_GA_TRACKING_ID || 'unset'}</div>
                 <div className="text-sm text-blue-600">Tracking ID</div>
               </div>
               <div className="text-center">

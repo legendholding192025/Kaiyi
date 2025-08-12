@@ -11,7 +11,7 @@ if (typeof gtag !== 'undefined') {
   gtag('event', 'page_view', {
     page_title: 'Test Page',
     page_location: window.location.href,
-    send_to: 'G-401233023'
+    send_to: (window.NEXT_PUBLIC_GA_TRACKING_ID || 'G-ELJSF9M19L')
   });
   console.log('✅ Test page view sent');
   
@@ -34,7 +34,7 @@ if (typeof gtag !== 'undefined') {
   
   // Test conversion event
   gtag('event', 'conversion', {
-    send_to: 'G-401233023',
+    send_to: (window.NEXT_PUBLIC_GA_TRACKING_ID || 'G-ELJSF9M19L'),
     event_category: 'lead_generation',
     event_label: 'test_conversion',
     value: 10
@@ -62,7 +62,7 @@ if (typeof gtag !== 'undefined') {
 }
 
 // Check for tracking ID
-const trackingId = 'G-401233023';
+const trackingId = (window.NEXT_PUBLIC_GA_TRACKING_ID || 'G-ELJSF9M19L');
 console.log(`🔍 Using tracking ID: ${trackingId}`);
 
 // Check network requests
