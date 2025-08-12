@@ -101,7 +101,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-401233023"></script>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID}`}></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -110,7 +110,7 @@ export default function RootLayout({
               gtag('js', new Date());
               
               // Enable debug mode
-              gtag('config', 'G-401233023', {
+              gtag('config', '${process.env.NEXT_PUBLIC_GA_TRACKING_ID}', {
                 debug_mode: true,
                 send_page_view: true,
                 allow_google_signals: true,
@@ -125,7 +125,7 @@ export default function RootLayout({
               });
               
               // Log to console for debugging
-              console.log('Google Analytics initialized with tracking ID: G-401233023');
+              console.log('Google Analytics initialized with tracking ID: ${process.env.NEXT_PUBLIC_GA_TRACKING_ID}');
               console.log('Current URL:', window.location.href);
               console.log('Page title:', document.title);
             `,

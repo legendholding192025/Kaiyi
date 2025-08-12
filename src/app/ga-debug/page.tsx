@@ -108,6 +108,7 @@ export default function GADebugPage() {
     addLog('📋 Current GA Property: Kaiyi GA4 (G-401233023)');
     addLog('🌐 Expected Domain: https://kaiyi.ae');
     addLog(`🔍 Current Domain: ${window.location.hostname}`);
+    addLog(`🔧 Environment Variable: ${process.env.NEXT_PUBLIC_GA_TRACKING_ID || 'Not set'}`);
     
     if (window.location.hostname === 'kaiyi.ae') {
       addLog('✅ Domain matches GA4 configuration');
