@@ -149,7 +149,7 @@ export default function Footer() {
        <div className="fixed bottom-6 right-6 z-50">
          <a
            href="tel:80052494 (Kaiyi)"
-           className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors shadow-lg"
+           className="w-16 h-16 bg-[#0e62a8] rounded-full flex items-center justify-center hover:bg-[#0a4a7a] transition-colors shadow-lg"
            title="Call 80052494 (Kaiyi)"
          >
            <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">

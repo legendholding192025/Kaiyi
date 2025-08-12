@@ -1,11 +1,15 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, Suspense, lazy } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import BrochureDownloadPopup from '../components/BrochureDownloadPopup';
 import { useLanguage } from '@/contexts/LanguageContext';
+
+// Lazy load non-critical components
+const LazyVideoSection = lazy(() => import('@/components/VideoSection'));
+const LazyModelSection = lazy(() => import('@/components/ModelSection'));
 
 // Type definitions for video fullscreen methods
 interface VideoWithFullscreen extends HTMLVideoElement {
@@ -20,6 +24,7 @@ export default function Home() {
   const [currentModelIndex, setCurrentModelIndex] = useState(0);
   const [isBrochurePopupOpen, setIsBrochurePopupOpen] = useState(false);
   const [selectedModelName, setSelectedModelName] = useState('');
+  const [isClient, setIsClient] = useState(false);
 
   const heroSlides = [
     {
@@ -51,6 +56,11 @@ export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [hoveredModel, setHoveredModel] = useState<string | null>(null);
 
+  // Client-side hydration check
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
@@ -59,8 +69,10 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [heroSlides.length]);
 
-  // Video visibility detection
+  // Video visibility detection - deferred
   useEffect(() => {
+    if (!isClient) return;
+    
     const handleVideoVisibility = () => {
       if (videoRef.current) {
         const rect = videoRef.current.getBoundingClientRect();
@@ -80,7 +92,7 @@ export default function Home() {
     handleVideoVisibility(); // Check initial visibility
 
     return () => window.removeEventListener('scroll', handleVideoVisibility);
-  }, []);
+  }, [isClient]);
 
   const carModels = [
     {
@@ -193,6 +205,8 @@ export default function Home() {
                   className={`object-cover ${index === 0 ? 'object-right' : ''} ${index === 2 ? 'object-contain' : ''}`}
                   style={index === 0 ? { objectPosition: '100% center' } : index === 1 ? { objectPosition: '40% center' } : {}}
                   priority={index === 0}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  sizes="100vw"
                 />
                 <div className="absolute inset-0 bg-black/40"></div>
               </div>
@@ -213,11 +227,11 @@ export default function Home() {
                   </div>
                   
                   <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4 justify-center">
-                    <a href="/test-drive" className="bg-white text-black px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 border-2 border-white text-center">
+                    <a href="/test-drive" className="bg-[#0e62a8] border border-[#0e62a8] text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg font-medium transition-colors hover:bg-[#0a4a7a] hover:border-[#0a4a7a] text-center">
                       {heroSlides[currentSlide].button1}
                     </a>
                     <button 
-                      className="border-2 border-white text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg hover:bg-white hover:text-black transition-all duration-300"
+                      className="bg-[#0e62a8] border border-[#0e62a8] text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg font-medium transition-colors hover:bg-[#0a4a7a] hover:border-[#0a4a7a] cursor-pointer"
                       onClick={() => {
                         setSelectedModelName(heroSlides[currentSlide].title);
                         setIsBrochurePopupOpen(true);
@@ -254,140 +268,39 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Model Section */}
-          <section id="models" className="py-20 bg-white" aria-labelledby="models-heading">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              
-              {/* Model Navigation */}
-              <div className="flex justify-center mb-8 sm:mb-12">
-                <h2 id="models-heading" className="sr-only">KAIYI Car Models</h2>
-                <div className="flex flex-wrap justify-center gap-4 sm:gap-8">
-                  {carModels.map((model, index) => (
-                    <button
-                      key={model.name}
-                      className={`text-xl sm:text-2xl md:text-3xl font-bold transition-all duration-300 ${
-                        (hoveredModel === model.name || currentModelIndex === index)
-                          ? 'text-[#0e62a8] underline'
-                          : 'text-gray-600 hover:text-gray-800'
-                      }`}
-                      onMouseEnter={() => setHoveredModel(model.name)}
-                      onMouseLeave={() => setHoveredModel(null)}
-                      onClick={() => {
-                        setCurrentModelIndex(index);
-                      }}
-                      aria-pressed={currentModelIndex === index}
-                    >
-                      {model.name}
-                    </button>
-                  ))}
+          {/* Model Section - Lazy Loaded */}
+          <Suspense fallback={
+            <div className="py-20 bg-white">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div className="animate-pulse">
+                  <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto mb-4"></div>
+                  <div className="h-64 bg-gray-200 rounded max-w-4xl mx-auto"></div>
                 </div>
-              </div>
-              
-              {/* Car Display */}
-              <div className="relative max-w-4xl mx-auto">
-                <div className="bg-white rounded-2xl p-4 sm:p-8 shadow-lg">
-                  {/* Car Image */}
-                  <div className="relative h-64 sm:h-80 md:h-96 w-full mb-6 sm:mb-8">
-                    <Image
-                      src={hoveredModel ? carModels.find(m => m.name === hoveredModel)?.image || carModels[currentModelIndex].image : carModels[currentModelIndex].image}
-                      alt={(() => {
-                        const currentModel = hoveredModel ? carModels.find(m => m.name === hoveredModel) : carModels[currentModelIndex];
-                        return `${currentModel?.name} - ${currentModel?.description}`;
-                      })()}
-                      fill
-                      className="object-contain transition-all duration-500"
-                    />
-                  </div>
-                  
-                  {/* Car Specifications */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-                    {(hoveredModel ? carModels.find(m => m.name === hoveredModel)?.specs : carModels[currentModelIndex].specs) && Object.entries(hoveredModel ? carModels.find(m => m.name === hoveredModel)!.specs : carModels[currentModelIndex].specs).map(([key, value]) => (
-                      <div key={key} className="text-center">
-                        <div className="text-lg sm:text-xl md:text-2xl font-bold text-black">{value.split(': ')[1] || value}</div>
-                        <div className="text-xs sm:text-sm text-gray-600 uppercase">{value.split(': ')[0] || key}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Navigation Arrows */}
-                <button 
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors"
-                  onClick={() => {
-                    const newIndex = currentModelIndex === 0 ? carModels.length - 1 : currentModelIndex - 1;
-                    setCurrentModelIndex(newIndex);
-                  }}
-                  aria-label="Previous car model"
-                >
-                  <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <button 
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors"
-                  onClick={() => {
-                    const newIndex = currentModelIndex === carModels.length - 1 ? 0 : currentModelIndex + 1;
-                    setCurrentModelIndex(newIndex);
-                  }}
-                  aria-label="Next car model"
-                >
-                  <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
               </div>
             </div>
-          </section>
+          }>
+            <LazyModelSection 
+              carModels={carModels}
+              currentModelIndex={currentModelIndex}
+              setCurrentModelIndex={setCurrentModelIndex}
+              hoveredModel={hoveredModel}
+              setHoveredModel={setHoveredModel}
+            />
+          </Suspense>
 
-          {/* Video Section */}
-          <section id="video" className="relative h-[70vh] sm:h-screen" aria-labelledby="video-heading">
-            <video
-              ref={videoRef}
-              id="kaiyi-video"
-              className="w-full h-full object-cover"
-              poster="https://kaiyiglobal.com/upload/dd/87741cf96bb4d4d48290491df9b47d.png"
-              muted
-              loop
-              aria-describedby="video-description"
-            >
-              <source src="https://kaiyiglobal.com/assets/shouyevie1-1-84f87b2c.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-            
-            {/* Play Button Overlay */}
-            <div 
-              className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-all duration-300 cursor-pointer"
-              onClick={() => {
-                if (videoRef.current) {
-                  const video = videoRef.current as VideoWithFullscreen;
-                  if (video.requestFullscreen) {
-                    video.requestFullscreen();
-                  } else if (video.webkitRequestFullscreen) {
-                    video.webkitRequestFullscreen();
-                  } else if (video.msRequestFullscreen) {
-                    video.msRequestFullscreen();
-                  }
-                  video.muted = false;
-                  video.play();
-                }
-              }}
-              role="button"
-              tabIndex={0}
-              aria-label="Play KAIYI brand video"
-            >
-              <div className="w-16 h-16 sm:w-24 sm:h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110">
-                <svg className="w-8 h-8 sm:w-12 sm:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
+          {/* Video Section - Lazy Loaded */}
+          <Suspense fallback={
+            <div className="relative h-[70vh] sm:h-screen bg-gray-900 flex items-center justify-center">
+              <div className="text-white text-center">
+                <div className="animate-pulse">
+                  <div className="h-8 bg-gray-700 rounded w-1/2 mx-auto mb-4"></div>
+                  <div className="h-4 bg-gray-700 rounded w-1/3 mx-auto"></div>
+                </div>
               </div>
             </div>
-            
-            {/* Video Info */}
-            <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 text-white">
-              <h2 id="video-heading" className="text-lg sm:text-2xl font-bold">{t('home.video.title')}</h2>
-              <p id="video-description" className="text-sm sm:text-lg text-gray-300">{t('home.video.subtitle')}</p>
-            </div>
-          </section>
+          }>
+            <LazyVideoSection videoRef={videoRef} />
+          </Suspense>
 
           {/* We Are KAIYI Section */}
           <section id="about" className="bg-white" aria-labelledby="about-heading">
@@ -402,7 +315,7 @@ export default function Home() {
                 </p>
                 <a 
                   href="/we-are-kaiyi"
-                  className="inline-block border-2 border-black text-black px-8 py-3 rounded-none font-semibold text-lg hover:bg-black hover:text-white transition-all duration-300"
+                  className="inline-block bg-[#0e62a8] border border-[#0e62a8] text-white px-8 py-3 rounded-lg font-medium transition-colors hover:bg-[#0a4a7a] hover:border-[#0a4a7a]"
                 >
                   {t('home.weAreKaiyi.more')}
                 </a>
@@ -421,6 +334,8 @@ export default function Home() {
                       width={400}
                       height={500}
                       className="w-full h-80 object-cover"
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </div>
 
@@ -432,6 +347,8 @@ export default function Home() {
                       width={400}
                       height={500}
                       className="w-full h-80 object-cover"
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </div>
 
@@ -443,6 +360,8 @@ export default function Home() {
                       width={400}
                       height={500}
                       className="w-full h-80 object-cover"
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </div>
                 </div>
@@ -459,6 +378,8 @@ export default function Home() {
                     width={1200}
                     height={600}
                     className="w-full h-48 sm:h-auto object-cover rounded-lg shadow-2xl"
+                    loading="lazy"
+                    sizes="100vw"
                   />
                   
                   {/* Text Overlay */}
@@ -472,7 +393,7 @@ export default function Home() {
                       </p>
                       <a 
                         href="/service-booking"
-                        className="inline-block bg-black text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-3 rounded-none font-semibold text-sm sm:text-base lg:text-lg hover:bg-gray-800 transition-all duration-300"
+                        className="inline-block bg-[#0e62a8] border border-[#0e62a8] text-white px-8 py-3 rounded-lg font-medium transition-colors hover:bg-[#0a4a7a] hover:border-[#0a4a7a]"
                       >
                         {t('home.service.more')}
                       </a>

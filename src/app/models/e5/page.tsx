@@ -349,13 +349,13 @@ export default function E5Page() {
         <div className="absolute bottom-8 right-8 flex flex-col space-y-4">
           <button
             onClick={handleTestDrive}
-            className="bg-white text-black px-8 py-3 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg"
+            className="bg-[#0e62a8] border border-[#0e62a8] text-white px-8 py-3 rounded-lg font-medium transition-colors hover:bg-[#0a4a7a] hover:border-[#0a4a7a] shadow-lg cursor-pointer"
           >
             Test Drive
           </button>
           <button
             onClick={handleDownloadBrochure}
-            className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-white hover:text-black transition-colors shadow-lg"
+            className="bg-[#0e62a8] border border-[#0e62a8] text-white px-8 py-3 rounded-lg font-medium transition-colors hover:bg-[#0a4a7a] hover:border-[#0a4a7a] shadow-lg cursor-pointer"
           >
             Download Brochure
           </button>

@@ -229,6 +229,8 @@ export default function Navbar() {
                   e.stopPropagation();
                   setIsModelsDropdownOpen(!isModelsDropdownOpen);
                 }}
+                onMouseEnter={() => setIsModelsDropdownOpen(true)}
+                onMouseLeave={() => setTimeout(() => setIsModelsDropdownOpen(false), 100)}
                 className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-black hover:text-gray-700 transition-colors"
               >
                 <span>{t('nav.models')}</span>
@@ -238,9 +240,13 @@ export default function Navbar() {
               </button>
               
               {/* Models Dropdown */}
-              <div className={`fixed top-16 left-1/2 transform -translate-x-1/2 mt-1 w-[95vw] sm:w-[90vw] max-w-6xl bg-white shadow-2xl rounded-lg transition-all duration-300 z-50 ${
-                isModelsDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
-              }`}>
+              <div 
+                className={`navbar-dropdown fixed top-16 left-1/2 transform -translate-x-1/2 mt-1 w-[95vw] sm:w-[90vw] max-w-6xl bg-white shadow-2xl rounded-lg transition-all duration-300 z-50 ${
+                  isModelsDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                }`}
+                onMouseEnter={() => setIsModelsDropdownOpen(true)}
+                onMouseLeave={() => setIsModelsDropdownOpen(false)}
+              >
                 <div className="p-4 sm:p-6">
                   <div className="flex flex-col lg:flex-row">
                     {/* Left Side - Model List */}
@@ -294,10 +300,10 @@ export default function Navbar() {
                           
                           {/* Action Buttons */}
                           <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 mb-6 lg:mb-8">
-                            <a href="/test-drive" className="px-6 lg:px-8 py-2 lg:py-3 rounded-full border border-black bg-white text-black hover:bg-gray-50 transition-colors text-sm lg:text-base text-center">
+                            <a href="/test-drive" className="px-6 lg:px-8 py-2 lg:py-3 rounded-lg border border-[#0e62a8] bg-[#0e62a8] text-white hover:bg-[#0a4a7a] hover:border-[#0a4a7a] transition-colors text-sm lg:text-base text-center font-medium">
                               {t('nav.testDrive')}
                             </a>
-                            <Link href={tabsContent[validActiveTab].link} className="px-6 lg:px-8 py-2 lg:py-3 rounded-full border border-black bg-white text-black hover:bg-gray-50 transition-colors text-sm lg:text-base text-center">
+                            <Link href={tabsContent[validActiveTab].link} className="px-6 lg:px-8 py-2 lg:py-3 rounded-lg border border-[#0e62a8] bg-[#0e62a8] text-white hover:bg-[#0a4a7a] hover:border-[#0a4a7a] transition-colors text-sm lg:text-base text-center font-medium">
                               {t('common.more')}
                             </Link>
                           </div>
@@ -329,6 +335,8 @@ export default function Navbar() {
                   e.stopPropagation();
                   setIsAfterSalesDropdownOpen(!isAfterSalesDropdownOpen);
                 }}
+                onMouseEnter={() => setIsAfterSalesDropdownOpen(true)}
+                onMouseLeave={() => setTimeout(() => setIsAfterSalesDropdownOpen(false), 100)}
                 className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-black hover:text-gray-700 transition-colors"
               >
                 <span>{t('nav.afterSales')}</span>
@@ -338,9 +346,13 @@ export default function Navbar() {
               </button>
               
               {/* After Sales Dropdown */}
-              <div className={`absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[200px] transition-all duration-200 ${
-                isAfterSalesDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
-              }`}>
+              <div 
+                className={`navbar-dropdown absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[200px] transition-all duration-200 ${
+                  isAfterSalesDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                }`}
+                onMouseEnter={() => setIsAfterSalesDropdownOpen(true)}
+                onMouseLeave={() => setIsAfterSalesDropdownOpen(false)}
+              >
                 <a href="/warranty" className="block px-4 py-2 text-sm text-black hover:bg-[#0e62a8] hover:text-white transition-colors rounded mx-1 my-1">
                   {t('nav.warranty')}
                 </a>
@@ -359,6 +371,8 @@ export default function Navbar() {
                   e.stopPropagation();
                   setIsContactDropdownOpen(!isContactDropdownOpen);
                 }}
+                onMouseEnter={() => setIsContactDropdownOpen(true)}
+                onMouseLeave={() => setTimeout(() => setIsContactDropdownOpen(false), 100)}
                 className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-black hover:text-gray-700 transition-colors"
               >
                 <span>{t('nav.contactUs')}</span>
@@ -368,9 +382,13 @@ export default function Navbar() {
               </button>
               
               {/* Contact Dropdown */}
-              <div className={`absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[200px] transition-all duration-200 ${
-                isContactDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
-              }`}>
+              <div 
+                className={`navbar-dropdown absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[200px] transition-all duration-200 ${
+                  isContactDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                }`}
+                onMouseEnter={() => setIsContactDropdownOpen(true)}
+                onMouseLeave={() => setIsContactDropdownOpen(false)}
+              >
                 <a href="/test-drive" className="block px-4 py-2 text-sm text-black hover:bg-[#0e62a8] hover:text-white transition-colors rounded mx-1 my-1">
                   {t('nav.testDrive')}
                 </a>

@@ -9,10 +9,12 @@ const poppins = Poppins({
   subsets: ["latin"],
   variable: "--font-poppins",
   display: "swap",
+  preload: true,
+  fallback: ['system-ui', 'arial'],
 });
 
 export const metadata: Metadata = {
-  title: "KAIYI UAE - Premium Cars & SUVs | Family Cars",
+  title: "KAIYI UAE - Premium Cars & SUVs | Family Cars | Test Drive Available",
   description: "Discover KAIYI's premium cars and SUVs in UAE. Book test drive for KAIYI X7, X3 Pro, and E5 models. Family cars designed for comfort and adventure. Visit our showroom today.",
   keywords: "KAIYI UAE, KAIYI cars, KAIYI X7, KAIYI X3 Pro, KAIYI E5, SUV cars, family cars, car dealership UAE, test drive KAIYI, KAIYI 2026, KAIYI price UAE, KAIYI agent UAE",
   authors: [{ name: "KAIYI International" }],
@@ -98,6 +100,65 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Bing Webmaster Tools Verification */}
+        <meta name="msvalidate.01" content="8F6CEAF64432436F0288577E8A27755A" />
+        
+        {/* Critical CSS Inline - Above the fold styles */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            /* Critical CSS for first paint - Minimal and non-conflicting */
+            body { 
+              margin: 0; 
+              font-family: system-ui, -apple-system, sans-serif; 
+            }
+            
+            /* Essential layout utilities - only what's absolutely necessary */
+            .min-h-screen { min-height: 100vh; }
+            .relative { position: relative; }
+            .absolute { position: absolute; }
+            .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+            .z-10 { z-index: 10; }
+            
+            /* Basic flexbox - minimal */
+            .flex { display: flex; }
+            .items-center { align-items: center; }
+            .justify-center { justify-content: center; }
+            
+            /* Essential spacing - minimal */
+            .px-4 { padding-left: 1rem; padding-right: 1rem; }
+            .mx-auto { margin-left: auto; margin-right: auto; }
+            
+            /* Critical text styles - minimal */
+            .text-white { color: white; }
+            .text-center { text-align: center; }
+            .font-bold { font-weight: 700; }
+            
+            /* Essential transitions - minimal */
+            .transition-opacity { transition-property: opacity; }
+            .duration-1000 { transition-duration: 1000ms; }
+            .opacity-100 { opacity: 1; }
+            .opacity-0 { opacity: 0; }
+            
+            /* Critical background - minimal */
+            .bg-gradient-to-br { 
+              background: linear-gradient(to bottom right, #0f172a, #581c87, #0f172a); 
+            }
+            
+            /* Essential overflow - minimal */
+            .overflow-hidden { overflow: hidden; }
+          `
+        }} />
+        
+        {/* Preload critical resources */}
+        <link rel="preload" href="/kaiyi.ico" as="image" />
+        <link rel="preload" href="https://cdn.legendholding.com/images/cdn_68933f58b721e4.14363203_20250806_114112.jpg" as="image" />
+        
+        {/* DNS prefetch for external domains */}
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+        <link rel="dns-prefetch" href="//cdn.legendholding.com" />
+        <link rel="dns-prefetch" href="//kaiyiglobal.com" />
+        
         {/* Preconnect to external domains for performance */}
         <link
           rel="preconnect"
@@ -108,9 +169,12 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
+        
+        {/* Load fonts asynchronously */}
         <link
           href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
           rel="stylesheet"
+          media="print"
         />
         
         {/* Structured Data for Organization */}
@@ -147,6 +211,18 @@ export default function RootLayout({
           {children}
           <PrivacyPolicyBar />
         </LanguageProvider>
+        
+        {/* Load non-critical CSS asynchronously */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            // Load non-critical CSS asynchronously
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap';
+            link.media = 'all';
+            document.head.appendChild(link);
+          `
+        }} />
       </body>
     </html>
   );

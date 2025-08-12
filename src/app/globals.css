@@ -74,6 +74,26 @@ button {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Navbar dropdown hover functionality */
+.navbar-dropdown {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.navbar-dropdown:hover {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Ensure dropdowns are properly positioned */
+[data-dropdown] {
+  position: relative;
+}
+
+[data-dropdown] .dropdown-content {
+  position: absolute;
+  z-index: 1000;
+}
+
 /* Poppins font utility classes */
 .font-thin {
   font-weight: 100;
