@@ -108,9 +108,26 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
+              
+              // Enable debug mode
               gtag('config', 'G-401233023', {
-                send_page_view: true
+                debug_mode: true,
+                send_page_view: true,
+                allow_google_signals: true,
+                allow_ad_personalization_signals: true
               });
+              
+              // Send a test event immediately
+              gtag('event', 'page_view', {
+                page_title: document.title,
+                page_location: window.location.href,
+                debug_mode: true
+              });
+              
+              // Log to console for debugging
+              console.log('Google Analytics initialized with tracking ID: G-401233023');
+              console.log('Current URL:', window.location.href);
+              console.log('Page title:', document.title);
             `,
           }}
         />
