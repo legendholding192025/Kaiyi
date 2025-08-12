@@ -11,12 +11,6 @@ import { useLanguage } from '@/contexts/LanguageContext';
 const LazyVideoSection = lazy(() => import('@/components/VideoSection'));
 const LazyModelSection = lazy(() => import('@/components/ModelSection'));
 
-// Type definitions for video fullscreen methods
-interface VideoWithFullscreen extends HTMLVideoElement {
-  webkitRequestFullscreen?: () => Promise<void>;
-  msRequestFullscreen?: () => Promise<void>;
-}
-
 export default function Home() {
   const { t } = useLanguage();
 

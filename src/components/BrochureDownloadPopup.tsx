@@ -181,11 +181,11 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
                 />
               </div>
 
-              {/* Submit Button */}
+              {/* Submit Button - KAIYI Brand Colors */}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-black text-white py-3 px-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-[#0e62a8] border border-[#0e62a8] text-white py-3 px-4 rounded-lg font-medium transition-colors hover:bg-[#0a4a7a] hover:border-[#0a4a7a] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 {isSubmitting ? t('popup.processing') : t('popup.downloadBrochureButton')}
               </button>

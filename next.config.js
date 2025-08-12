@@ -1,25 +1,26 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable experimental features for better performance
+  // Remove deprecated swcMinify and experimental.turbo
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['@/components'],
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
+    optimizePackageImports: ['@/components', '@/contexts'],
   },
-
-  // Image optimization
+  
+  // Images configuration
   images: {
-    domains: [
-      'cdn.legendholding.com',
-      'kaiyiglobal.com',
-      'www.kaiyiglobal.com'
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'kaiyiglobal.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.kaiyiglobal.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.legendholding.com',
+      },
     ],
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -29,12 +30,12 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
-  // Compression and optimization
+  // Compression and headers
   compress: true,
   poweredByHeader: false,
   generateEtags: false,
 
-  // Headers for performance
+  // Security headers
   async headers() {
     return [
       {
@@ -60,20 +61,6 @@ const nextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
           },
-        ],
-      },
-      {
-        source: '/static/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/images/(.*)',
-        headers: [
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
@@ -83,11 +70,10 @@ const nextConfig = {
     ];
   },
 
-  // Webpack configuration for optimization
+  // Webpack configuration
   webpack: (config, { dev, isServer }) => {
-    // Production optimizations
     if (!dev && !isServer) {
-      // Split chunks for better caching
+      // Production optimizations
       config.optimization.splitChunks = {
         chunks: 'all',
         cacheGroups: {
@@ -96,47 +82,13 @@ const nextConfig = {
             name: 'vendors',
             chunks: 'all',
           },
-          common: {
-            name: 'common',
-            minChunks: 2,
-            chunks: 'all',
-            enforce: true,
-          },
         },
       };
-
-      // Minimize CSS
-      config.optimization.minimize = true;
     }
-
-    // Bundle analyzer (uncomment for debugging)
-    // if (process.env.ANALYZE === 'true') {
-    //   const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-    //   config.plugins.push(
-    //     new BundleAnalyzerPlugin({
-    //       analyzerMode: 'server',
-    //       analyzerPort: 8888,
-    //       openAnalyzer: true,
-    //     })
-    //   );
-    // }
-
     return config;
   },
 
-  // Performance monitoring
-  onDemandEntries: {
-    maxInactiveAge: 25 * 1000,
-    pagesBufferLength: 2,
-  },
-
-  // Enable SWC minification
-  swcMinify: true,
-
-  // Trailing slash for better SEO
-  trailingSlash: false,
-
-  // Redirects for better performance
+  // Redirects
   async redirects() {
     return [
       {
@@ -147,7 +99,7 @@ const nextConfig = {
     ];
   },
 
-  // Rewrites for better performance
+  // Rewrites
   async rewrites() {
     return [
       {
@@ -156,6 +108,9 @@ const nextConfig = {
       },
     ];
   },
+
+  // Trailing slash
+  trailingSlash: false,
 };
 
 module.exports = nextConfig;

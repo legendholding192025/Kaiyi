@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 // Type definitions for video fullscreen methods

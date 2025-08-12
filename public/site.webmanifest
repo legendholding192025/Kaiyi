@@ -1,0 +1,40 @@
+{
+  "name": "KAIYI UAE - Premium Cars & SUVs",
+  "short_name": "KAIYI UAE",
+  "description": "Discover KAIYI's premium cars and SUVs in UAE. Book test drive for KAIYI X7, X3 Pro, and E5 models.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0e62a8",
+  "theme_color": "#0e62a8",
+  "orientation": "portrait-primary",
+  "categories": ["automotive", "shopping", "business"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/kaiyi.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/kaiyi.ico",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/kaiyi.ico",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://cdn.legendholding.com/images/cdn_68933f58b721e4.14363203_20250806_114112.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide"
+    }
+  ]
+}

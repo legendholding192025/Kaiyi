@@ -71,6 +71,7 @@ export default function Navbar() {
 
   const tabsContent = [
     {
+      // X7 Model Image - Updated to working URL
       src: "https://www.kaiyiglobal.com/upload/1a/d147a490cbc17bc9e4459ce608a1e3.png",
       car: "X7",
       carcent: t('models.x7.description'),

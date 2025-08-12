@@ -1,180 +1,135 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface DiagnosticData {
-  viewport?: {
+  viewport: {
     width: number;
     height: number;
-    devicePixelRatio: number;
   };
-  stylesheets?: any[] | string;
-  fonts?: any[] | string;
-  layoutShifts?: number;
-  cssSupport?: {
-    flexbox: boolean;
-    positioning: boolean;
-    alignment: boolean;
-  } | string;
+  stylesheets: {
+    href: string;
+    rules: number;
+    size: string;
+  }[];
+  fonts: {
+    family: string;
+    status: string;
+  }[];
+  layoutShifts: {
+    timestamp: number;
+    value: number;
+  }[];
+  timestamp: number;
 }
 
 export default function LayoutDiagnostic() {
-  const [diagnostics, setDiagnostics] = useState<DiagnosticData>({});
-  const [isVisible, setIsVisible] = useState(false);
+  const [diagnostics, setDiagnostics] = useState<DiagnosticData>({
+    viewport: { width: 0, height: 0 },
+    stylesheets: [],
+    fonts: [],
+    layoutShifts: [],
+    timestamp: Date.now()
+  });
 
   useEffect(() => {
-    // Check for common layout issues
     const checkLayout = () => {
-      const issues: DiagnosticData = {};
-      
-      // Check viewport
-      issues.viewport = {
-        width: window.innerWidth,
-        height: window.innerHeight,
-        devicePixelRatio: window.devicePixelRatio
+      const newDiagnostics: DiagnosticData = {
+        viewport: {
+          width: window.innerWidth,
+          height: window.innerHeight
+        },
+        stylesheets: [],
+        fonts: [],
+        layoutShifts: [],
+        timestamp: Date.now()
       };
-      
-      // Check CSS loading - with proper error handling
+
+      // Check stylesheets
       try {
-        const stylesheets = Array.from(document.styleSheets);
-        issues.stylesheets = stylesheets.map(sheet => {
+        for (let i = 0; i < document.styleSheets.length; i++) {
           try {
-            return {
-              href: sheet.href,
-              disabled: sheet.disabled,
-              rules: sheet.cssRules ? sheet.cssRules.length : 'N/A (external)',
-              isExternal: sheet.href && !sheet.href.startsWith(window.location.origin)
-            };
-          } catch (error) {
-            // Handle security restrictions for external stylesheets
-            return {
-              href: sheet.href,
-              disabled: sheet.disabled,
-              rules: 'N/A (security restricted)',
-              isExternal: true
-            };
+            const sheet = document.styleSheets[i];
+            const rules = sheet.cssRules ? sheet.cssRules.length : 0;
+            const href = sheet.href || 'inline';
+            const size = 'unknown'; // Can't get actual size without fetch
+            
+            newDiagnostics.stylesheets.push({
+              href,
+              rules,
+              size
+            });
+          } catch (e) {
+            // Skip cross-origin stylesheets
+            continue;
           }
-        });
-      } catch (error) {
-        issues.stylesheets = 'Error accessing stylesheets';
+        }
+      } catch (e) {
+        // Handle any stylesheet access errors
       }
-      
-      // Check font loading - with proper error handling
+
+      // Check fonts
       try {
         if ('fonts' in document) {
-          document.fonts.ready.then(() => {
-            try {
-              const fontStatus = Array.from(document.fonts).map(font => ({
-                family: font.family,
-                status: font.status
-              }));
-              setDiagnostics((prev: DiagnosticData) => ({ ...prev, fonts: fontStatus }));
-            } catch (error) {
-              setDiagnostics((prev: DiagnosticData) => ({ ...prev, fonts: 'Error reading fonts' }));
-            }
-          }).catch(error => {
-            setDiagnostics((prev: DiagnosticData) => ({ ...prev, fonts: 'Font loading failed' }));
+          // @ts-ignore - FontFaceSet API
+          const fontStatus = document.fonts.status;
+          newDiagnostics.fonts.push({
+            family: 'System Fonts',
+            status: fontStatus
           });
         }
-      } catch (error) {
-        issues.fonts = 'Fonts API not supported';
+      } catch (e) {
+        // Handle font API errors
       }
-      
-      // Check for layout shifts - with proper error handling
+
+      // Check layout shifts
       try {
         if ('PerformanceObserver' in window) {
+          // @ts-ignore - PerformanceObserver API
           const observer = new PerformanceObserver((list) => {
-            try {
-              const entries = list.getEntries();
-              const layoutShifts = entries.filter(entry => entry.entryType === 'layout-shift');
-              if (layoutShifts.length > 0) {
-                setDiagnostics((prev: DiagnosticData) => ({ ...prev, layoutShifts: layoutShifts.length }));
+            for (const entry of list.getEntries()) {
+              // @ts-ignore - LayoutShiftEntry
+              if (entry.value) {
+                newDiagnostics.layoutShifts.push({
+                  timestamp: entry.startTime,
+                  // @ts-ignore - LayoutShiftEntry
+                  value: entry.value
+                });
               }
-            } catch (error) {
-              console.warn('Error processing performance entries:', error);
             }
           });
           
-          observer.observe({ entryTypes: ['layout-shift'] });
+          try {
+            // @ts-ignore - PerformanceObserver API
+            observer.observe({ entryTypes: ['layout-shift'] });
+          } catch (e) {
+            // Handle observer errors
+          }
         }
-      } catch (error) {
-        console.warn('PerformanceObserver not supported:', error);
+      } catch (e) {
+        // Handle PerformanceObserver errors
       }
-      
-      // Check for basic CSS properties
-      try {
-        const testElement = document.createElement('div');
-        testElement.style.position = 'absolute';
-        testElement.style.display = 'flex';
-        testElement.style.alignItems = 'center';
-        testElement.style.justifyContent = 'center';
-        
-        issues.cssSupport = {
-          flexbox: testElement.style.display === 'flex',
-          positioning: testElement.style.position === 'absolute',
-          alignment: testElement.style.alignItems === 'center'
-        };
-        
-        document.body.appendChild(testElement);
-        document.body.removeChild(testElement);
-      } catch (error) {
-        issues.cssSupport = 'Error testing CSS support';
-      }
-      
-      setDiagnostics((prev: DiagnosticData) => ({ ...prev, ...issues }));
+
+      setDiagnostics(newDiagnostics);
     };
-    
+
     checkLayout();
-    
-    // Check on resize
     window.addEventListener('resize', checkLayout);
-    return () => window.removeEventListener('resize', checkLayout);
+    
+    return () => {
+      window.removeEventListener('resize', checkLayout);
+    };
   }, []);
 
-  if (!isVisible) {
-    return (
-      <button
-        onClick={() => setIsVisible(true)}
-        className="fixed bottom-4 right-4 bg-red-500 text-white p-2 rounded-full z-50"
-        title="Show Layout Diagnostics"
-      >
-        🔍
-      </button>
-    );
-  }
-
   return (
-    <div className="fixed bottom-4 right-4 bg-black text-white p-4 rounded-lg z-50 max-w-sm text-xs">
-      <button
-        onClick={() => setIsVisible(false)}
-        className="absolute top-2 right-2 text-white hover:text-gray-300"
-      >
-        ✕
-      </button>
-      <h3 className="font-bold mb-2">Layout Diagnostics</h3>
-      <div className="space-y-2">
-        <div>
-          <strong>Viewport:</strong> {diagnostics.viewport?.width} × {diagnostics.viewport?.height}
-        </div>
-        <div>
-          <strong>Stylesheets:</strong> {Array.isArray(diagnostics.stylesheets) ? diagnostics.stylesheets.length : 'Error'}
-        </div>
-        <div>
-          <strong>Fonts:</strong> {Array.isArray(diagnostics.fonts) ? diagnostics.fonts.length : 'Checking...'}
-        </div>
-        {diagnostics.layoutShifts && (
-          <div>
-            <strong>Layout Shifts:</strong> {diagnostics.layoutShifts}
-          </div>
-        )}
-        {diagnostics.cssSupport && typeof diagnostics.cssSupport === 'object' && (
-          <div>
-            <strong>CSS Support:</strong> {diagnostics.cssSupport.flexbox ? '✅' : '❌'} Flexbox
-          </div>
-        )}
-      </div>
-      <div className="mt-2 text-xs text-gray-300">
-        Check console for detailed info
+    <div className="fixed top-4 right-4 bg-black bg-opacity-90 text-white p-4 rounded-lg text-xs max-w-xs z-50">
+      <h3 className="font-bold mb-2">Layout Diagnostic</h3>
+      <div className="space-y-1">
+        <div>Viewport: {diagnostics.viewport.width} × {diagnostics.viewport.height}</div>
+        <div>Stylesheets: {diagnostics.stylesheets.length}</div>
+        <div>Fonts: {diagnostics.fonts.length}</div>
+        <div>Layout Shifts: {diagnostics.layoutShifts.length}</div>
+        <div>Last Update: {new Date(diagnostics.timestamp).toLocaleTimeString()}</div>
       </div>
     </div>
   );
