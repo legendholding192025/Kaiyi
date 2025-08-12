@@ -1,8 +1,8 @@
 // Google Analytics utilities
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
-    dataLayer: any[];
+    gtag: (...args: unknown[]) => void;
+    dataLayer: unknown[];
   }
 }
 
@@ -131,7 +131,7 @@ export const trackScrollDepth = (percentage: number) => {
 };
 
 // Track outbound links
-export const trackOutboundLink = (url: string, linkText?: string) => {
+export const trackOutboundLink = (url: string) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'click', {
       event_category: 'outbound',
