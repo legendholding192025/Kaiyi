@@ -101,26 +101,15 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Google Analytics */}
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID || 'G-401233023'}`}></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-401233023"></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '${process.env.NEXT_PUBLIC_GA_TRACKING_ID || 'G-401233023'}', {
-                page_title: document.title,
-                page_location: window.location.href,
-                send_page_view: true,
-                cookie_flags: 'SameSite=None;Secure'
-              });
-              
-              // Enhanced ecommerce tracking
-              gtag('config', '${process.env.NEXT_PUBLIC_GA_TRACKING_ID || 'G-401233023'}', {
-                custom_map: {
-                  'custom_parameter_1': 'lead_source',
-                  'custom_parameter_2': 'form_type'
-                }
+              gtag('config', 'G-401233023', {
+                send_page_view: true
               });
             `,
           }}
