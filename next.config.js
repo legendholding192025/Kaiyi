@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Remove deprecated swcMinify and experimental.turbo
+  // Remove problematic experimental features for deployment
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ['@/components', '@/contexts'],
   },
   
