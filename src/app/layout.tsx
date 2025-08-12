@@ -14,7 +14,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "KAIYI UAE - Premium Cars & SUVs | Family Cars | Test Drive Available",
+  title: "KAIYI UAE - Premium Cars & SUVs | Family Cars",
   description: "Discover KAIYI's premium cars and SUVs in UAE. Book test drive for KAIYI X7, X3 Pro, and E5 models. Family cars designed for comfort and adventure. Visit our showroom today.",
   keywords: "KAIYI UAE, KAIYI cars, KAIYI X7, KAIYI X3 Pro, KAIYI E5, SUV cars, family cars, car dealership UAE, test drive KAIYI, KAIYI 2026, KAIYI price UAE, KAIYI agent UAE",
   authors: [{ name: "KAIYI International" }],
