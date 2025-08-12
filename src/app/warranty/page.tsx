@@ -1,12 +1,73 @@
 'use client';
 
+import Head from 'next/head';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import Image from 'next/image';
 
 export default function WarrantyPage() {
+  // SEO Structured Data for Warranty Service
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "KAIYI Warranty Service",
+    "description": "Comprehensive warranty coverage for KAIYI vehicles including 5-year complete vehicle warranty, 3-year parts warranty, and special engine parts coverage up to 120 months/1,000,000 km.",
+    "provider": {
+      "@type": "Organization",
+      "name": "KAIYI International",
+      "url": "https://kaiyi.ae"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "United Arab Emirates"
+    },
+    "serviceType": "Warranty Service",
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": "https://kaiyi.ae/warranty"
+    },
+    "offers": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock"
+    }
+  };
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <>
+      {/* SEO Head Section */}
+      <Head>
+        <title>KAIYI Warranty | Comprehensive Coverage | 5-Year Warranty | KAIYI UAE</title>
+        <meta name="description" content="KAIYI comprehensive warranty coverage includes 5-year complete vehicle warranty, 3-year parts warranty, and special engine parts coverage. Get peace of mind with KAIYI UAE." />
+        <meta name="keywords" content="KAIYI warranty, KAIYI UAE warranty, car warranty UAE, KAIYI warranty coverage, 5-year warranty, vehicle warranty, parts warranty, engine warranty, KAIYI service" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="KAIYI Warranty | Comprehensive Coverage | 5-Year Warranty | KAIYI UAE" />
+        <meta property="og:description" content="KAIYI comprehensive warranty coverage includes 5-year complete vehicle warranty, 3-year parts warranty, and special engine parts coverage." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://cdn.legendholding.com/images/cdn_68947e6c590e79.53045565_20250807_102236.jpg" />
+        <meta property="og:url" content="https://kaiyi.ae/warranty" />
+        <meta property="og:site_name" content="KAIYI UAE" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="KAIYI Warranty | Comprehensive Coverage | 5-Year Warranty | KAIYI UAE" />
+        <meta name="twitter:description" content="KAIYI comprehensive warranty coverage includes 5-year complete vehicle warranty and special engine parts coverage." />
+        <meta name="twitter:image" content="https://cdn.legendholding.com/images/cdn_68947e6c590e79.53045565_20250807_102236.jpg" />
+        
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://kaiyi.ae/warranty" />
+        
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData)
+          }}
+        />
+      </Head>
+
+      <div className="min-h-screen flex flex-col">
       <style jsx global>{`
         /* Custom scrollbar styles */
         ::-webkit-scrollbar {
@@ -307,5 +368,6 @@ export default function WarrantyPage() {
 
       <Footer />
     </div>
+    </>
   );
 } 

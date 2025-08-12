@@ -119,316 +119,381 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Navbar Component */}
-      <Navbar />
-
-      {/* Hero Section */}
-      <section id="home" className="pt-16 min-h-[70vh] sm:min-h-[95vh] flex items-center justify-center relative overflow-hidden">
-        {/* Background Images */}
-        {heroSlides.map((slide, index) => (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            <Image
-              src={slide.image}
-              alt={slide.title}
-              fill
-              className={`object-cover ${index === 0 ? 'object-right' : ''} ${index === 2 ? 'object-contain' : ''}`}
-              style={index === 0 ? { objectPosition: '100% center' } : index === 1 ? { objectPosition: '40% center' } : {}}
-              priority={index === 0}
-            />
-            <div className="absolute inset-0 bg-black/40"></div>
-          </div>
-        ))}
-        
-        {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-center min-h-[50vh] sm:min-h-[70vh]">
-            {/* Text Content */}
-            <div className="text-center space-y-4 sm:space-y-6 lg:space-y-8 max-w-4xl px-4">
-              <div className="space-y-2 sm:space-y-3 lg:space-y-4">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-bold text-white leading-tight">
-                  {heroSlides[currentSlide].title}
-                </h1>
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-300 font-medium">
-                  {heroSlides[currentSlide].subtitle}
-                </p>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4 justify-center">
-                <a href="/test-drive" className="bg-white text-black px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 border-2 border-white text-center">
-                  {heroSlides[currentSlide].button1}
-                </a>
-                <button 
-                  className="border-2 border-white text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg hover:bg-white hover:text-black transition-all duration-300"
-                  onClick={() => {
-                    setSelectedModelName(heroSlides[currentSlide].title);
-                    setIsBrochurePopupOpen(true);
-                  }}
-                >
-                  {heroSlides[currentSlide].button2}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Slide Indicators */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-3">
-          {heroSlides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentSlide ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/75'
-              }`}
-            />
-          ))}
-        </div>
-        
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 right-10">
-          <div className="animate-bounce">
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </div>
-        </div>
-      </section>
-
-      {/* Model Section */}
-      <section id="models" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Model Navigation */}
-          <div className="flex justify-center mb-8 sm:mb-12">
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-8">
-              {carModels.map((model, index) => (
-                <button
-                  key={model.name}
-                  className={`text-xl sm:text-2xl md:text-3xl font-bold transition-all duration-300 ${
-                    (hoveredModel === model.name || currentModelIndex === index)
-                      ? 'text-[#0e62a8] underline'
-                      : 'text-gray-600 hover:text-gray-800'
-                  }`}
-                  onMouseEnter={() => setHoveredModel(model.name)}
-                  onMouseLeave={() => setHoveredModel(null)}
-                  onClick={() => {
-                    setCurrentModelIndex(index);
-                  }}
-                >
-                  {model.name}
-                </button>
-              ))}
-            </div>
-          </div>
-          
-          {/* Car Display */}
-          <div className="relative max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl p-4 sm:p-8 shadow-lg">
-              {/* Car Image */}
-              <div className="relative h-64 sm:h-80 md:h-96 w-full mb-6 sm:mb-8">
-                <Image
-                  src={hoveredModel ? carModels.find(m => m.name === hoveredModel)?.image || carModels[currentModelIndex].image : carModels[currentModelIndex].image}
-                  alt="KAIYI Car Model"
-                  fill
-                  className="object-contain transition-all duration-500"
-                />
-              </div>
-              
-              {/* Car Specifications */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-                {(hoveredModel ? carModels.find(m => m.name === hoveredModel)?.specs : carModels[currentModelIndex].specs) && Object.entries(hoveredModel ? carModels.find(m => m.name === hoveredModel)!.specs : carModels[currentModelIndex].specs).map(([key, value]) => (
-                  <div key={key} className="text-center">
-                    <div className="text-lg sm:text-xl md:text-2xl font-bold text-black">{value.split(': ')[1] || value}</div>
-                    <div className="text-xs sm:text-sm text-gray-600 uppercase">{value.split(': ')[0] || key}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            {/* Navigation Arrows */}
-            <button 
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors"
-              onClick={() => {
-                const newIndex = currentModelIndex === 0 ? carModels.length - 1 : currentModelIndex - 1;
-                setCurrentModelIndex(newIndex);
-              }}
-            >
-              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button 
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors"
-              onClick={() => {
-                const newIndex = currentModelIndex === carModels.length - 1 ? 0 : currentModelIndex + 1;
-                setCurrentModelIndex(newIndex);
-              }}
-            >
-              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Video Section */}
-      <section id="video" className="relative h-[70vh] sm:h-screen">
-        <video
-          ref={videoRef}
-          id="kaiyi-video"
-          className="w-full h-full object-cover"
-          poster="https://kaiyiglobal.com/upload/dd/87741cf96bb4d4d48290491df9b47d.png"
-          muted
-          loop
-        >
-          <source src="https://kaiyiglobal.com/assets/shouyevie1-1-84f87b2c.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        
-        {/* Play Button Overlay */}
-        <div 
-          className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-all duration-300 cursor-pointer"
-          onClick={() => {
-            if (videoRef.current) {
-              const video = videoRef.current as VideoWithFullscreen;
-              if (video.requestFullscreen) {
-                video.requestFullscreen();
-              } else if (video.webkitRequestFullscreen) {
-                video.webkitRequestFullscreen();
-              } else if (video.msRequestFullscreen) {
-                video.msRequestFullscreen();
+    <>
+      {/* Structured Data for Car Models */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "KAIYI Car Models",
+            "description": "Premium KAIYI cars and SUVs available in UAE",
+            "itemListElement": [
+              {
+                "@type": "Car",
+                "position": 1,
+                "name": "KAIYI X7",
+                "description": "Where Family Adventures Begin",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "KAIYI"
+                },
+                "category": "SUV",
+                "url": "https://kaiyi.ae/models/x7"
+              },
+              {
+                "@type": "Car",
+                "position": 2,
+                "name": "KAIYI X3 Pro",
+                "description": "Designed for comfort and styled to fit your life",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "KAIYI"
+                },
+                "category": "SUV",
+                "url": "https://kaiyi.ae/models/x3-pro"
+              },
+              {
+                "@type": "Car",
+                "position": 3,
+                "name": "KAIYI E5",
+                "description": "Sporty efficiency with the power you need every day",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "KAIYI"
+                },
+                "category": "Sedan",
+                "url": "https://kaiyi.ae/models/e5"
               }
-              video.muted = false;
-              video.play();
-            }
-          }}
-        >
-          <div className="w-16 h-16 sm:w-24 sm:h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110">
-            <svg className="w-8 h-8 sm:w-12 sm:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-          </div>
-        </div>
-        
-        {/* Video Info */}
-        <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 text-white">
-          <p className="text-lg sm:text-2xl font-bold">{t('home.video.title')}</p>
-          <p className="text-sm sm:text-lg text-gray-300">{t('home.video.subtitle')}</p>
-        </div>
-      </section>
+            ]
+          })
+        }}
+      />
 
-      {/* We Are KAIYI Section */}
-      <section id="about" className="bg-white">
-        {/* Top Section - WE ARE KAIYI */}
-        <div className="py-20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-5xl md:text-6xl font-bold text-black mb-6">
-              {t('home.weAreKaiyi.title')}
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed">
-              {t('home.weAreKaiyi.description')}
-            </p>
-            <button 
-              className="border-2 border-black text-black px-8 py-3 rounded-none font-semibold text-lg hover:bg-black hover:text-white transition-all duration-300"
-              onClick={() => window.location.href = '/we-are-kaiyi'}
-            >
-              {t('home.weAreKaiyi.more')}
-            </button>
-          </div>
-        </div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        {/* Navbar Component */}
+        <Navbar />
 
-        {/* Image Section - Cross-wise Layout */}
-        <div className="py-20 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Image 1 */}
-              <div className="relative overflow-hidden rounded-xl shadow-lg">
+        {/* Hero Section */}
+        <main>
+          <section id="home" className="pt-16 min-h-[70vh] sm:min-h-[95vh] flex items-center justify-center relative overflow-hidden">
+            {/* Background Images */}
+            {heroSlides.map((slide, index) => (
+              <div
+                key={slide.id}
+                className={`absolute inset-0 transition-opacity duration-1000 ${
+                  index === currentSlide ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
                 <Image
-                  src="https://cdn.legendholding.com/images/cdn_68934f98360432.89609659_20250806_125032.jpg"
-                  alt="KAIYI Innovation"
-                  width={400}
-                  height={500}
-                  className="w-full h-80 object-cover"
+                  src={slide.image}
+                  alt={`${slide.title} - ${slide.subtitle}`}
+                  fill
+                  className={`object-cover ${index === 0 ? 'object-right' : ''} ${index === 2 ? 'object-contain' : ''}`}
+                  style={index === 0 ? { objectPosition: '100% center' } : index === 1 ? { objectPosition: '40% center' } : {}}
+                  priority={index === 0}
                 />
+                <div className="absolute inset-0 bg-black/40"></div>
               </div>
-
-              {/* Image 2 */}
-              <div className="relative overflow-hidden rounded-xl shadow-lg">
-                <Image
-                  src="https://cdn.legendholding.com/images/cdn_68933ff403d2b1.16599158_20250806_114348.jpg"
-                  alt="KAIYI Quality"
-                  width={400}
-                  height={500}
-                  className="w-full h-80 object-cover"
-                />
-              </div>
-
-              {/* Image 3 */}
-              <div className="relative overflow-hidden rounded-xl shadow-lg">
-                <Image
-                  src="https://cdn.legendholding.com/images/cdn_689350637bc023.32741045_20250806_125355.jpg"
-                  alt="KAIYI Performance"
-                  width={400}
-                  height={500}
-                  className="w-full h-80 object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Bottom Section - SERVICE with Car Interior Image */}
-        <div className="relative bg-gray-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-16">
-            <div className="relative">
-              <Image
-                src="https://cdn.legendholding.com/images/cdn_68935e577bba84.38122423_20250806_135327.jpg"
-                alt="KAIYI Car Interior"
-                width={1200}
-                height={600}
-                className="w-full h-48 sm:h-auto object-cover rounded-lg shadow-2xl"
-              />
-              
-              {/* Text Overlay */}
-              <div className="absolute inset-0 flex flex-col justify-end items-center pb-4 sm:pb-8 lg:pb-16">
-                <div className="text-center px-4">
-                  <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-2 sm:mb-4 drop-shadow-lg">
-                    {t('home.service.title')}
-                  </h3>
-                  <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white mb-4 sm:mb-6 lg:mb-8 max-w-2xl drop-shadow-lg">
-                    {t('home.service.subtitle')}
-                  </p>
-                  <button 
-                    className="bg-black text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-3 rounded-none font-semibold text-sm sm:text-base lg:text-lg hover:bg-gray-800 transition-all duration-300"
-                    onClick={() => window.location.href = '/service-booking'}
-                  >
-                    {t('home.service.more')}
-                  </button>
+            ))}
+            
+            {/* Content */}
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center justify-center min-h-[50vh] sm:min-h-[70vh]">
+                {/* Text Content */}
+                <div className="text-center space-y-4 sm:space-y-6 lg:space-y-8 max-w-4xl px-4">
+                  <div className="space-y-2 sm:space-y-3 lg:space-y-4">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-bold text-white leading-tight">
+                      {heroSlides[currentSlide].title}
+                    </h1>
+                    <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-300 font-medium">
+                      {heroSlides[currentSlide].subtitle}
+                    </p>
+                  </div>
+                  
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4 justify-center">
+                    <a href="/test-drive" className="bg-white text-black px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 border-2 border-white text-center">
+                      {heroSlides[currentSlide].button1}
+                    </a>
+                    <button 
+                      className="border-2 border-white text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg hover:bg-white hover:text-black transition-all duration-300"
+                      onClick={() => {
+                        setSelectedModelName(heroSlides[currentSlide].title);
+                        setIsBrochurePopupOpen(true);
+                      }}
+                    >
+                      {heroSlides[currentSlide].button2}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+            
+            {/* Slide Indicators */}
+            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-3">
+              {heroSlides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentSlide ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/75'
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+            
+            {/* Scroll Indicator */}
+            <div className="absolute bottom-10 right-10">
+              <div className="animate-bounce">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </div>
+            </div>
+          </section>
 
+          {/* Model Section */}
+          <section id="models" className="py-20 bg-white" aria-labelledby="models-heading">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              
+              {/* Model Navigation */}
+              <div className="flex justify-center mb-8 sm:mb-12">
+                <h2 id="models-heading" className="sr-only">KAIYI Car Models</h2>
+                <div className="flex flex-wrap justify-center gap-4 sm:gap-8">
+                  {carModels.map((model, index) => (
+                    <button
+                      key={model.name}
+                      className={`text-xl sm:text-2xl md:text-3xl font-bold transition-all duration-300 ${
+                        (hoveredModel === model.name || currentModelIndex === index)
+                          ? 'text-[#0e62a8] underline'
+                          : 'text-gray-600 hover:text-gray-800'
+                      }`}
+                      onMouseEnter={() => setHoveredModel(model.name)}
+                      onMouseLeave={() => setHoveredModel(null)}
+                      onClick={() => {
+                        setCurrentModelIndex(index);
+                      }}
+                      aria-pressed={currentModelIndex === index}
+                    >
+                      {model.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Car Display */}
+              <div className="relative max-w-4xl mx-auto">
+                <div className="bg-white rounded-2xl p-4 sm:p-8 shadow-lg">
+                  {/* Car Image */}
+                  <div className="relative h-64 sm:h-80 md:h-96 w-full mb-6 sm:mb-8">
+                    <Image
+                      src={hoveredModel ? carModels.find(m => m.name === hoveredModel)?.image || carModels[currentModelIndex].image : carModels[currentModelIndex].image}
+                      alt={(() => {
+                        const currentModel = hoveredModel ? carModels.find(m => m.name === hoveredModel) : carModels[currentModelIndex];
+                        return `${currentModel?.name} - ${currentModel?.description}`;
+                      })()}
+                      fill
+                      className="object-contain transition-all duration-500"
+                    />
+                  </div>
+                  
+                  {/* Car Specifications */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                    {(hoveredModel ? carModels.find(m => m.name === hoveredModel)?.specs : carModels[currentModelIndex].specs) && Object.entries(hoveredModel ? carModels.find(m => m.name === hoveredModel)!.specs : carModels[currentModelIndex].specs).map(([key, value]) => (
+                      <div key={key} className="text-center">
+                        <div className="text-lg sm:text-xl md:text-2xl font-bold text-black">{value.split(': ')[1] || value}</div>
+                        <div className="text-xs sm:text-sm text-gray-600 uppercase">{value.split(': ')[0] || key}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Navigation Arrows */}
+                <button 
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors"
+                  onClick={() => {
+                    const newIndex = currentModelIndex === 0 ? carModels.length - 1 : currentModelIndex - 1;
+                    setCurrentModelIndex(newIndex);
+                  }}
+                  aria-label="Previous car model"
+                >
+                  <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button 
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors"
+                  onClick={() => {
+                    const newIndex = currentModelIndex === carModels.length - 1 ? 0 : currentModelIndex + 1;
+                    setCurrentModelIndex(newIndex);
+                  }}
+                  aria-label="Next car model"
+                >
+                  <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </section>
 
+          {/* Video Section */}
+          <section id="video" className="relative h-[70vh] sm:h-screen" aria-labelledby="video-heading">
+            <video
+              ref={videoRef}
+              id="kaiyi-video"
+              className="w-full h-full object-cover"
+              poster="https://kaiyiglobal.com/upload/dd/87741cf96bb4d4d48290491df9b47d.png"
+              muted
+              loop
+              aria-describedby="video-description"
+            >
+              <source src="https://kaiyiglobal.com/assets/shouyevie1-1-84f87b2c.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            
+            {/* Play Button Overlay */}
+            <div 
+              className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-all duration-300 cursor-pointer"
+              onClick={() => {
+                if (videoRef.current) {
+                  const video = videoRef.current as VideoWithFullscreen;
+                  if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                  } else if (video.webkitRequestFullscreen) {
+                    video.webkitRequestFullscreen();
+                  } else if (video.msRequestFullscreen) {
+                    video.msRequestFullscreen();
+                  }
+                  video.muted = false;
+                  video.play();
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              aria-label="Play KAIYI brand video"
+            >
+              <div className="w-16 h-16 sm:w-24 sm:h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110">
+                <svg className="w-8 h-8 sm:w-12 sm:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+            
+            {/* Video Info */}
+            <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 text-white">
+              <h2 id="video-heading" className="text-lg sm:text-2xl font-bold">{t('home.video.title')}</h2>
+              <p id="video-description" className="text-sm sm:text-lg text-gray-300">{t('home.video.subtitle')}</p>
+            </div>
+          </section>
 
-      {/* Brochure Download Popup */}
-      <BrochureDownloadPopup
-        isOpen={isBrochurePopupOpen}
-        onClose={() => setIsBrochurePopupOpen(false)}
-        modelName={selectedModelName}
-      />
+          {/* We Are KAIYI Section */}
+          <section id="about" className="bg-white" aria-labelledby="about-heading">
+            {/* Top Section - WE ARE KAIYI */}
+            <div className="py-20">
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 id="about-heading" className="text-5xl md:text-6xl font-bold text-black mb-6">
+                  {t('home.weAreKaiyi.title')}
+                </h2>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed">
+                  {t('home.weAreKaiyi.description')}
+                </p>
+                <a 
+                  href="/we-are-kaiyi"
+                  className="inline-block border-2 border-black text-black px-8 py-3 rounded-none font-semibold text-lg hover:bg-black hover:text-white transition-all duration-300"
+                >
+                  {t('home.weAreKaiyi.more')}
+                </a>
+              </div>
+            </div>
 
-      {/* Footer Component */}
-      <Footer />
-    </div>
+            {/* Image Section - Cross-wise Layout */}
+            <div className="py-20 bg-gray-50">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  {/* Image 1 */}
+                  <div className="relative overflow-hidden rounded-xl shadow-lg">
+                    <Image
+                      src="https://cdn.legendholding.com/images/cdn_68934f98360432.89609659_20250806_125032.jpg"
+                      alt="KAIYI Innovation and Technology"
+                      width={400}
+                      height={500}
+                      className="w-full h-80 object-cover"
+                    />
+                  </div>
+
+                  {/* Image 2 */}
+                  <div className="relative overflow-hidden rounded-xl shadow-lg">
+                    <Image
+                      src="https://cdn.legendholding.com/images/cdn_68933ff403d2b1.16599158_20250806_114348.jpg"
+                      alt="KAIYI Quality and Design"
+                      width={400}
+                      height={500}
+                      className="w-full h-80 object-cover"
+                    />
+                  </div>
+
+                  {/* Image 3 */}
+                  <div className="relative overflow-hidden rounded-xl shadow-lg">
+                    <Image
+                      src="https://cdn.legendholding.com/images/cdn_689350637bc023.32741045_20250806_125355.jpg"
+                      alt="KAIYI Performance and Engineering"
+                      width={400}
+                      height={500}
+                      className="w-full h-80 object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Bottom Section - SERVICE with Car Interior Image */}
+            <div className="relative bg-gray-100">
+              <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-16">
+                <div className="relative">
+                  <Image
+                    src="https://cdn.legendholding.com/images/cdn_68935e577bba84.38122423_20250806_135327.jpg"
+                    alt="KAIYI Car Interior - Premium Comfort and Technology"
+                    width={1200}
+                    height={600}
+                    className="w-full h-48 sm:h-auto object-cover rounded-lg shadow-2xl"
+                  />
+                  
+                  {/* Text Overlay */}
+                  <div className="absolute inset-0 flex flex-col justify-end items-center pb-4 sm:pb-8 lg:pb-16">
+                    <div className="text-center px-4">
+                      <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-2 sm:mb-4 drop-shadow-lg">
+                        {t('home.service.title')}
+                      </h3>
+                      <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white mb-4 sm:mb-6 lg:mb-8 max-w-2xl drop-shadow-lg">
+                        {t('home.service.subtitle')}
+                      </p>
+                      <a 
+                        href="/service-booking"
+                        className="inline-block bg-black text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-3 rounded-none font-semibold text-sm sm:text-base lg:text-lg hover:bg-gray-800 transition-all duration-300"
+                      >
+                        {t('home.service.more')}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        {/* Brochure Download Popup */}
+        <BrochureDownloadPopup
+          isOpen={isBrochurePopupOpen}
+          onClose={() => setIsBrochurePopupOpen(false)}
+          modelName={selectedModelName}
+        />
+
+        {/* Footer Component */}
+        <Footer />
+      </div>
+    </>
   );
 }

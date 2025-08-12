@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
+import Head from 'next/head';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import BrochureDownloadPopup from '../../../components/BrochureDownloadPopup';
@@ -13,6 +14,44 @@ export default function E5Page() {
 
   const [selectedColor, setSelectedColor] = useState(0);
   const [isBrochurePopupOpen, setIsBrochurePopupOpen] = useState(false);
+
+  // SEO Structured Data for KAIYI E5
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Car",
+    "name": "KAIYI E5",
+    "description": "Sporty efficiency with the power you need every day. The KAIYI E5 is a premium sedan designed for modern families and young drivers.",
+    "brand": {
+      "@type": "Brand",
+      "name": "KAIYI"
+    },
+    "category": "Sedan",
+    "url": "https://kaiyi.ae/models/e5",
+    "image": [
+      "https://kaiyiglobal.com/upload/99/b95b13234541763b68eccb90303e65.png",
+      "https://kaiyiglobal.com/upload/df/c71c66fd8b5d73bb54527e7c4b07dd.png",
+      "https://kaiyiglobal.com/upload/e3/fea88113e0fcc9debef3a417ee0bec.png",
+      "https://kaiyiglobal.com/upload/88/6adf34c003e998864522c0d739d2b0.png"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "priceCurrency": "AED",
+      "seller": {
+        "@type": "Organization",
+        "name": "KAIYI International"
+      }
+    },
+    "vehicleEngine": {
+      "@type": "EngineSpecification",
+      "name": "1.5T Engine"
+    },
+    "vehicleTransmission": "Simulated 9-Speed CVT",
+    "vehicleWheelbase": "2700 mm",
+    "numberOfAirbags": 6,
+    "fuelType": "Gasoline",
+    "vehicleModelDate": "2026"
+  };
 
   const carColors = [
     {
@@ -76,7 +115,7 @@ export default function E5Page() {
 
   const fourthTechnicalImages = [
     "https://kaiyiglobal.com/upload/0a/78071bdc8a47ea95ce764a4ffa32aa.jpg",
-    "https://kaiyiglobal.com/upload/5b/b9473e8e49c918fdd3a3a39f0476c4.jpg",
+    "https://kaiyiglobal.com/upload/5b/b9473c8e49c918fdd3a3a39f0476c4.jpg",
     "https://kaiyiglobal.com/upload/8a/af5ba053c5972327dbf8924c1c06e3.jpg",
     "https://kaiyiglobal.com/upload/a0/cfa40f9b907c2096f7546b11d6341c.jpg"
   ];
@@ -235,9 +274,43 @@ export default function E5Page() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navbar Component */}
-      <Navbar />
+    <>
+      {/* SEO Head Section */}
+      <Head>
+        <title>KAIYI E5 - Premium Sedan | Sporty Efficiency | KAIYI UAE</title>
+        <meta name="description" content="Discover the KAIYI E5 - a premium sedan with sporty efficiency and the power you need every day. Features 1.5T engine, 9-speed CVT, and advanced safety. Book your test drive today." />
+        <meta name="keywords" content="KAIYI E5, KAIYI sedan, KAIYI E5 UAE, KAIYI E5 price, KAIYI E5 specs, KAIYI E5 test drive, KAIYI E5 2026, premium sedan, family car, 1.5T engine, CVT transmission" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="KAIYI E5 - Premium Sedan | Sporty Efficiency | KAIYI UAE" />
+        <meta property="og:description" content="Discover the KAIYI E5 - a premium sedan with sporty efficiency and the power you need every day. Features 1.5T engine, 9-speed CVT, and advanced safety." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://kaiyiglobal.com/upload/99/b95b13234541763b68eccb90303e65.png" />
+        <meta property="og:url" content="https://kaiyi.ae/models/e5" />
+        <meta property="og:site_name" content="KAIYI UAE" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="KAIYI E5 - Premium Sedan | Sporty Efficiency | KAIYI UAE" />
+        <meta name="twitter:description" content="Discover the KAIYI E5 - a premium sedan with sporty efficiency and the power you need every day." />
+        <meta name="twitter:image" content="https://kaiyiglobal.com/upload/99/b95b13234541763b68eccb90303e65.png" />
+        
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://kaiyi.ae/models/e5" />
+        
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData)
+          }}
+        />
+      </Head>
+
+      <div className="min-h-screen bg-white">
+        {/* Navbar Component */}
+        <Navbar />
       
       {/* Hero Section with Video */}
       <div className="relative h-screen overflow-hidden">
@@ -677,5 +750,6 @@ export default function E5Page() {
       {/* Footer Component */}
       <Footer />
     </div>
+    </>
   );
 } 

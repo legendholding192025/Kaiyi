@@ -1,39 +1,95 @@
 'use client';
 
+import Head from 'next/head';
+import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
-export default function ContactUsPage() {
-  return (
-    <div className="min-h-screen flex flex-col">
-      <style jsx global>{`
-        /* Custom scrollbar styles */
-        ::-webkit-scrollbar {
-          width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-          background: #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-          background: #000000;
-          border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-          background: #333333;
-        }
-        
-        /* Firefox scrollbar */
-        * {
-          scrollbar-width: thin;
-          scrollbar-color: #000000 #f1f1f1;
-        }
-      `}</style>
-      <Navbar />
+export default function ContactPage() {
+  // SEO Structured Data for Contact Information
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact KAIYI UAE",
+    "description": "Get in touch with KAIYI UAE for inquiries about our premium vehicles, test drives, service, and support.",
+    "url": "https://kaiyi.ae/contact-us",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "KAIYI International",
+      "url": "https://kaiyi.ae",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "areaServed": "UAE",
+        "availableLanguage": ["English", "Arabic"]
+      }
+    }
+  };
 
-              {/* We're Here for You Section */}
+  return (
+    <>
+      {/* SEO Head Section */}
+      <Head>
+        <title>Contact KAIYI UAE | Get in Touch | Customer Support | KAIYI International</title>
+        <meta name="description" content="Contact KAIYI UAE for inquiries about our premium vehicles, test drives, service, and support. Get in touch with our customer service team today." />
+        <meta name="keywords" content="contact KAIYI UAE, KAIYI contact, KAIYI customer service, KAIYI support, KAIYI inquiry, KAIYI UAE contact, car dealership contact UAE" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Contact KAIYI UAE | Get in Touch | Customer Support | KAIYI International" />
+        <meta property="og:description" content="Contact KAIYI UAE for inquiries about our premium vehicles, test drives, service, and support." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://cdn.legendholding.com/images/cdn_68947e6c590e79.53045565_20250807_102236.jpg" />
+        <meta property="og:url" content="https://kaiyi.ae/contact-us" />
+        <meta property="og:site_name" content="KAIYI UAE" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact KAIYI UAE | Get in Touch | Customer Support | KAIYI International" />
+        <meta name="twitter:description" content="Contact KAIYI UAE for inquiries about our premium vehicles, test drives, and support." />
+        <meta name="twitter:image" content="https://cdn.legendholding.com/images/cdn_68947e6c590e79.53045565_20250807_102236.jpg" />
+        
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://kaiyi.ae/contact-us" />
+        
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData)
+          }}
+        />
+      </Head>
+
+      <div className="min-h-screen bg-white">
+        <style jsx global>{`
+          /* Custom scrollbar styles */
+          ::-webkit-scrollbar {
+            width: 8px;
+          }
+          
+          ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+          }
+          
+          ::-webkit-scrollbar-thumb {
+            background: #000000;
+            border-radius: 4px;
+          }
+          
+          ::-webkit-scrollbar-thumb:hover {
+            background: #333333;
+          }
+          
+          /* Firefox scrollbar */
+          * {
+            scrollbar-width: thin;
+            scrollbar-color: #000000 #f1f1f1;
+          }
+        `}</style>
+        <Navbar />
+
+        {/* We're Here for You Section */}
         <section 
           className="relative text-white py-32 px-4 text-center min-h-[80vh] flex items-center justify-center overflow-hidden"
           style={{
@@ -111,5 +167,6 @@ export default function ContactUsPage() {
 
       <Footer />
     </div>
+    </>
   );
 } 

@@ -1,5 +1,6 @@
 'use client';
 
+import Head from 'next/head';
 import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
@@ -8,8 +9,85 @@ import { useLanguage } from '../../contexts/LanguageContext';
 export default function WeAreKaiyiPage() {
   const { t } = useLanguage();
 
+  // SEO Structured Data for About KAIYI
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "KAIYI International",
+    "description": "Craft smart, stylish cars designed for modern families and young drivers. Driven by innovation, we're here to make every journey more comfortable, enjoyable, and connected to your lifestyle.",
+    "url": "https://kaiyi.ae",
+    "logo": "https://kaiyi.ae/kaiyi.ico",
+    "foundingDate": "2020",
+    "industry": "Automotive",
+    "areaServed": {
+      "@type": "Country",
+      "name": "United Arab Emirates"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "KAIYI Vehicle Models",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Car",
+            "name": "KAIYI X7"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Car",
+            "name": "KAIYI X3 Pro"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Car",
+            "name": "KAIYI E5"
+          }
+        }
+      ]
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-white">
+    <>
+      {/* SEO Head Section */}
+      <Head>
+        <title>We Are KAIYI | About KAIYI International | Premium Car Manufacturer | KAIYI UAE</title>
+        <meta name="description" content="Discover KAIYI International - crafting smart, stylish cars for modern families and young drivers. Driven by innovation, we make every journey more comfortable and enjoyable." />
+        <meta name="keywords" content="We Are KAIYI, KAIYI International, KAIYI company, KAIYI manufacturer, KAIYI history, KAIYI story, KAIYI innovation, KAIYI technology, KAIYI UAE, car manufacturer UAE" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="We Are KAIYI | About KAIYI International | Premium Car Manufacturer | KAIYI UAE" />
+        <meta property="og:description" content="Discover KAIYI International - crafting smart, stylish cars for modern families and young drivers. Driven by innovation." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://cdn.legendholding.com/images/cdn_68934f98360432.89609659_20250806_125032.jpg" />
+        <meta property="og:url" content="https://kaiyi.ae/we-are-kaiyi" />
+        <meta property="og:site_name" content="KAIYI UAE" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="We Are KAIYI | About KAIYI International | Premium Car Manufacturer | KAIYI UAE" />
+        <meta name="twitter:description" content="Discover KAIYI International - crafting smart, stylish cars for modern families and young drivers." />
+        <meta name="twitter:image" content="https://cdn.legendholding.com/images/cdn_68934f98360432.89609659_20250806_125032.jpg" />
+        
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://kaiyi.ae/we-are-kaiyi" />
+        
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData)
+          }}
+        />
+      </Head>
+
+      <div className="min-h-screen bg-white">
       {/* Navbar Component */}
       <Navbar />
       
@@ -40,8 +118,8 @@ export default function WeAreKaiyiPage() {
           <div className="stats-content flex flex-col md:flex-row justify-between items-start mt-[6vw] md:mt-[2vw] space-y-[6vw] md:space-y-0">
             <div className="stats-grid flex justify-center md:justify-start gap-[6vw] md:gap-[2vw] w-full md:w-auto">
               <div className="stat-item text-center">
-                <div className="stat-number text-[6vw] md:text-[2vw] text-[#dc0000] font-bold">2024</div>
-                <div className="stat-label text-[3.5vw] md:text-[1vw] text-[#222]">Since</div>
+                <div className="stat-number text-[6vw] md:text-[2vw] text-[#0e62a8] font-bold">2024</div>
+                <div className="stat-label text-[3.5vw] md:text-[1vw] text-[#0e62a8]">Since</div>
               </div>
             </div>
             <div className="story-text w-full md:flex-1 md:ml-[3vw] text-[4vw] md:text-[1vw] text-[#444] space-y-[3vw] md:space-y-[1vw] leading-relaxed">
@@ -74,8 +152,8 @@ export default function WeAreKaiyiPage() {
           <div className="stats-content flex flex-col md:flex-row justify-between items-start mt-[6vw] md:mt-[2vw] space-y-[6vw] md:space-y-0">
             <div className="stats-grid flex justify-center md:justify-start gap-[6vw] md:gap-[2vw] w-full md:w-auto">
               <div className="stat-item text-center">
-                <div className="stat-number text-[6vw] md:text-[2vw] text-[#dc0000] font-bold">2014</div>
-                <div className="stat-label text-[3.5vw] md:text-[1vw] text-[#222]">Since</div>
+                <div className="stat-number text-[6vw] md:text-[2vw] text-[#0e62a8] font-bold">2014</div>
+                <div className="stat-label text-[3.5vw] md:text-[1vw] text-[#0e62a8]">Since</div>
               </div>
             </div>
             <div className="story-text w-full md:flex-1 md:ml-[3vw] text-[4vw] md:text-[1vw] text-[#444] space-y-[3vw] md:space-y-[1vw] leading-relaxed">
@@ -114,5 +192,6 @@ export default function WeAreKaiyiPage() {
       {/* Footer Component */}
       <Footer />
     </div>
+    </>
   );
 } 

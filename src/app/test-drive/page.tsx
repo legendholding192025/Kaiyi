@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Head from 'next/head';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import SuccessPopup from '../../components/SuccessPopup';
@@ -26,6 +27,34 @@ export default function TestDrivePage() {
   });
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  // SEO Structured Data for Test Drive Service
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "KAIYI Test Drive Service",
+    "description": "Book a test drive for KAIYI X7, X3 Pro, or E5 models in UAE. Experience the premium quality and performance of KAIYI vehicles firsthand.",
+    "provider": {
+      "@type": "Organization",
+      "name": "KAIYI International",
+      "url": "https://kaiyi.ae"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "United Arab Emirates"
+    },
+    "serviceType": "Test Drive",
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": "https://kaiyi.ae/test-drive"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "AED",
+      "availability": "https://schema.org/InStock"
+    }
+  };
 
   const models = [
     { id: 1, name: "KAIYI X7" },
@@ -93,9 +122,43 @@ export default function TestDrivePage() {
   };
 
   return (
-    <div className="testdrive-page w-full min-h-screen bg-white">
-      {/* Navbar Component */}
-      <Navbar />
+    <>
+      {/* SEO Head Section */}
+      <Head>
+        <title>Book KAIYI Test Drive | KAIYI X7, X3 Pro, E5 | KAIYI UAE</title>
+        <meta name="description" content="Book your KAIYI test drive today! Experience the premium quality of KAIYI X7, X3 Pro, and E5 models. Available in UAE with professional service and support." />
+        <meta name="keywords" content="KAIYI test drive, book KAIYI test drive, KAIYI X7 test drive, KAIYI X3 Pro test drive, KAIYI E5 test drive, KAIYI UAE test drive, car test drive UAE" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Book KAIYI Test Drive | KAIYI X7, X3 Pro, E5 | KAIYI UAE" />
+        <meta property="og:description" content="Book your KAIYI test drive today! Experience the premium quality of KAIYI X7, X3 Pro, and E5 models. Available in UAE." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://cdn.legendholding.com/images/cdn_68933f58b721e4.14363203_20250806_114112.jpg" />
+        <meta property="og:url" content="https://kaiyi.ae/test-drive" />
+        <meta property="og:site_name" content="KAIYI UAE" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Book KAIYI Test Drive | KAIYI X7, X3 Pro, E5 | KAIYI UAE" />
+        <meta name="twitter:description" content="Book your KAIYI test drive today! Experience the premium quality of KAIYI vehicles." />
+        <meta name="twitter:image" content="https://cdn.legendholding.com/images/cdn_68933f58b721e4.14363203_20250806_114112.jpg" />
+        
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://kaiyi.ae/test-drive" />
+        
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData)
+          }}
+        />
+      </Head>
+
+      <div className="testdrive-page w-full min-h-screen bg-white">
+        {/* Navbar Component */}
+        <Navbar />
       
       <div className="flex flex-col lg:flex-row pt-16">
         {/* Image Section - Full width on mobile, 50% on desktop */}
@@ -229,5 +292,6 @@ export default function TestDrivePage() {
       {/* Footer Component */}
       <Footer />
     </div>
+    </>
   );
 } 
