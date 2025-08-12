@@ -2,7 +2,8 @@
   "extends": "next/core-web-vitals",
   "rules": {
     "@typescript-eslint/no-unused-vars": "warn",
-    "@next/next/no-page-custom-font": "warn",
-    "@typescript-eslint/no-explicit-any": "error"
+    "@next/next/no-page-custom-font": "off",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/ban-ts-comment": "warn"
   }
 }

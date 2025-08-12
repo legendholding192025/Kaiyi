@@ -3,7 +3,6 @@
 import Head from 'next/head';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function WarrantyPage() {
   // SEO Structured Data for Warranty Service
