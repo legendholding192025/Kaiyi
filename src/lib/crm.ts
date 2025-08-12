@@ -1,3 +1,5 @@
+import { trackFormSubmission, trackLead } from './analytics'
+
 // CRM Integration Configuration
 export const CRM_CONFIG = {
   API_URL: 'https://lmmta.legendholding.com/CRM_IS/rest/RESTAPIDealerShip/RESTAPI_WEB',
@@ -134,6 +136,9 @@ export async function submitToCRM(lead: CRMLead): Promise<{ success: boolean; er
     const leadSourceCode = getLeadSource()
     const utmParams = getUTMParams()
     
+    // Track form submission in Google Analytics
+    trackFormSubmission(lead.formType, leadSourceCode)
+    
     // Determine location based on form type
     const location = lead.location || 'Dubai'
     
@@ -157,8 +162,6 @@ export async function submitToCRM(lead: CRMLead): Promise<{ success: boolean; er
     headers.append('UTMTerm', utmParams.utm_term || '')
     headers.append('UTMContent', utmParams.utm_content || '')
 
-
-
     const response = await fetch(CRM_CONFIG.API_URL, {
       method: 'POST',
       headers
@@ -170,13 +173,30 @@ export async function submitToCRM(lead: CRMLead): Promise<{ success: boolean; er
       throw new Error(`CRM API error: ${response.status} ${response.statusText}`)
     }
 
+    // Track successful lead conversion in Google Analytics
+    const leadValue = getLeadValue(lead.formType)
+    trackLead(lead.formType, leadValue, leadSourceCode)
+
     return { success: true }
   } catch (error) {
-
     return { 
       success: false, 
       error: error instanceof Error ? error.message : 'Unknown CRM error' 
     }
+  }
+}
+
+// Get lead value for analytics tracking
+function getLeadValue(formType: 'test_drive' | 'service_booking' | 'brochure_download'): number {
+  switch (formType) {
+    case 'test_drive':
+      return 50 // High value for test drive bookings
+    case 'service_booking':
+      return 25 // Medium value for service bookings
+    case 'brochure_download':
+      return 10 // Lower value for brochure downloads
+    default:
+      return 5
   }
 }
 

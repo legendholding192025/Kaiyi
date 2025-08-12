@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { trackBrochureDownload, trackEngagement } from '@/lib/analytics';
+import { getLeadSource } from '@/lib/crm';
 
 interface BrochureDownloadPopupProps {
   isOpen: boolean;
@@ -42,6 +44,10 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
         alert(t('popup.brochureNotFound', { modelName }));
         return;
     }
+    
+    // Track brochure download in Google Analytics
+    const leadSource = getLeadSource();
+    trackBrochureDownload(modelName, leadSource);
     
     // Create link to open PDF in browser
     const link = document.createElement('a');
@@ -104,7 +110,10 @@ export default function BrochureDownloadPopup({ isOpen, onClose, modelName }: Br
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6 relative">
         {/* Close Button */}
         <button
-          onClick={onClose}
+          onClick={() => {
+            trackEngagement('popup_close', 'brochure_download_popup');
+            onClose();
+          }}
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
