@@ -175,7 +175,7 @@ export default function ServiceBookingPage() {
                    </svg>
                    <div>
                      <p className="text-sm font-medium text-gray-600">Address</p>
-                     <p className="text-lg font-semibold text-gray-800">Plot 59, 22nd St, Al Quoz Industrial Area 2, Dubai</p>
+                     <p className="text-lg font-semibold text-gray-800">Ras Al Khor Industrial Area - Ras Al Khor Industrial Area 1, Dubai </p>
                    </div>
                  </div>
                </div>
@@ -187,7 +187,7 @@ export default function ServiceBookingPage() {
                  <h3 className="text-2xl font-bold text-gray-800">Our Service Center Location</h3>
                </div>
                <iframe
-                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.9999999999995!2d55.2455193!3d25.1291623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f696fe56cf769%3A0xf798a999ce6259d2!2sLegend%20World%20Automobile%20Services%20L.L.C%20-%20Luxury%20Car%20Repair%20%26%20Service%20Garage%20Dubai!5e0!3m2!1sen!2sae!4v1700000000000!5m2!1sen!2sae"
+                 src="https://www.google.com/maps/dir//58CX%2B66W+-+Ras+Al+Khor+Industrial+Area+-+Ras+Al+Khor+Industrial+Area+1+-+Dubai/@25.1740564,55.2737746,12.25z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3e5f670068ad1c43:0x9b216b2ac4eb584!2m2!1d55.3480918!2d25.1706187?entry=ttu&g_ep=EgoyMDI1MDgwNi4wIKXMDSoASAFQAw%3D%3D"
                  width="100%"
                  height="300"
                  style={{ border: 0 }}

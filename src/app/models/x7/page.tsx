@@ -72,8 +72,7 @@ export default function X7Page() {
   const technicalImages = [
     "https://www.kaiyiglobal.com/upload/d9/c7d7e9cd4e334eb728217521143dce.png",
     "https://www.kaiyiglobal.com/upload/d4/365a9ae47e3ef20849fb66ae3e933e.png",
-    "https://www.kaiyiglobal.com/upload/e4/297f99c8facce5df1e7480403ba288.png",
-    "https://www.kaiyiglobal.com/upload/83/c913c44dd57b70dd96a5bd65a213e8.png"
+    "https://www.kaiyiglobal.com/upload/e4/297f99c8facce5df1e7480403ba288.png"
   ];
 
   const secondTechnicalImages = [
@@ -100,8 +99,7 @@ export default function X7Page() {
   const technicalDetails = [
     "Kunpeng Power 2.0T/ 1.6T",
     "7-Speed Wet Type DCT Transmission",
-    "Suspension Comfort Optimization Adjustment",
-    "Intelligent Timely Four-wheel Drive"
+    "Suspension Comfort Optimization Adjustment"
   ];
 
   const secondTechnicalDetails = [
