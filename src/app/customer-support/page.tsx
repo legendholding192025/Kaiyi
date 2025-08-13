@@ -7,31 +7,6 @@ import Footer from '../../components/Footer';
 export default function CustomerSupportPage() {
   return (
     <div className="min-h-screen bg-white">
-      <style jsx global>{`
-        /* Custom scrollbar styles */
-        ::-webkit-scrollbar {
-          width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-          background: #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-          background: #000000;
-          border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-          background: #333333;
-        }
-        
-        /* Firefox scrollbar */
-        * {
-          scrollbar-width: thin;
-          scrollbar-color: #000000 #f1f1f1;
-        }
-      `}</style>
       
       <Navbar />
       
